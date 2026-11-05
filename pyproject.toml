@@ -7,7 +7,7 @@ name = "fastapi-docs-rag"
 version = "0.1.0"
 description = "Captured FastAPI documentation for an evidence-grounded assistant"
 requires-python = ">=3.12,<3.13"
-dependencies = ["beautifulsoup4>=4.12,<5", "httpx>=0.28,<0.29"]
+dependencies = ["beautifulsoup4>=4.12,<5", "httpx>=0.28,<0.29", "tokenizers>=0.21,<0.24"]
 
 [dependency-groups]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
