@@ -9,7 +9,9 @@ from pathlib import Path
 import httpx
 import psycopg
 
+from fastapi_docs_rag.artifacts import write_json
 from fastapi_docs_rag.db import connect_database, import_capture, migrate
+from fastapi_docs_rag.evaluate import keyword_diagnostics
 from fastapi_docs_rag.fetch import FetchLimits
 from fastapi_docs_rag.ingest import capture
 from fastapi_docs_rag.retrieve import search
@@ -33,6 +35,12 @@ def main() -> int:
     command.add_argument("--mode", choices=["keyword"], default="keyword")
     command.add_argument("--limit", type=int, default=10)
     command.add_argument("--json", action="store_true")
+    command = commands.add_parser(
+        "diagnose-keyword", help="Check label provenance and inspect misses"
+    )
+    command.add_argument("--snapshot", required=True)
+    command.add_argument("--dataset", type=Path, default=Path("evals/development-draft.json"))
+    command.add_argument("--output", type=Path, required=True)
     arguments = parser.parse_args()
 
     async def run():
@@ -51,6 +59,21 @@ def main() -> int:
                     result = {"applied": migrate(connection)}
                 elif arguments.command == "import-capture":
                     result = import_capture(connection, arguments.report, arguments.artifacts)
+                elif arguments.command == "diagnose-keyword":
+                    dataset = json.loads(arguments.dataset.read_text(encoding="utf-8"))
+                    result = keyword_diagnostics(connection, arguments.snapshot, dataset)
+                    write_json(arguments.output, result)
+                    print(
+                        json.dumps(
+                            {
+                                "report": str(arguments.output),
+                                "label_validation": result["label_validation"],
+                                "categories": result["categories"],
+                            },
+                            indent=2,
+                        )
+                    )
+                    return 0
                 else:
                     rows = search(
                         connection,

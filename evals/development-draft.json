@@ -1,0 +1,847 @@
+{
+  "version": 1,
+  "name": "milestone-2-development-draft",
+  "capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+  "manifest_hash": "9c77e450e488e250ed69d36e20bdc0c68776095029c53684faf87ca894c827d8",
+  "label_origin": "agent_draft",
+  "corpus": [
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/body/",
+      "content_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+      "content_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+      "content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+      "content_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+      "content_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+      "content_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+      "content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/testing/",
+      "content_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5"
+    }
+  ],
+  "questions": [
+    {
+      "id": "dev-01",
+      "family": "routing",
+      "split": "development",
+      "question": "How do I create a GET endpoint with FastAPI?",
+      "answerable": true,
+      "expected_facts": [
+        "Create a FastAPI application and use an app.get decorator with an async route function."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+              "document_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221",
+              "section_anchor": "first-steps",
+              "block_index": 1,
+              "start": 0,
+              "end": 47,
+              "text": "The simplest FastAPI file could look like this:"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+              "document_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221",
+              "section_anchor": "first-steps",
+              "block_index": 2,
+              "start": 0,
+              "end": 117,
+              "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World\"}\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-02",
+      "family": "interactive-docs",
+      "split": "development",
+      "question": "Where can I open the interactive API documentation?",
+      "answerable": true,
+      "expected_facts": [
+        "The default interactive documentation is available at /docs."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+              "document_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221",
+              "section_anchor": "interactive-api-docs",
+              "block_index": 16,
+              "start": 0,
+              "end": 37,
+              "text": "Now go to http://127.0.0.1:8000/docs."
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-03",
+      "family": "path-types",
+      "split": "development",
+      "question": "How does FastAPI convert an int path parameter?",
+      "answerable": true,
+      "expected_facts": [
+        "An int annotation makes the path value arrive as an integer after conversion."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+              "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+              "section_anchor": "path-parameters-with-types",
+              "block_index": 8,
+              "start": 0,
+              "end": 143,
+              "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: int):\n    return {\"item_id\": item_id}\n"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+              "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+              "section_anchor": "data-conversion",
+              "block_index": 16,
+              "start": 0,
+              "end": 100,
+              "text": "Notice that the value your function received (and returned) is 3, as a Python int, not a string \"3\"."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+              "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+              "section_anchor": "data-conversion",
+              "block_index": 17,
+              "start": 0,
+              "end": 78,
+              "text": "So, with that type declaration, FastAPI gives you automatic request \"parsing\"."
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-04",
+      "family": "route-order",
+      "split": "development",
+      "question": "Why should a fixed path operation appear before a parameterized route?",
+      "answerable": true,
+      "expected_facts": [
+        "Path operations are evaluated in order, so a fixed route must precede a matching parameter route."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+              "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+              "section_anchor": "order-matters",
+              "block_index": 43,
+              "start": 0,
+              "end": 101,
+              "text": "And then you can also have a path /users/{user_id} to get data about a specific user by some user ID."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+              "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+              "section_anchor": "order-matters",
+              "block_index": 44,
+              "start": 0,
+              "end": 146,
+              "text": "Because path operations are evaluated in order, you need to make sure that the path for /users/me is declared before the one for /users/{user_id}:"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+              "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+              "section_anchor": "order-matters",
+              "block_index": 45,
+              "start": 0,
+              "end": 236,
+              "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/users/me\")\nasync def read_user_me():\n    return {\"user_id\": \"the current user\"}\n\n\n@app.get(\"/users/{user_id}\")\nasync def read_user(user_id: str):\n    return {\"user_id\": user_id}\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-05",
+      "family": "query-defaults",
+      "split": "development",
+      "question": "How do I give skip and limit query parameters default values?",
+      "answerable": true,
+      "expected_facts": [
+        "Defaults in function parameters supply values when query parameters are omitted."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "defaults",
+              "block_index": 17,
+              "start": 0,
+              "end": 101,
+              "text": "As query parameters are not a fixed part of a path, they can be optional and can have default values."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "defaults",
+              "block_index": 18,
+              "start": 0,
+              "end": 69,
+              "text": "In the example above they have default values of skip=0 and limit=10."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "defaults",
+              "block_index": 26,
+              "start": 0,
+              "end": 38,
+              "text": "skip=20: because you set it in the URL"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "defaults",
+              "block_index": 27,
+              "start": 0,
+              "end": 44,
+              "text": "limit=10: because that was the default value"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-06",
+      "family": "optional-query",
+      "split": "development",
+      "question": "How do I make a query parameter optional?",
+      "answerable": true,
+      "expected_facts": [
+        "A None default makes the query parameter optional in the documented example."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "optional-parameters",
+              "block_index": 29,
+              "start": 0,
+              "end": 90,
+              "text": "The same way, you can declare optional query parameters, by setting their default to None:"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "optional-parameters",
+              "block_index": 30,
+              "start": 0,
+              "end": 219,
+              "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: str, q: str | None = None):\n    if q:\n        return {\"item_id\": item_id, \"q\": q}\n    return {\"item_id\": item_id}\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-07",
+      "family": "query-bool",
+      "split": "development",
+      "question": "Can a boolean query parameter accept values such as yes or on?",
+      "answerable": true,
+      "expected_facts": [
+        "The documented boolean conversion accepts several true-like query strings."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "query-parameter-type-conversion",
+              "block_index": 35,
+              "start": 0,
+              "end": 60,
+              "text": "You can also declare bool types, and they will be converted:"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "query-parameter-type-conversion",
+              "block_index": 36,
+              "start": 0,
+              "end": 374,
+              "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: str, q: str | None = None, short: bool = False):\n    item = {\"item_id\": item_id}\n    if q:\n        item.update({\"q\": q})\n    if not short:\n        item.update(\n            {\"description\": \"This is an amazing item that has a long description\"}\n        )\n    return item\n"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "query-parameter-type-conversion",
+              "block_index": 44,
+              "start": 0,
+              "end": 41,
+              "text": "http://127.0.0.1:8000/items/foo?short=on\n"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "query-parameter-type-conversion",
+              "block_index": 46,
+              "start": 0,
+              "end": 42,
+              "text": "http://127.0.0.1:8000/items/foo?short=yes\n"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+              "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+              "section_anchor": "query-parameter-type-conversion",
+              "block_index": 47,
+              "start": 0,
+              "end": 142,
+              "text": "or any other case variation (uppercase, first letter in uppercase, etc), your function will see the parameter short with a bool value of True."
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-08",
+      "family": "request-model",
+      "split": "development",
+      "question": "How do I define a JSON request body with Pydantic?",
+      "answerable": true,
+      "expected_facts": [
+        "Declare a BaseModel subclass with annotated fields and use it as a route parameter."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+              "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+              "section_anchor": "create-your-data-model",
+              "block_index": 13,
+              "start": 0,
+              "end": 73,
+              "text": "Then you declare your data model as a class that inherits from BaseModel."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+              "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+              "section_anchor": "create-your-data-model",
+              "block_index": 15,
+              "start": 0,
+              "end": 271,
+              "text": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\n\nclass Item(BaseModel):\n    name: str\n    description: str | None = None\n    price: float\n    tax: float | None = None\n\n\napp = FastAPI()\n\n\n@app.post(\"/items/\")\nasync def create_item(item: Item):\n    return item\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-09",
+      "family": "mixed-parameters",
+      "split": "development",
+      "question": "Can one endpoint use a request body with path and query parameters?",
+      "answerable": true,
+      "expected_facts": [
+        "The documented endpoint combines path parameters, an Item body model, and optional query data."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+              "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+              "section_anchor": "request-body-path-query-parameters",
+              "block_index": 62,
+              "start": 0,
+              "end": 75,
+              "text": "You can also declare body, path and query parameters, all at the same time."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+              "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+              "section_anchor": "request-body-path-query-parameters",
+              "block_index": 64,
+              "start": 0,
+              "end": 414,
+              "text": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\n\nclass Item(BaseModel):\n    name: str\n    description: str | None = None\n    price: float\n    tax: float | None = None\n\n\napp = FastAPI()\n\n\n@app.put(\"/items/{item_id}\")\nasync def update_item(item_id: int, item: Item, q: str | None = None):\n    result = {\"item_id\": item_id, **item.model_dump()}\n    if q:\n        result.update({\"q\": q})\n    return result\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-10",
+      "family": "response-filter",
+      "split": "development",
+      "question": "What does response_model do to returned data?",
+      "answerable": true,
+      "expected_facts": [
+        "The declared response model validates, converts, documents, and filters the returned output."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+              "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+              "section_anchor": "response-model-parameter",
+              "block_index": 29,
+              "start": 0,
+              "end": 159,
+              "text": "FastAPI will use this response_model to do all the data documentation, validation, etc. and also to convert and filter the output data to its type declaration."
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-11",
+      "family": "response-security",
+      "split": "development",
+      "question": "How can I avoid returning an input password in my response?",
+      "answerable": true,
+      "expected_facts": [
+        "Use a distinct output model that omits the password field."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+              "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+              "section_anchor": "add-an-output-model",
+              "block_index": 54,
+              "start": 0,
+              "end": 96,
+              "text": "We can instead create an input model with the plaintext password and an output model without it:"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+              "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+              "section_anchor": "add-an-output-model",
+              "block_index": 55,
+              "start": 0,
+              "end": 431,
+              "text": "from typing import Any\n\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel, EmailStr\n\napp = FastAPI()\n\n\nclass UserIn(BaseModel):\n    username: str\n    password: str\n    email: EmailStr\n    full_name: str | None = None\n\n\nclass UserOut(BaseModel):\n    username: str\n    email: EmailStr\n    full_name: str | None = None\n\n\n@app.post(\"/user/\", response_model=UserOut)\nasync def create_user(user: UserIn) -> Any:\n    return user\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-12",
+      "family": "response-priority",
+      "split": "development",
+      "question": "Which takes priority when both a return annotation and response_model are declared?",
+      "answerable": true,
+      "expected_facts": [
+        "The response_model takes priority over the return type annotation."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+              "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+              "section_anchor": "response-model-priority",
+              "block_index": 34,
+              "start": 0,
+              "end": 117,
+              "text": "If you declare both a return type and a response_model, the response_model will take priority and be used by FastAPI."
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-13",
+      "family": "dependency-injection",
+      "split": "development",
+      "question": "How do I receive a shared dependency value in a route?",
+      "answerable": true,
+      "expected_facts": [
+        "Declare a parameter with Depends on the dependency function."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+              "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+              "section_anchor": "declare-the-dependency-in-the-dependant",
+              "block_index": 44,
+              "start": 0,
+              "end": 118,
+              "text": "The same way you use Body, Query, etc. with your path operation function parameters, use Depends with a new parameter:"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+              "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+              "section_anchor": "declare-the-dependency-in-the-dependant",
+              "block_index": 45,
+              "start": 0,
+              "end": 454,
+              "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI\n\napp = FastAPI()\n\n\nasync def common_parameters(q: str | None = None, skip: int = 0, limit: int = 100):\n    return {\"q\": q, \"skip\": skip, \"limit\": limit}\n\n\n@app.get(\"/items/\")\nasync def read_items(commons: Annotated[dict, Depends(common_parameters)]):\n    return commons\n\n\n@app.get(\"/users/\")\nasync def read_users(commons: Annotated[dict, Depends(common_parameters)]):\n    return commons\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-14",
+      "family": "dependency-alias",
+      "split": "development",
+      "question": "How do I reuse an Annotated dependency declaration across routes?",
+      "answerable": true,
+      "expected_facts": [
+        "Assign an Annotated dependency type to an alias and reuse it in route signatures."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+              "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+              "section_anchor": "share-annotated-dependencies",
+              "block_index": 70,
+              "start": 0,
+              "end": 114,
+              "text": "But because we are using Annotated, we can store that Annotated value in a variable and use it in multiple places:"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+              "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+              "section_anchor": "share-annotated-dependencies",
+              "block_index": 71,
+              "start": 0,
+              "end": 447,
+              "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI\n\napp = FastAPI()\n\n\nasync def common_parameters(q: str | None = None, skip: int = 0, limit: int = 100):\n    return {\"q\": q, \"skip\": skip, \"limit\": limit}\n\n\nCommonsDep = Annotated[dict, Depends(common_parameters)]\n\n\n@app.get(\"/items/\")\nasync def read_items(commons: CommonsDep):\n    return commons\n\n\n@app.get(\"/users/\")\nasync def read_users(commons: CommonsDep):\n    return commons\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-15",
+      "family": "yield-cleanup",
+      "split": "development",
+      "question": "How do I close a database resource in a dependency with yield?",
+      "answerable": true,
+      "expected_facts": [
+        "Yield the resource inside try and close it in finally after its use."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+              "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+              "section_anchor": "a-database-dependency-with-yield",
+              "block_index": 12,
+              "start": 0,
+              "end": 90,
+              "text": "For example, you could use this to create a database session and close it after finishing."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+              "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+              "section_anchor": "a-database-dependency-with-yield",
+              "block_index": 14,
+              "start": 0,
+              "end": 99,
+              "text": "async def get_db():\n    db = DBSession()\n    try:\n        yield db\n    finally:\n        db.close()\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-16",
+      "family": "yield-exceptions",
+      "split": "development",
+      "question": "How can a dependency with yield translate a caught exception into HTTPException?",
+      "answerable": true,
+      "expected_facts": [
+        "Catch the exception in an except block and raise HTTPException, as in the documented dependency."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+              "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+              "section_anchor": "dependencies-with-yield-and-httpexception",
+              "block_index": 54,
+              "start": 0,
+              "end": 88,
+              "text": "You can also use except to catch the exception that was raised and do something with it."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+              "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+              "section_anchor": "dependencies-with-yield-and-httpexception",
+              "block_index": 55,
+              "start": 0,
+              "end": 69,
+              "text": "For example, you can raise a different exception, like HTTPException."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+              "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+              "section_anchor": "dependencies-with-yield-and-httpexception",
+              "block_index": 59,
+              "start": 0,
+              "end": 775,
+              "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI, HTTPException\n\napp = FastAPI()\n\n\ndata = {\n    \"plumbus\": {\"description\": \"Freshly pickled plumbus\", \"owner\": \"Morty\"},\n    \"portal-gun\": {\"description\": \"Gun to create portals\", \"owner\": \"Rick\"},\n}\n\n\nclass OwnerError(Exception):\n    pass\n\n\ndef get_username():\n    try:\n        yield \"Rick\"\n    except OwnerError as e:\n        raise HTTPException(status_code=400, detail=f\"Owner error: {e}\")\n\n\n@app.get(\"/items/{item_id}\")\ndef get_item(item_id: str, username: Annotated[str, Depends(get_username)]):\n    if item_id not in data:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    item = data[item_id]\n    if item[\"owner\"] != username:\n        raise OwnerError(username)\n    return item\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-17",
+      "family": "testclient",
+      "split": "development",
+      "question": "How do I call FastAPI endpoints from a test without starting a live server?",
+      "answerable": true,
+      "expected_facts": [
+        "Use TestClient with the application and regular test functions."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+              "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+              "section_anchor": "using-testclient",
+              "block_index": 10,
+              "start": 0,
+              "end": 62,
+              "text": "Create a TestClient by passing your FastAPI application to it."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+              "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+              "section_anchor": "using-testclient",
+              "block_index": 11,
+              "start": 0,
+              "end": 91,
+              "text": "Create functions with a name that starts with test_ (this is a standard pytest convention)."
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+              "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+              "section_anchor": "using-testclient",
+              "block_index": 14,
+              "start": 0,
+              "end": 334,
+              "text": "from fastapi import FastAPI\nfrom fastapi.testclient import TestClient\n\napp = FastAPI()\n\n\n@app.get(\"/\")\nasync def read_main():\n    return {\"msg\": \"Hello World\"}\n\n\nclient = TestClient(app)\n\n\ndef test_read_main():\n    response = client.get(\"/\")\n    assert response.status_code == 200\n    assert response.json() == {\"msg\": \"Hello World\"}\n"
+            },
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+              "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+              "section_anchor": "using-testclient",
+              "block_index": 16,
+              "start": 0,
+              "end": 64,
+              "text": "Notice that the testing functions are normal def, not async def."
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-18",
+      "family": "testclient",
+      "split": "development",
+      "question": "How do I check a response status code and JSON body in a test?",
+      "answerable": true,
+      "expected_facts": [
+        "Call the endpoint through TestClient and assert its status_code and json result."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "evidence": [
+            {
+              "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+              "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+              "section_anchor": "using-testclient",
+              "block_index": 14,
+              "start": 0,
+              "end": 334,
+              "text": "from fastapi import FastAPI\nfrom fastapi.testclient import TestClient\n\napp = FastAPI()\n\n\n@app.get(\"/\")\nasync def read_main():\n    return {\"msg\": \"Hello World\"}\n\n\nclient = TestClient(app)\n\n\ndef test_read_main():\n    response = client.get(\"/\")\n    assert response.status_code == 200\n    assert response.json() == {\"msg\": \"Hello World\"}\n"
+            }
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-19",
+      "family": "outside-corpus-19",
+      "split": "development",
+      "question": "What producer settings guarantee exactly-once Kafka writes from a FastAPI endpoint?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "The captured eight-page tutorial subset does not document Kafka producer transactional configuration.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-20",
+      "family": "outside-corpus-20",
+      "split": "development",
+      "question": "How should I configure NGINX mutual TLS certificate rotation for this application?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "This captured subset does not contain NGINX mutual TLS and certificate-rotation configuration.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    }
+  ]
+}
