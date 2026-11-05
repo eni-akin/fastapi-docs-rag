@@ -1,0 +1,16 @@
+<article class="md-content__inner md-typeset"><h1 id="dependencies-with-yield">Dependencies with yield<a class="headerlink" href="#dependencies-with-yield" title="Permanent link">¶</a></h1><p>FastAPI supports dependencies that do some <dfn title='sometimes also called "exit code", "cleanup code", "teardown code", "closing code", "context manager exit code", etc.'>extra steps after finishing</dfn>.</p><div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1">Python 3.10+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-0-1"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_db</span><span class="p">():</span>
+</span><span id="__span-0-2"><span class="hll">    <span class="n">db</span> <span class="o">=</span> <span class="n">DBSession</span><span class="p">()</span>
+</span></span><span id="__span-0-3"><span class="hll">    <span class="k">try</span><span class="p">:</span>
+</span></span><span id="__span-0-4"><span class="hll">        <span class="k">yield</span> <span class="n">db</span>
+</span></span><span id="__span-0-5">    <span class="k">finally</span><span class="p">:</span>
+</span><span id="__span-0-6">        <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></div>
+</div>
+</div>
+</div><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Make sure to use <code>yield</code> one single time per dependency.</p>
+</div></article>

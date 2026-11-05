@@ -1,0 +1,18 @@
+<article class="md-content__inner md-typeset"><h1 id="first-steps">First Steps<a class="headerlink" href="#first-steps" title="Permanent link">¶</a></h1><p>The simplest FastAPI file could look like this:</p><div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1">Python 3.10+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-0-1"><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+</span><span id="__span-0-2">
+</span><span id="__span-0-3"><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+</span><span id="__span-0-4">
+</span><span id="__span-0-5">
+</span><span id="__span-0-6"><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+</span><span id="__span-0-7"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">root</span><span class="p">():</span>
+</span><span id="__span-0-8">    <span class="k">return</span> <span class="p">{</span><span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Hello World"</span><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>FastAPI has an <a href="https://marketplace.visualstudio.com/items?itemName=FastAPILabs.fastapi-vscode">official extension for VS Code</a> (and Cursor), which provides a lot of features, including a path operation explorer, path operation search, CodeLens navigation in tests (jump to definition from tests), and FastAPI Cloud deployment and logs, all from your editor.</p>
+</div></article>
