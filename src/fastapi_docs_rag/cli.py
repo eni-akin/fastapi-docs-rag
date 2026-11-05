@@ -12,6 +12,7 @@ import psycopg
 from fastapi_docs_rag.db import connect_database, import_capture, migrate
 from fastapi_docs_rag.fetch import FetchLimits
 from fastapi_docs_rag.ingest import capture
+from fastapi_docs_rag.retrieve import search
 
 
 def main() -> int:
@@ -26,6 +27,12 @@ def main() -> int:
     command = commands.add_parser("import-capture", help="Build or reuse a keyword-only snapshot")
     command.add_argument("--report", type=Path, required=True)
     command.add_argument("--artifacts", type=Path, default=Path("data"))
+    command = commands.add_parser("search", help="Inspect keyword matches in a ready snapshot")
+    command.add_argument("--snapshot", required=True)
+    command.add_argument("--query", required=True)
+    command.add_argument("--mode", choices=["keyword"], default="keyword")
+    command.add_argument("--limit", type=int, default=10)
+    command.add_argument("--json", action="store_true")
     arguments = parser.parse_args()
 
     async def run():
@@ -42,8 +49,37 @@ def main() -> int:
             with connect_database() as connection:
                 if arguments.command == "migrate":
                     result = {"applied": migrate(connection)}
-                else:
+                elif arguments.command == "import-capture":
                     result = import_capture(connection, arguments.report, arguments.artifacts)
+                else:
+                    rows = search(
+                        connection,
+                        arguments.snapshot,
+                        arguments.query,
+                        arguments.limit,
+                        arguments.mode,
+                    )
+                    result = {
+                        "snapshot_id": arguments.snapshot,
+                        "mode": arguments.mode,
+                        "query": arguments.query,
+                        "results": rows,
+                    }
+                    if not arguments.json:
+                        print(f"{len(rows)} results | snapshot {arguments.snapshot}")
+                        for index, row in enumerate(rows, start=1):
+                            print(f"\n{index}. {row['title']} | score {row['score']:.6f}")
+                            print(f"chunk {row['chunk_id']} | document {row['document_id']}")
+                            print(row["url"])
+                            print("heading: " + " > ".join(row["heading_path"]))
+                            print("variants: " + " / ".join(v["label"] for v in row["variants"]))
+                            print(
+                                f"tokens: {row['input_tokens']} | "
+                                f"partial code: {row['partial_code']}"
+                            )
+                            print("source spans: " + json.dumps(row["source_spans"]))
+                            print(row["text"])
+                        return 0
             print(json.dumps(result, indent=2))
             return 0
         path, report = asyncio.run(run())
