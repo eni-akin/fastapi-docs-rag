@@ -1,0 +1,793 @@
+{
+  "status": "succeeded",
+  "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+  "ranking": "PostgreSQL simple full-text ts_rank_cd",
+  "queries": [
+    {
+      "query": "Depends",
+      "results": [
+        {
+          "chunk_id": "6e70ad8b-a880-5154-a680-ad72a84caf6d",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "8fa7881a-0246-576a-bf9c-25fd0063c24d",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+          "title": "Dependencies",
+          "document_content_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+          "evidence_key": "004cb7705ace42ffa4beb13db072190e38589f59377fe168dfc37a9b75efb8e3",
+          "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI\n\napp = FastAPI()\n\n\nasync def common_parameters(q: str | None = None, skip: int = 0, limit: int = 100):\n    return {\"q\": q, \"skip\": skip, \"limit\": limit}\n\n\n@app.get(\"/items/\")\nasync def read_items(commons: Annotated[dict, Depends(common_parameters)]):\n    return commons\n\n\n@app.get(\"/users/\")\nasync def read_users(commons: Annotated[dict, Depends(common_parameters)]):\n    return commons\n",
+          "heading_path": [
+            "Dependencies",
+            "First Steps",
+            "Import Depends"
+          ],
+          "section_anchor": "import-depends",
+          "variants": [
+            {
+              "group": "tabs-3",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 454,
+              "start": 0,
+              "block_index": 38
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 151,
+          "input_tokens": 168,
+          "score": 2.2,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#import-depends"
+        },
+        {
+          "chunk_id": "d8667bd3-594b-570a-bdd4-269761866134",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "8fa7881a-0246-576a-bf9c-25fd0063c24d",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+          "title": "Dependencies",
+          "document_content_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+          "evidence_key": "78dc4fcd3fa68a09eca2f55ebc72ca1edb2a0a60dc8df45073aba3bcff9fb7ee",
+          "text": "from fastapi import Depends, FastAPI\n\napp = FastAPI()\n\n\nasync def common_parameters(q: str | None = None, skip: int = 0, limit: int = 100):\n    return {\"q\": q, \"skip\": skip, \"limit\": limit}\n\n\n@app.get(\"/items/\")\nasync def read_items(commons: dict = Depends(common_parameters)):\n    return commons\n\n\n@app.get(\"/users/\")\nasync def read_users(commons: dict = Depends(common_parameters)):\n    return commons\n",
+          "heading_path": [
+            "Dependencies",
+            "First Steps",
+            "Import Depends"
+          ],
+          "section_anchor": "import-depends",
+          "variants": [
+            {
+              "group": "tabs-4",
+              "index": 0,
+              "label": "Python 3.10+ - non-Annotated"
+            }
+          ],
+          "callout": {
+            "kind": "note",
+            "title": "🤓 Other versions and variants"
+          },
+          "source_spans": [
+            {
+              "end": 404,
+              "start": 0,
+              "block_index": 42
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 135,
+          "input_tokens": 163,
+          "score": 2.2,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#import-depends"
+        },
+        {
+          "chunk_id": "236a0fda-e3c5-567b-b86d-e8acb7b46bbe",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "8fa7881a-0246-576a-bf9c-25fd0063c24d",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+          "title": "Dependencies",
+          "document_content_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+          "evidence_key": "c2498fe6227eac1a0ad95f379b9b49919e5ae434b935ab85a5ef7484991a0d05",
+          "text": "Although you use Depends in the parameters of your function the same way you use Body, Query, etc, Depends works a bit differently.\n\nYou only give Depends a single parameter.\n\nThis parameter must be something like a function.\n\nYou don't call it directly (don't add the parenthesis at the end), you just pass it as a parameter to Depends().\n\nAnd that function takes parameters in the same way that path operation functions do.",
+          "heading_path": [
+            "Dependencies",
+            "First Steps",
+            "Declare the dependency, in the \"dependant\""
+          ],
+          "section_anchor": "declare-the-dependency-in-the-dependant",
+          "variants": [],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 131,
+              "start": 0,
+              "block_index": 50
+            },
+            {
+              "end": 41,
+              "start": 0,
+              "block_index": 51
+            },
+            {
+              "end": 49,
+              "start": 0,
+              "block_index": 52
+            },
+            {
+              "end": 112,
+              "start": 0,
+              "block_index": 53
+            },
+            {
+              "end": 84,
+              "start": 0,
+              "block_index": 54
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 91,
+          "input_tokens": 111,
+          "score": 1.6,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#declare-the-dependency-in-the-dependant"
+        },
+        {
+          "chunk_id": "20f18ab1-4b66-56a9-bce2-60836b2043f1",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "2fd8ce00a9c663b5b4c3616c8261d5370f039f216ee397b509befaf1ec108379",
+          "text": "from typing import Annotated\n\nfrom fastapi import Depends\n\n\nasync def dependency_a():\n    dep_a = generate_dep_a()\n    try:\n        yield dep_a\n    finally:\n        dep_a.close()\n\n\nasync def dependency_b(dep_a: Annotated[DepA, Depends(dependency_a)]):\n    dep_b = generate_dep_b()\n    try:\n        yield dep_b\n    finally:\n        dep_b.close(dep_a)\n\n\nasync def dependency_c(dep_b: Annotated[DepB, Depends(dependency_b)]):\n    dep_c = generate_dep_c()\n    try:\n        yield dep_c\n    finally:\n        dep_c.close(dep_b)\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Sub-dependencies with yield"
+          ],
+          "section_anchor": "sub-dependencies-with-yield",
+          "variants": [
+            {
+              "group": "tabs-5",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 521,
+              "start": 0,
+              "block_index": 32
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 179,
+          "input_tokens": 201,
+          "score": 1.2,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield"
+        },
+        {
+          "chunk_id": "2186a1eb-9f3d-518f-9100-3f3a320efd01",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "008829cf41033c2942f0fc592807c7dac4467c35e3994f1b6605ece592230e3f",
+          "text": "from fastapi import Depends\n\n\nasync def dependency_a():\n    dep_a = generate_dep_a()\n    try:\n        yield dep_a\n    finally:\n        dep_a.close()\n\n\nasync def dependency_b(dep_a=Depends(dependency_a)):\n    dep_b = generate_dep_b()\n    try:\n        yield dep_b\n    finally:\n        dep_b.close(dep_a)\n\n\nasync def dependency_c(dep_b=Depends(dependency_b)):\n    dep_c = generate_dep_c()\n    try:\n        yield dep_c\n    finally:\n        dep_c.close(dep_b)\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Sub-dependencies with yield"
+          ],
+          "section_anchor": "sub-dependencies-with-yield",
+          "variants": [
+            {
+              "group": "tabs-6",
+              "index": 0,
+              "label": "Python 3.10+ - non-Annotated"
+            }
+          ],
+          "callout": {
+            "kind": "note",
+            "title": "🤓 Other versions and variants"
+          },
+          "source_spans": [
+            {
+              "end": 455,
+              "start": 0,
+              "block_index": 36
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 156,
+          "input_tokens": 189,
+          "score": 1.2,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield"
+        }
+      ]
+    },
+    {
+      "query": "response_model",
+      "results": [
+        {
+          "chunk_id": "2f37ecdc-742b-5851-a80d-a19e6dcf9562",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "d53fe49b-2b8d-5d95-83fb-ec9298dbf2b0",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+          "title": "Response Model - Return Type",
+          "document_content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+          "evidence_key": "7ac492864c114224a9824277828efa43184d3767520002945ca6b53d68262917",
+          "text": "        \"price\": 50.2,\n        \"tax\": 10.5,\n    },\n}\n\n\n@app.get(\n    \"/items/{item_id}/name\",\n    response_model=Item,\n    response_model_include=[\"name\", \"description\"],\n)\nasync def read_item_name(item_id: str):\n    return items[item_id]\n\n\n@app.get(\"/items/{item_id}/public\", response_model=Item, response_model_exclude=[\"tax\"])\nasync def read_item_public_data(item_id: str):\n    return items[item_id]\n",
+          "heading_path": [
+            "Response Model - Return Type",
+            "Response Model encoding parameters",
+            "response_model_include and response_model_exclude",
+            "Using lists instead of sets"
+          ],
+          "section_anchor": "using-lists-instead-of-sets",
+          "variants": [
+            {
+              "group": "tabs-16",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 816,
+              "start": 413,
+              "block_index": 153
+            }
+          ],
+          "partial_code": true,
+          "body_tokens": 148,
+          "input_tokens": 188,
+          "score": 6.6,
+          "url": "https://fastapi.tiangolo.com/tutorial/response-model/#using-lists-instead-of-sets"
+        },
+        {
+          "chunk_id": "b140154d-4372-51f3-aec9-835d09778226",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "d53fe49b-2b8d-5d95-83fb-ec9298dbf2b0",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+          "title": "Response Model - Return Type",
+          "document_content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+          "evidence_key": "c42f171cc830f201506afc36b6a7f936fc6799011c5da1f7793f69a2d16e9d76",
+          "text": "        \"price\": 50.2,\n        \"tax\": 10.5,\n    },\n}\n\n\n@app.get(\n    \"/items/{item_id}/name\",\n    response_model=Item,\n    response_model_include={\"name\", \"description\"},\n)\nasync def read_item_name(item_id: str):\n    return items[item_id]\n\n\n@app.get(\"/items/{item_id}/public\", response_model=Item, response_model_exclude={\"tax\"})\nasync def read_item_public_data(item_id: str):\n    return items[item_id]\n",
+          "heading_path": [
+            "Response Model - Return Type",
+            "Response Model encoding parameters",
+            "response_model_include and response_model_exclude"
+          ],
+          "section_anchor": "response-model-include-and-response-model-exclude",
+          "variants": [
+            {
+              "group": "tabs-15",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 816,
+              "start": 413,
+              "block_index": 147
+            }
+          ],
+          "partial_code": true,
+          "body_tokens": 148,
+          "input_tokens": 182,
+          "score": 6.6,
+          "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude"
+        },
+        {
+          "chunk_id": "df983393-b50b-50c7-a32f-ddae5d6c0e12",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "d53fe49b-2b8d-5d95-83fb-ec9298dbf2b0",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+          "title": "Response Model - Return Type",
+          "document_content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+          "evidence_key": "f9b2f39d567ef5fe24930283a120ad92e5a79eb7d7741ef488e340b219583b8d",
+          "text": "If you declare both a return type and a response_model, the response_model will take priority and be used by FastAPI.\n\nThis way you can add correct type annotations to your functions even when you are returning a type different than the response model, to be used by the editor and tools like mypy. And still you can have FastAPI do the data validation, documentation, etc. using the response_model.\n\nYou can also use response_model=None to disable creating a response model for that path operation, you might need to do it if you are adding type annotations for things that are not valid Pydantic fields, you will see an example of that in one of the sections below.",
+          "heading_path": [
+            "Response Model - Return Type",
+            "response_model Parameter",
+            "response_model Priority"
+          ],
+          "section_anchor": "response-model-priority",
+          "variants": [],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 117,
+              "start": 0,
+              "block_index": 34
+            },
+            {
+              "end": 280,
+              "start": 0,
+              "block_index": 35
+            },
+            {
+              "end": 266,
+              "start": 0,
+              "block_index": 36
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 150,
+          "input_tokens": 172,
+          "score": 6.4,
+          "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-priority"
+        },
+        {
+          "chunk_id": "37df1fa3-93aa-5891-8027-3e85e25d1c56",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "d53fe49b-2b8d-5d95-83fb-ec9298dbf2b0",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+          "title": "Response Model - Return Type",
+          "document_content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+          "evidence_key": "25d2e72b5ead42c60c297f8c41ad7d41a8cad2371c74858a66266991b79475b3",
+          "text": "Tip\n\nBut it is still recommended to use the ideas above, using multiple classes, instead of these parameters.\n\nThis is because the JSON Schema generated in your app's OpenAPI (and the docs) will still be the one for the complete model, even if you use response_model_include or response_model_exclude to omit some attributes.\n\nThis also applies to response_model_by_alias that works similarly.",
+          "heading_path": [
+            "Response Model - Return Type",
+            "Response Model encoding parameters",
+            "response_model_include and response_model_exclude"
+          ],
+          "section_anchor": "response-model-include-and-response-model-exclude",
+          "variants": [],
+          "callout": {
+            "kind": "tip",
+            "title": "Tip"
+          },
+          "source_spans": [
+            {
+              "end": 3,
+              "start": 0,
+              "block_index": 143
+            },
+            {
+              "end": 104,
+              "start": 0,
+              "block_index": 144
+            },
+            {
+              "end": 214,
+              "start": 0,
+              "block_index": 145
+            },
+            {
+              "end": 66,
+              "start": 0,
+              "block_index": 146
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 90,
+          "input_tokens": 120,
+          "score": 6.2,
+          "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude"
+        },
+        {
+          "chunk_id": "d0a7a828-fe8a-5b0d-88bb-2ceb59fb4aa5",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "d53fe49b-2b8d-5d95-83fb-ec9298dbf2b0",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+          "title": "Response Model - Return Type",
+          "document_content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+          "evidence_key": "f9a928065c5946b17b40310a561fc8af6571e1ce90334d4d4d5e20ec7016e4a2",
+          "text": "You can also use the path operation decorator parameters response_model_include and response_model_exclude.\n\nThey take a set of str with the name of the attributes to include (omitting the rest) or to exclude (including the rest).\n\nThis can be used as a quick shortcut if you have only one Pydantic model and want to remove some data from the output.",
+          "heading_path": [
+            "Response Model - Return Type",
+            "Response Model encoding parameters",
+            "response_model_include and response_model_exclude"
+          ],
+          "section_anchor": "response-model-include-and-response-model-exclude",
+          "variants": [],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 107,
+              "start": 0,
+              "block_index": 140
+            },
+            {
+              "end": 121,
+              "start": 0,
+              "block_index": 141
+            },
+            {
+              "end": 118,
+              "start": 0,
+              "block_index": 142
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 82,
+          "input_tokens": 111,
+          "score": 5.8,
+          "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude"
+        }
+      ]
+    },
+    {
+      "query": "HTTPException",
+      "results": [
+        {
+          "chunk_id": "12f232bd-183c-5b3c-84d8-bc8d9b206102",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "4064b4c3fb3ae99844bcdf8cd7179b33f9875fdd85bff5cdb322fb3e9580adcc",
+          "text": "from fastapi import Depends, FastAPI, HTTPException\n\napp = FastAPI()\n\n\ndata = {\n    \"plumbus\": {\"description\": \"Freshly pickled plumbus\", \"owner\": \"Morty\"},\n    \"portal-gun\": {\"description\": \"Gun to create portals\", \"owner\": \"Rick\"},\n}\n\n\nclass OwnerError(Exception):\n    pass\n\n\ndef get_username():\n    try:\n        yield \"Rick\"\n    except OwnerError as e:\n        raise HTTPException(status_code=400, detail=f\"Owner error: {e}\")\n\n\n@app.get(\"/items/{item_id}\")\ndef get_item(item_id: str, username: str = Depends(get_username)):\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield and HTTPException"
+          ],
+          "section_anchor": "dependencies-with-yield-and-httpexception",
+          "variants": [
+            {
+              "group": "tabs-10",
+              "index": 0,
+              "label": "Python 3.10+ - non-Annotated"
+            }
+          ],
+          "callout": {
+            "kind": "note",
+            "title": "🤓 Other versions and variants"
+          },
+          "source_spans": [
+            {
+              "end": 527,
+              "start": 0,
+              "block_index": 63
+            }
+          ],
+          "partial_code": true,
+          "body_tokens": 176,
+          "input_tokens": 211,
+          "score": 1.8,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception"
+        },
+        {
+          "chunk_id": "eda0d1e5-0033-501b-922f-1991ed42b591",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "5760d310a571480f86f002d29ea0042bcc9c5bc05f7e5822f0371b96d94c4fcd",
+          "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI, HTTPException\n\napp = FastAPI()\n\n\ndata = {\n    \"plumbus\": {\"description\": \"Freshly pickled plumbus\", \"owner\": \"Morty\"},\n    \"portal-gun\": {\"description\": \"Gun to create portals\", \"owner\": \"Rick\"},\n}\n\n\nclass OwnerError(Exception):\n    pass\n\n\ndef get_username():\n    try:\n        yield \"Rick\"\n    except OwnerError as e:\n        raise HTTPException(status_code=400, detail=f\"Owner error: {e}\")\n\n\n@app.get(\"/items/{item_id}\")\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield and HTTPException"
+          ],
+          "section_anchor": "dependencies-with-yield-and-httpexception",
+          "variants": [
+            {
+              "group": "tabs-9",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 490,
+              "start": 0,
+              "block_index": 59
+            }
+          ],
+          "partial_code": true,
+          "body_tokens": 155,
+          "input_tokens": 179,
+          "score": 1.8,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception"
+        },
+        {
+          "chunk_id": "2f97d033-92a8-5872-bdf1-0622f7530a17",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "ec985046fa87cd00add44f74258eab7a17e844e9cbaa231011eaa7d1e786bdc3",
+          "text": "Dependencies with yield have evolved over time to cover different use cases and fix some issues.\n\nIf you want to see what has changed in different versions of FastAPI, you can read more about it in the advanced guide, in Advanced Dependencies - Dependencies with yield, HTTPException, except and Background Tasks.",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield, HTTPException, except and Background Tasks"
+          ],
+          "section_anchor": "dependencies-with-yield-httpexception-except-and-background-tasks",
+          "variants": [],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 96,
+              "start": 0,
+              "block_index": 108
+            },
+            {
+              "end": 215,
+              "start": 0,
+              "block_index": 109
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 64,
+          "input_tokens": 88,
+          "score": 1.4,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-httpexception-except-and-background-tasks"
+        },
+        {
+          "chunk_id": "503bf1d2-9394-5069-93fe-10db1afc7218",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "668dece312bceb1adca60cba51eed5c77306089c492f5a2f7a2c33de3da2eb96",
+          "text": "Tip\n\nThis is a somewhat advanced technique, and in most of the cases you won't really need it, as you can raise exceptions (including HTTPException) from inside of the rest of your application code, for example, in the path operation function.\n\nBut it's there for you if you need it. 🤓",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield and HTTPException"
+          ],
+          "section_anchor": "dependencies-with-yield-and-httpexception",
+          "variants": [],
+          "callout": {
+            "kind": "tip",
+            "title": "Tip"
+          },
+          "source_spans": [
+            {
+              "end": 3,
+              "start": 0,
+              "block_index": 56
+            },
+            {
+              "end": 238,
+              "start": 0,
+              "block_index": 57
+            },
+            {
+              "end": 40,
+              "start": 0,
+              "block_index": 58
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 65,
+          "input_tokens": 85,
+          "score": 1.4,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception"
+        },
+        {
+          "chunk_id": "50c19731-a374-5134-a46f-25460cce2975",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "04ac45ca5c9a096d0b9d38d032ad6f13ff4b23ef41a4b2b0f86a8518d56c744f",
+          "text": "\n\n@app.get(\"/items/{item_id}\")\ndef get_item(item_id: str, username: Annotated[str, Depends(get_username)]):\n    if item_id not in data:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    item = data[item_id]\n    if item[\"owner\"] != username:\n        raise OwnerError(username)\n    return item\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield and HTTPException"
+          ],
+          "section_anchor": "dependencies-with-yield-and-httpexception",
+          "variants": [
+            {
+              "group": "tabs-9",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 775,
+              "start": 459,
+              "block_index": 59
+            }
+          ],
+          "partial_code": true,
+          "body_tokens": 105,
+          "input_tokens": 129,
+          "score": 1.4,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception"
+        }
+      ]
+    },
+    {
+      "query": "yield",
+      "results": [
+        {
+          "chunk_id": "9881f5bf-d8db-577b-9825-6344f5bf3375",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "898de86cbe54bd6161c22f1ba84695a10111db007991e5526b7978b1b42b167c",
+          "text": "If you catch an exception in a dependency with yield, unless you are raising another HTTPException or similar, you should re-raise the original exception.\n\nYou can re-raise the same exception using raise:",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield and except",
+            "Always raise in Dependencies with yield and except"
+          ],
+          "section_anchor": "always-raise-in-dependencies-with-yield-and-except",
+          "variants": [],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 154,
+              "start": 0,
+              "block_index": 74
+            },
+            {
+              "end": 48,
+              "start": 0,
+              "block_index": 75
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 42,
+          "input_tokens": 69,
+          "score": 4.4,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except"
+        },
+        {
+          "chunk_id": "b0c3c6e2-0e8f-5cda-a7a8-25aa57c4328a",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "ff1877f0bfa8462bc91851d21b06fe426a32af729cda75041ae9a354ae6457ef",
+          "text": "from fastapi import Depends, FastAPI, HTTPException\n\napp = FastAPI()\n\n\nclass InternalError(Exception):\n    pass\n\n\ndef get_username():\n    try:\n        yield \"Rick\"\n    except InternalError:\n        print(\"We don't swallow the internal error here, we raise again 😎\")\n        raise\n\n\n@app.get(\"/items/{item_id}\")\ndef get_item(item_id: str, username: str = Depends(get_username)):\n    if item_id == \"portal-gun\":\n        raise InternalError(\n            f\"The portal gun is too dangerous to be owned by {username}\"\n        )\n    if item_id != \"plumbus\":\n        raise HTTPException(\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield and except",
+            "Always raise in Dependencies with yield and except"
+          ],
+          "section_anchor": "always-raise-in-dependencies-with-yield-and-except",
+          "variants": [
+            {
+              "group": "tabs-14",
+              "index": 0,
+              "label": "Python 3.10+ - non-Annotated"
+            }
+          ],
+          "callout": {
+            "kind": "note",
+            "title": "🤓 Other versions and variants"
+          },
+          "source_spans": [
+            {
+              "end": 580,
+              "start": 0,
+              "block_index": 80
+            }
+          ],
+          "partial_code": true,
+          "body_tokens": 163,
+          "input_tokens": 206,
+          "score": 4.4,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except"
+        },
+        {
+          "chunk_id": "b29c5d8f-c89c-54e4-be81-73e7493d60c7",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "9bbbc0f9ad4b5f36853022c08f8199e94069b6a5902c9892ac983bb12ed796db",
+          "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI, HTTPException\n\napp = FastAPI()\n\n\nclass InternalError(Exception):\n    pass\n\n\ndef get_username():\n    try:\n        yield \"Rick\"\n    except InternalError:\n        print(\"We don't swallow the internal error here, we raise again 😎\")\n        raise\n\n\n@app.get(\"/items/{item_id}\")\ndef get_item(item_id: str, username: Annotated[str, Depends(get_username)]):\n    if item_id == \"portal-gun\":\n        raise InternalError(\n            f\"The portal gun is too dangerous to be owned by {username}\"\n        )\n    if item_id != \"plumbus\":\n        raise HTTPException(\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Dependencies with yield and except",
+            "Always raise in Dependencies with yield and except"
+          ],
+          "section_anchor": "always-raise-in-dependencies-with-yield-and-except",
+          "variants": [
+            {
+              "group": "tabs-13",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 620,
+              "start": 0,
+              "block_index": 76
+            }
+          ],
+          "partial_code": true,
+          "body_tokens": 174,
+          "input_tokens": 206,
+          "score": 4.4,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except"
+        },
+        {
+          "chunk_id": "20f18ab1-4b66-56a9-bce2-60836b2043f1",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "2fd8ce00a9c663b5b4c3616c8261d5370f039f216ee397b509befaf1ec108379",
+          "text": "from typing import Annotated\n\nfrom fastapi import Depends\n\n\nasync def dependency_a():\n    dep_a = generate_dep_a()\n    try:\n        yield dep_a\n    finally:\n        dep_a.close()\n\n\nasync def dependency_b(dep_a: Annotated[DepA, Depends(dependency_a)]):\n    dep_b = generate_dep_b()\n    try:\n        yield dep_b\n    finally:\n        dep_b.close(dep_a)\n\n\nasync def dependency_c(dep_b: Annotated[DepB, Depends(dependency_b)]):\n    dep_c = generate_dep_c()\n    try:\n        yield dep_c\n    finally:\n        dep_c.close(dep_b)\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Sub-dependencies with yield"
+          ],
+          "section_anchor": "sub-dependencies-with-yield",
+          "variants": [
+            {
+              "group": "tabs-5",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "callout": null,
+          "source_spans": [
+            {
+              "end": 521,
+              "start": 0,
+              "block_index": 32
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 179,
+          "input_tokens": 201,
+          "score": 4.2,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield"
+        },
+        {
+          "chunk_id": "2186a1eb-9f3d-518f-9100-3f3a320efd01",
+          "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+          "document_id": "6ba20567-7d58-5cc5-ada3-8ef520f002a9",
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "title": "Dependencies with yield",
+          "document_content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "evidence_key": "008829cf41033c2942f0fc592807c7dac4467c35e3994f1b6605ece592230e3f",
+          "text": "from fastapi import Depends\n\n\nasync def dependency_a():\n    dep_a = generate_dep_a()\n    try:\n        yield dep_a\n    finally:\n        dep_a.close()\n\n\nasync def dependency_b(dep_a=Depends(dependency_a)):\n    dep_b = generate_dep_b()\n    try:\n        yield dep_b\n    finally:\n        dep_b.close(dep_a)\n\n\nasync def dependency_c(dep_b=Depends(dependency_b)):\n    dep_c = generate_dep_c()\n    try:\n        yield dep_c\n    finally:\n        dep_c.close(dep_b)\n",
+          "heading_path": [
+            "Dependencies with yield",
+            "Sub-dependencies with yield"
+          ],
+          "section_anchor": "sub-dependencies-with-yield",
+          "variants": [
+            {
+              "group": "tabs-6",
+              "index": 0,
+              "label": "Python 3.10+ - non-Annotated"
+            }
+          ],
+          "callout": {
+            "kind": "note",
+            "title": "🤓 Other versions and variants"
+          },
+          "source_spans": [
+            {
+              "end": 455,
+              "start": 0,
+              "block_index": 36
+            }
+          ],
+          "partial_code": false,
+          "body_tokens": 156,
+          "input_tokens": 189,
+          "score": 4.2,
+          "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield"
+        }
+      ]
+    }
+  ]
+}
