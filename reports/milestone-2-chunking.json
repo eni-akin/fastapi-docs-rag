@@ -1,0 +1,83 @@
+{
+  "status": "succeeded",
+  "capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+  "pages": [
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/body/",
+      "chunks": 23,
+      "max_input_tokens": 166,
+      "partial_code_chunks": 0,
+      "chunk_set_hash": "449df51c53aa544fee276e26a5a2f6fe6908336ffd020dd930f845251822edd2",
+      "coverage": "all non-heading source characters"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+      "chunks": 36,
+      "max_input_tokens": 176,
+      "partial_code_chunks": 0,
+      "chunk_set_hash": "6b58999f2e1509c086e81e955a8bde3e50a479d026feb3cf1906a7eedb5c252d",
+      "coverage": "all non-heading source characters"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+      "chunks": 69,
+      "max_input_tokens": 211,
+      "partial_code_chunks": 16,
+      "chunk_set_hash": "e620049dd32e23606d7a1f8f236f0c652514f4379a170b2642cceb32eb5ba1dc",
+      "coverage": "all non-heading source characters"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+      "chunks": 52,
+      "max_input_tokens": 190,
+      "partial_code_chunks": 8,
+      "chunk_set_hash": "3bb835ec83704346440f0cb1a7e1cbdbfbb4abfff0b2f42fbd75d987e264bff4",
+      "coverage": "all non-heading source characters"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+      "chunks": 47,
+      "max_input_tokens": 189,
+      "partial_code_chunks": 10,
+      "chunk_set_hash": "35f0c623357b30835bdca3c5b76b65d66f4f5c6331adad66f0367bb3a85cf798",
+      "coverage": "all non-heading source characters"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+      "chunks": 21,
+      "max_input_tokens": 188,
+      "partial_code_chunks": 0,
+      "chunk_set_hash": "b96815693ad5bb955a16cad60602509965c3d35269d6af62941fd9f07127fb23",
+      "coverage": "all non-heading source characters"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+      "chunks": 67,
+      "max_input_tokens": 208,
+      "partial_code_chunks": 8,
+      "chunk_set_hash": "46c07e84150a54ac938677a1959f9abe8d9cbc2144caaefea63f0d9d0a2e5495",
+      "coverage": "all non-heading source characters"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/testing/",
+      "chunks": 40,
+      "max_input_tokens": 209,
+      "partial_code_chunks": 16,
+      "chunk_set_hash": "6fcfcaf963c36ab11c9f98b1cf376f0d541e60935977657c22d232218d8fb572",
+      "coverage": "all non-heading source characters"
+    }
+  ],
+  "profile": {
+    "chunker_version": "1",
+    "tokenizer": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+    },
+    "body_tokens": 180,
+    "overlap_tokens": 30,
+    "max_input_tokens": 256,
+    "prefix_tokens": 64
+  },
+  "chunks": 355
+}
