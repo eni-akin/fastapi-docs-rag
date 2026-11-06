@@ -1,0 +1,12 @@
+{
+  "status": "succeeded",
+  "import": {
+    "snapshot_id": "ecc6a886-48a5-4af7-a1c6-e7d780a8748d",
+    "reused": false,
+    "state": "ready",
+    "document_count": 8,
+    "chunk_count": 355
+  },
+  "repeat_import_reused": true,
+  "postgresql_version": "17.11 (Homebrew)"
+}
