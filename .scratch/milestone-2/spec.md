@@ -1,6 +1,7 @@
 # Milestone 2: captured documentation to keyword search
 
-Status: planned; implementation and human review tracked separately below.
+Status: agent-owned implementation and all section reviews complete; human question/evidence review pending.
+See `docs/milestone-2-keyword-search.md` for commands and verification evidence.
 Base: `main` at `79d3a1a` (completed milestone 1).
 
 ## Outcome
