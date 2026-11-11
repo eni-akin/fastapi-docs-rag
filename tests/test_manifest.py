@@ -14,6 +14,23 @@ def test_seed_manifest():
     assert json_hash(manifest) == json_hash(json.loads(json.dumps(manifest)))
 
 
+def test_expanded_manifest_preserves_seed_and_adds_approved_pages():
+    seed = load_manifest(ROOT / "corpus/manifests/tutorial-seed.json")
+    expanded = load_manifest(ROOT / "corpus/manifests/tutorial-expanded-v2.json")
+    assert len(expanded["pages"]) == 14
+    assert all(page in expanded["pages"] for page in seed["pages"])
+    extra = {page["url"] for page in expanded["pages"]} - {page["url"] for page in seed["pages"]}
+    assert extra == {
+        "https://fastapi.tiangolo.com/tutorial/body-fields/",
+        "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+        "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+        "https://fastapi.tiangolo.com/tutorial/header-params/",
+        "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+        "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+    }
+    assert all(page.get("expected_section") for page in expanded["pages"])
+
+
 @pytest.mark.parametrize(
     "url",
     [

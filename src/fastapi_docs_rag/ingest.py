@@ -55,9 +55,23 @@ def render_markdown(document: dict) -> str:
 
 
 async def capture(
-    manifest_path: Path, artifact_dir: Path, client: httpx.AsyncClient, limits: FetchLimits
+    manifest_path: Path,
+    artifact_dir: Path,
+    client: httpx.AsyncClient,
+    limits: FetchLimits,
+    retained_report_path: Path | None = None,
+    retained_artifact_dir: Path | None = None,
 ) -> tuple[Path, dict]:
     manifest = load_manifest(manifest_path)
+    retained = {}
+    retained_report = None
+    if retained_report_path is not None:
+        if retained_artifact_dir is None:
+            raise ValueError("Retained capture requires its artifact directory")
+        from fastapi_docs_rag.db import load_capture
+
+        retained_report, _ = load_capture(retained_report_path, retained_artifact_dir)
+        retained = {page["url"]: page for page in retained_report["pages"]}
     run_id = str(uuid4())
     report_path = artifact_dir / "captures" / run_id / "report.json"
     report = {
@@ -70,11 +84,30 @@ async def capture(
         "parser_version": PARSER_VERSION,
         "pages": [],
     }
+    if retained_report:
+        report["retained_capture"] = {
+            "capture_id": retained_report["capture_id"],
+            "manifest_hash": retained_report["manifest_hash"],
+            "capture_interval": retained_report.get("capture_interval")
+            or {
+                "started_at": retained_report["started_at"],
+                "finished_at": retained_report["finished_at"],
+            },
+        }
     write_json(report_path, report)
     for index, expected in enumerate(manifest["pages"]):
         page = {"url": expected["url"], "status": "failed", "stage": "fetch"}
         try:
-            page.update(await fetch_page(client, expected["url"], artifact_dir, limits))
+            if expected["url"] in retained:
+                source = retained[expected["url"]]
+                page.update(source)
+                page["status"] = "failed"
+                page["reused_from_capture"] = retained_report["capture_id"]
+                for key in ("raw_path", "parsed_path"):
+                    path = page[key]
+                    write_bytes(artifact_dir / path, (retained_artifact_dir / path).read_bytes())
+            else:
+                page.update(await fetch_page(client, expected["url"], artifact_dir, limits))
             page["stage"] = "parse"
             raw = (artifact_dir / page["raw_path"]).read_bytes()
             if hashlib.sha256(raw).hexdigest() != page["raw_hash"]:
@@ -114,7 +147,7 @@ async def capture(
             page["error"] = f"{type(error).__name__}: {error}"
         report["pages"].append(page)
         write_json(report_path, report)
-        if index < len(manifest["pages"]) - 1:
+        if index < len(manifest["pages"]) - 1 and expected["url"] not in retained:
             await asyncio.sleep(limits.pause)
     succeeded = sum(page["status"] == "succeeded" for page in report["pages"])
     report.update(
@@ -123,6 +156,12 @@ async def capture(
             "finished_at": datetime.now(UTC).isoformat(),
             "pages_succeeded": succeeded,
             "pages_failed": len(manifest["pages"]) - succeeded,
+            "capture_interval": {
+                "started_at": report["retained_capture"]["capture_interval"]["started_at"]
+                if retained_report
+                else report["started_at"],
+                "finished_at": datetime.now(UTC).isoformat(),
+            },
         }
     )
     write_json(report_path, report)
