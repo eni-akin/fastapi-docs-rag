@@ -1,0 +1,542 @@
+{
+  "snapshot_id": "47dcc829-9d9c-4d8a-b492-de95683ea73c",
+  "interpretation": "structural smoke checks, labels not reviewed",
+  "queries": [
+    {
+      "query": "Depends",
+      "modes": {
+        "keyword": {
+          "count": 5,
+          "seconds": 0.0111,
+          "top": [
+            {
+              "chunk_id": "1c1d5d41-00b4-5047-82f2-a1fd2df9d165",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#import-depends",
+              "score": 2.2
+            },
+            {
+              "chunk_id": "deecf38f-368c-5068-9383-b20419ceda28",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#import-depends",
+              "score": 2.2
+            },
+            {
+              "chunk_id": "f8342bce-7b0c-547f-aafa-27f69c9e54ae",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#declare-the-dependency-in-the-dependant",
+              "score": 1.6
+            },
+            {
+              "chunk_id": "196befb4-b618-5456-adc3-ca69074a3ba1",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#declare-the-dependency-in-the-dependant",
+              "score": 1.2
+            },
+            {
+              "chunk_id": "4b8008d5-75c4-5fe2-b3ee-698cb1995a49",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield",
+              "score": 1.2
+            }
+          ]
+        },
+        "vector": {
+          "count": 5,
+          "seconds": 0.0244,
+          "top": [
+            {
+              "chunk_id": "24a4f4c0-2e80-5820-9956-a423bb38d5ff",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#early-exit-and-scope",
+              "score": 0.1372327640971236
+            },
+            {
+              "chunk_id": "d8c39c1a-1e45-51f4-814f-332d30c6e323",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except",
+              "score": 0.13615531274879378
+            },
+            {
+              "chunk_id": "d5e35a8a-b3d8-5d10-b08d-ec318e8b1f72",
+              "url": "https://fastapi.tiangolo.com/tutorial/path-params/#order-matters",
+              "score": 0.1322299084389329
+            },
+            {
+              "chunk_id": "6f2733fd-75a0-5cd3-a62e-cacdd0d7ffec",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 0.12967995470524674
+            },
+            {
+              "chunk_id": "939f4093-2113-566c-8aa6-6e6aee4927f9",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except",
+              "score": 0.12835950344333014
+            }
+          ]
+        },
+        "hybrid": {
+          "count": 5,
+          "seconds": 0.0077,
+          "top": [
+            {
+              "chunk_id": "24a4f4c0-2e80-5820-9956-a423bb38d5ff",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#early-exit-and-scope",
+              "score": 0.029906956136464335
+            },
+            {
+              "chunk_id": "d8c39c1a-1e45-51f4-814f-332d30c6e323",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except",
+              "score": 0.02878726010616578
+            },
+            {
+              "chunk_id": "6f2733fd-75a0-5cd3-a62e-cacdd0d7ffec",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 0.028782894736842105
+            },
+            {
+              "chunk_id": "939f4093-2113-566c-8aa6-6e6aee4927f9",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except",
+              "score": 0.028205128205128206
+            },
+            {
+              "chunk_id": "8c6b965f-b134-5dfd-a526-24be18c5420b",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#early-exit-and-scope",
+              "score": 0.02813852813852814
+            }
+          ]
+        }
+      }
+    },
+    {
+      "query": "response_model",
+      "modes": {
+        "keyword": {
+          "count": 5,
+          "seconds": 0.0018,
+          "top": [
+            {
+              "chunk_id": "5443236e-57d4-51d0-8adf-d9351b7e11b9",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude",
+              "score": 6.6
+            },
+            {
+              "chunk_id": "d051ccf4-16b1-53db-a4be-922e83531d54",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#using-lists-instead-of-sets",
+              "score": 6.6
+            },
+            {
+              "chunk_id": "e5ca1a5d-538c-5914-92a8-d573849aab98",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-priority",
+              "score": 6.4
+            },
+            {
+              "chunk_id": "ffba75ea-a9c8-5ddd-9f11-7f00eb23bf14",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude",
+              "score": 6.2
+            },
+            {
+              "chunk_id": "5ab3d3d1-aba2-5b6e-9f73-b5edb6e68193",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude",
+              "score": 5.8
+            }
+          ]
+        },
+        "vector": {
+          "count": 5,
+          "seconds": 0.0051,
+          "top": [
+            {
+              "chunk_id": "83265e0a-95cb-5afc-b657-44f52b414c30",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-parameter",
+              "score": 0.6888713836669922
+            },
+            {
+              "chunk_id": "fae60aa5-aee5-509f-8dab-ea15f2add140",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#add-an-output-model",
+              "score": 0.6887795514595788
+            },
+            {
+              "chunk_id": "aca2b08e-1d0a-5e7d-8038-36daa860ba77",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#return-the-same-input-data",
+              "score": 0.6639014482498169
+            },
+            {
+              "chunk_id": "fb20c2cf-96b6-5c22-98dc-d49d92ae7d40",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-encoding-parameters",
+              "score": 0.6398181915283203
+            },
+            {
+              "chunk_id": "b11d17f3-c062-5b11-b562-37ac3be2d101",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#recap",
+              "score": 0.6305637359619141
+            }
+          ]
+        },
+        "hybrid": {
+          "count": 5,
+          "seconds": 0.0087,
+          "top": [
+            {
+              "chunk_id": "5ab3d3d1-aba2-5b6e-9f73-b5edb6e68193",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude",
+              "score": 0.028371628371628373
+            },
+            {
+              "chunk_id": "f29f4e4c-153c-5c2c-aba6-bea2b8d5940d",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-include-and-response-model-exclude",
+              "score": 0.02819138376017471
+            },
+            {
+              "chunk_id": "4d6ebbde-cf89-533c-986b-92ad07ad2a63",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-parameter",
+              "score": 0.02690501986276634
+            },
+            {
+              "chunk_id": "fb930420-243d-559b-8a23-2c4a22aa2da4",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#data-with-values-for-fields-with-defaults",
+              "score": 0.025807525807525808
+            },
+            {
+              "chunk_id": "70fb3e32-187a-5448-842c-6a078a4c22be",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-encoding-parameters",
+              "score": 0.025158227848101268
+            }
+          ]
+        }
+      }
+    },
+    {
+      "query": "HTTPException",
+      "modes": {
+        "keyword": {
+          "count": 5,
+          "seconds": 0.0006,
+          "top": [
+            {
+              "chunk_id": "2b10c490-f7eb-518a-928a-53bd303bd38f",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 1.8
+            },
+            {
+              "chunk_id": "60b0468d-54a6-5a6b-a28a-3d0981440466",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 1.8
+            },
+            {
+              "chunk_id": "2ef8c383-9c8c-5867-9fff-1c61ea349d8d",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 1.4
+            },
+            {
+              "chunk_id": "7e995f5f-90ed-594a-a1a7-f8aa3e4095f9",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-httpexception-except-and-background-tasks",
+              "score": 1.4
+            },
+            {
+              "chunk_id": "c35a8bc4-c7aa-5b91-b6c5-65f9fd22006b",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 1.4
+            }
+          ]
+        },
+        "vector": {
+          "count": 5,
+          "seconds": 0.0071,
+          "top": [
+            {
+              "chunk_id": "cd01475a-242b-527b-bba9-240fbaabf709",
+              "url": "https://fastapi.tiangolo.com/tutorial/testing/#using-testclient",
+              "score": 0.41380635417662015
+            },
+            {
+              "chunk_id": "15c85c1f-d30e-5a56-95c9-14b90523cbc4",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#execution-of-dependencies-with-yield",
+              "score": 0.41341661174844035
+            },
+            {
+              "chunk_id": "9c86ead7-0332-58f8-bd1a-b2117b8447f6",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 0.3421039973435409
+            },
+            {
+              "chunk_id": "54cdb065-7dff-593a-bcd7-089067b22013",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except",
+              "score": 0.3388802207183712
+            },
+            {
+              "chunk_id": "c74de274-7f92-5e41-95fa-aca29b0688a3",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 0.33384772135642504
+            }
+          ]
+        },
+        "hybrid": {
+          "count": 5,
+          "seconds": 0.0082,
+          "top": [
+            {
+              "chunk_id": "2ef8c383-9c8c-5867-9fff-1c61ea349d8d",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 0.03057889822595705
+            },
+            {
+              "chunk_id": "c74de274-7f92-5e41-95fa-aca29b0688a3",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 0.030536130536130537
+            },
+            {
+              "chunk_id": "62294411-45af-5d80-8bdd-5e30b9499177",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 0.029418126757516764
+            },
+            {
+              "chunk_id": "2b10c490-f7eb-518a-928a-53bd303bd38f",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 0.02938045560996381
+            },
+            {
+              "chunk_id": "60b0468d-54a6-5a6b-a28a-3d0981440466",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-httpexception",
+              "score": 0.02928692699490662
+            }
+          ]
+        }
+      }
+    },
+    {
+      "query": "yield",
+      "modes": {
+        "keyword": {
+          "count": 5,
+          "seconds": 0.0015,
+          "top": [
+            {
+              "chunk_id": "6f2733fd-75a0-5cd3-a62e-cacdd0d7ffec",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 4.4
+            },
+            {
+              "chunk_id": "9c86ead7-0332-58f8-bd1a-b2117b8447f6",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 4.4
+            },
+            {
+              "chunk_id": "f07b3b03-04bf-5426-bd7b-3903adcb42bf",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 4.4
+            },
+            {
+              "chunk_id": "4b8008d5-75c4-5fe2-b3ee-698cb1995a49",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield",
+              "score": 4.2
+            },
+            {
+              "chunk_id": "8fc023f4-f861-5161-961b-2b763b4b14e4",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield",
+              "score": 4.2
+            }
+          ]
+        },
+        "vector": {
+          "count": 5,
+          "seconds": 0.0062,
+          "top": [
+            {
+              "chunk_id": "d8eb43f4-53c7-5e0e-9bd8-9f1b3e141cdd",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.6280717475371522
+            },
+            {
+              "chunk_id": "9980f83e-d9e2-5673-abd4-ad1b39b3c186",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except",
+              "score": 0.6237870903268945
+            },
+            {
+              "chunk_id": "7e56b8e0-1825-5a96-8df4-d7504027dccf",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield",
+              "score": 0.6235561447937241
+            },
+            {
+              "chunk_id": "9f7688cd-6bf4-51f0-b8a8-fd4b0e48c151",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield",
+              "score": 0.6235561447937241
+            },
+            {
+              "chunk_id": "839cfd5e-efa4-51cc-8b34-53f0b984ae7f",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#early-exit-and-scope",
+              "score": 0.6230945215764938
+            }
+          ]
+        },
+        "hybrid": {
+          "count": 5,
+          "seconds": 0.0073,
+          "top": [
+            {
+              "chunk_id": "dc0cf108-1ff2-5f0a-ba71-2874054226fc",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 0.029236022193768675
+            },
+            {
+              "chunk_id": "c6f44c2b-691d-550c-a1f7-dd4605ed78e5",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 0.027443609022556388
+            },
+            {
+              "chunk_id": "6f2733fd-75a0-5cd3-a62e-cacdd0d7ffec",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#always-raise-in-dependencies-with-yield-and-except",
+              "score": 0.01639344262295082
+            },
+            {
+              "chunk_id": "d8eb43f4-53c7-5e0e-9bd8-9f1b3e141cdd",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.01639344262295082
+            },
+            {
+              "chunk_id": "9980f83e-d9e2-5673-abd4-ad1b39b3c186",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except",
+              "score": 0.016129032258064516
+            }
+          ]
+        }
+      }
+    },
+    {
+      "query": "How can a shared helper supply values to multiple endpoints?",
+      "modes": {
+        "keyword": {
+          "count": 0,
+          "seconds": 0.0008,
+          "top": []
+        },
+        "vector": {
+          "count": 5,
+          "seconds": 0.007,
+          "top": [
+            {
+              "chunk_id": "5bfb9bb1-0244-5959-8276-a8d15f42250a",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#simple-and-powerful",
+              "score": 0.3561848998069763
+            },
+            {
+              "chunk_id": "ba178007-3b98-58a9-bd7c-3de5254a3b80",
+              "url": "https://fastapi.tiangolo.com/tutorial/first-steps/#path",
+              "score": 0.3188932538032532
+            },
+            {
+              "chunk_id": "edbf96f1-b453-5810-8fe8-32267cc0fbf4",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#share-annotated-dependencies",
+              "score": 0.31018509329468624
+            },
+            {
+              "chunk_id": "9571364f-b4a4-5953-8fec-cf4a22908b0e",
+              "url": "https://fastapi.tiangolo.com/tutorial/path-params/#create-an-enum-class",
+              "score": 0.3091688844313887
+            },
+            {
+              "chunk_id": "c951a257-e969-5a36-9ee9-bae1680c5242",
+              "url": "https://fastapi.tiangolo.com/tutorial/path-params/#return-enumeration-members",
+              "score": 0.3079602832817868
+            }
+          ]
+        },
+        "hybrid": {
+          "count": 5,
+          "seconds": 0.0078,
+          "top": [
+            {
+              "chunk_id": "5bfb9bb1-0244-5959-8276-a8d15f42250a",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#simple-and-powerful",
+              "score": 0.01639344262295082
+            },
+            {
+              "chunk_id": "ba178007-3b98-58a9-bd7c-3de5254a3b80",
+              "url": "https://fastapi.tiangolo.com/tutorial/first-steps/#path",
+              "score": 0.016129032258064516
+            },
+            {
+              "chunk_id": "edbf96f1-b453-5810-8fe8-32267cc0fbf4",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/#share-annotated-dependencies",
+              "score": 0.015873015873015872
+            },
+            {
+              "chunk_id": "9571364f-b4a4-5953-8fec-cf4a22908b0e",
+              "url": "https://fastapi.tiangolo.com/tutorial/path-params/#create-an-enum-class",
+              "score": 0.015625
+            },
+            {
+              "chunk_id": "c951a257-e969-5a36-9ee9-bae1680c5242",
+              "url": "https://fastapi.tiangolo.com/tutorial/path-params/#return-enumeration-members",
+              "score": 0.015384615384615385
+            }
+          ]
+        }
+      }
+    },
+    {
+      "query": "How do I close a database resource after a request?",
+      "modes": {
+        "keyword": {
+          "count": 0,
+          "seconds": 0.0006,
+          "top": []
+        },
+        "vector": {
+          "count": 5,
+          "seconds": 0.0071,
+          "top": [
+            {
+              "chunk_id": "7df57ff5-8175-5793-8aba-314116e34ad9",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.4524592487538317
+            },
+            {
+              "chunk_id": "320ef4a2-0c6f-5a5c-a5ec-e523d2af20f1",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-parameter",
+              "score": 0.3678530612167047
+            },
+            {
+              "chunk_id": "45ca51d7-b5a7-53af-9194-f30be0c0b200",
+              "url": "https://fastapi.tiangolo.com/tutorial/body/#declare-it-as-a-parameter",
+              "score": 0.28838678334990897
+            },
+            {
+              "chunk_id": "a44cfaa3-ede1-5863-9f14-fbe1e779ad1c",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.28233013854443256
+            },
+            {
+              "chunk_id": "c61c00bb-8a5c-5339-88db-ddc0eba55513",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.28233013854443256
+            }
+          ]
+        },
+        "hybrid": {
+          "count": 5,
+          "seconds": 0.0065,
+          "top": [
+            {
+              "chunk_id": "7df57ff5-8175-5793-8aba-314116e34ad9",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.01639344262295082
+            },
+            {
+              "chunk_id": "320ef4a2-0c6f-5a5c-a5ec-e523d2af20f1",
+              "url": "https://fastapi.tiangolo.com/tutorial/response-model/#response-model-parameter",
+              "score": 0.016129032258064516
+            },
+            {
+              "chunk_id": "45ca51d7-b5a7-53af-9194-f30be0c0b200",
+              "url": "https://fastapi.tiangolo.com/tutorial/body/#declare-it-as-a-parameter",
+              "score": 0.015873015873015872
+            },
+            {
+              "chunk_id": "a44cfaa3-ede1-5863-9f14-fbe1e779ad1c",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.015625
+            },
+            {
+              "chunk_id": "c61c00bb-8a5c-5339-88db-ddc0eba55513",
+              "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
+              "score": 0.015384615384615385
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
