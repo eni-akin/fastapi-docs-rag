@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "name": "tutorial-expanded-v2",
+  "variant_policy": "preserve-all-labeled-panels",
+  "pages": [
+    {"url": "https://fastapi.tiangolo.com/tutorial/body-fields/", "expected_title": "Body - Fields", "expected_code": "Field", "expected_section": "import-field"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/body/", "expected_title": "Request Body", "expected_code": "BaseModel", "expected_section": "import-pydantics-basemodel"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/dependencies/", "expected_title": "Dependencies", "expected_code": "Depends", "expected_section": "share-annotated-dependencies"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/", "expected_title": "Classes as Dependencies", "expected_code": "Depends", "expected_section": "classes-as-dependencies_1"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/", "expected_title": "Dependencies with yield", "expected_code": "yield", "expected_section": "a-database-dependency-with-yield"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/first-steps/", "expected_title": "First Steps", "expected_code": "FastAPI", "expected_section": "check-it"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/handling-errors/", "expected_title": "Handling Errors", "expected_code": "HTTPException", "expected_section": "use-httpexception"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/header-params/", "expected_title": "Header Parameters", "expected_code": "Header", "expected_section": "import-header"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/path-params/", "expected_title": "Path Parameters", "expected_code": "item_id", "expected_section": "path-parameters-with-types"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/", "expected_title": "Query Parameters and String Validations", "expected_code": "Query", "expected_section": "additional-validation"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/query-params/", "expected_title": "Query Parameters", "expected_code": "skip", "expected_section": "optional-parameters"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/response-model/", "expected_title": "Response Model - Return Type", "expected_code": "response_model", "expected_section": "response-model-parameter"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/response-status-code/", "expected_title": "Response Status Code", "expected_code": "status_code", "expected_section": "about-http-status-codes"},
+    {"url": "https://fastapi.tiangolo.com/tutorial/testing/", "expected_title": "Testing", "expected_code": "TestClient", "expected_section": "using-testclient"}
+  ]
+}

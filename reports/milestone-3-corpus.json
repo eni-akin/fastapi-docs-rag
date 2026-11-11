@@ -1,0 +1,179 @@
+{
+  "status": "passed",
+  "manifest": "corpus/manifests/tutorial-expanded-v2.json",
+  "manifest_hash": "23e46b6d7b15e079b2b2bb0605e4ab23d067365a40bad9a036851b500f1861a9",
+  "capture_id": "58a210e6-d72f-4938-9efa-5698e1e9fd8e",
+  "capture_report": "data/captures/58a210e6-d72f-4938-9efa-5698e1e9fd8e/report.json",
+  "artifact_root": "data",
+  "capture_interval": {
+    "started_at": "2026-11-05T18:55:15.751350+00:00",
+    "finished_at": "2026-11-11T09:53:54.174542+00:00"
+  },
+  "provenance": {
+    "seed_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+    "new_page_capture_id": "08903fce-63b0-470d-a636-54689fd65a61",
+    "seed_pages_reused": 8,
+    "new_pages_fetched": 6,
+    "final_capture_revalidated_all_pages": true
+  },
+  "parser_version": "1",
+  "chunker_version": "1",
+  "pages": [
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+      "source_capture_id": "08903fce-63b0-470d-a636-54689fd65a61",
+      "raw_hash": "0d0144c0d533b8dfcb6462e91ce7780f916d0aa8bf91d2112bc0d28ca3a3bd62",
+      "content_hash": "95005246f9209c4be67433ef3b7b1098ca19741df9c72c2560569481790d2df5",
+      "code_blocks": 5,
+      "chunks": 19,
+      "chunk_set_hash": "bb0cec255e3c4c4a3057126cc54d55a60e2981778218b59e584b4ab6d11e738e",
+      "max_input_tokens": 185
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/body/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "f11901b226a695972685f70a812e1044ae6a178405a9dbf5a8801b956e797cd9",
+      "content_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+      "code_blocks": 8,
+      "chunks": 23,
+      "chunk_set_hash": "449df51c53aa544fee276e26a5a2f6fe6908336ffd020dd930f845251822edd2",
+      "max_input_tokens": 166
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "d175c33d73c8d3983b9c3881c856fa74f41695977608989d8a014612aedd24b6",
+      "content_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+      "code_blocks": 10,
+      "chunks": 36,
+      "chunk_set_hash": "6b58999f2e1509c086e81e955a8bde3e50a479d026feb3cf1906a7eedb5c252d",
+      "max_input_tokens": 176
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+      "source_capture_id": "08903fce-63b0-470d-a636-54689fd65a61",
+      "raw_hash": "cd7db90468176cb957905b0efcc866159260547f1bd6e3d0b542df9d4179974e",
+      "content_hash": "09834b606651049b33bab8d1ac62b7cf0833e4fb6e9961cb93a79a5adeaaf11f",
+      "code_blocks": 31,
+      "chunks": 77,
+      "chunk_set_hash": "573ad84985f15232cea8d5cde6f7dd68da8bf1541d370ec5b6df2488a35c74d7",
+      "max_input_tokens": 200
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "aa0df88cb9de31947bf15bdd2ea2776762dae021725d26866b1aaf8b45c49943",
+      "content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+      "code_blocks": 20,
+      "chunks": 69,
+      "chunk_set_hash": "e620049dd32e23606d7a1f8f236f0c652514f4379a170b2642cceb32eb5ba1dc",
+      "max_input_tokens": 211
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "c5c6c8659176f6227abd00bb8682ae7ea2f9b71e83c4fd8e3d8fd61719c56934",
+      "content_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221",
+      "code_blocks": 21,
+      "chunks": 52,
+      "chunk_set_hash": "3bb835ec83704346440f0cb1a7e1cbdbfbb4abfff0b2f42fbd75d987e264bff4",
+      "max_input_tokens": 190
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+      "source_capture_id": "08903fce-63b0-470d-a636-54689fd65a61",
+      "raw_hash": "8774a0b3eff2855248b20bc81fcbb1901919cfb8089bda5c6c1964c955e0419e",
+      "content_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+      "code_blocks": 17,
+      "chunks": 36,
+      "chunk_set_hash": "06b651ba0c291793ad5d99b8934eaa7edbe4b60a44c4bb6add7fb2de02ebfdbb",
+      "max_input_tokens": 203
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+      "source_capture_id": "08903fce-63b0-470d-a636-54689fd65a61",
+      "raw_hash": "987a4d527c30a7e0db04ba704d85616e3a84c57c6e7d7fb63b61262c4f837e61",
+      "content_hash": "3677897c321a4d09200a652f465fd73887f7b53c8d6fc8503374abe562726225",
+      "code_blocks": 11,
+      "chunks": 24,
+      "chunk_set_hash": "4b4915b769f2d9ac3ac894dce8681df9fb1b79d4adb4937effb09938a324ee7c",
+      "max_input_tokens": 167
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "b6381441734c11a26281986d799d1148d75445c15b80412a9e0ced43bbf01edc",
+      "content_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+      "code_blocks": 15,
+      "chunks": 47,
+      "chunk_set_hash": "35f0c623357b30835bdca3c5b76b65d66f4f5c6331adad66f0367bb3a85cf798",
+      "max_input_tokens": 189
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+      "source_capture_id": "08903fce-63b0-470d-a636-54689fd65a61",
+      "raw_hash": "a5642e9e5a6e94145b6ed6aac1834b102fab260ef8227c89c22083d2d26bb9fa",
+      "content_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+      "code_blocks": 56,
+      "chunks": 111,
+      "chunk_set_hash": "45ffbdd648245756ce5a8e41b6342a84b22901631ad46aacc149270f53b4912e",
+      "max_input_tokens": 208
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "41582272e9291b2234aad94fa9bab78ed1c7e330edb0f91d107dfc56ac051c73",
+      "content_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+      "code_blocks": 19,
+      "chunks": 21,
+      "chunk_set_hash": "b96815693ad5bb955a16cad60602509965c3d35269d6af62941fd9f07127fb23",
+      "max_input_tokens": 188
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "0c258eff0955f17a9380d0f440abd588b2585192c49168f63dede621f6b6d7bc",
+      "content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+      "code_blocks": 21,
+      "chunks": 67,
+      "chunk_set_hash": "46c07e84150a54ac938677a1959f9abe8d9cbc2144caaefea63f0d9d0a2e5495",
+      "max_input_tokens": 208
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+      "source_capture_id": "08903fce-63b0-470d-a636-54689fd65a61",
+      "raw_hash": "935ba9e067ce4cb56655bfe152320de9af966026653ed7e9892b84db68807475",
+      "content_hash": "b2c56905afd6a10462ba42eaa42f8422b86fa65d6666aa68df87dc1de45ef0a7",
+      "code_blocks": 4,
+      "chunks": 15,
+      "chunk_set_hash": "13ebfc12b027c18330cde066b7db0e7aba38cb1bd0e9a486d1b18274843b077a",
+      "max_input_tokens": 179
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/testing/",
+      "source_capture_id": "4b6f1a40-a9f6-4738-aaaa-1f86d8f5937e",
+      "raw_hash": "4a9a299faa1cb763ecaabf26c8128d0212f39b998ff791068289284373228d10",
+      "content_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+      "code_blocks": 13,
+      "chunks": 40,
+      "chunk_set_hash": "6fcfcaf963c36ab11c9f98b1cf376f0d541e60935977657c22d232218d8fb572",
+      "max_input_tokens": 209
+    }
+  ],
+  "totals": {
+    "pages": 14,
+    "code_blocks": 251,
+    "chunks": 637,
+    "max_input_tokens": 211
+  },
+  "checks": {
+    "manifest_title_code_section": true,
+    "raw_and_parsed_checksums": true,
+    "raw_code_equals_parsed_code": true,
+    "anchors_in_raw_article": true,
+    "nonheading_source_coverage": true,
+    "deterministic_parse_and_chunk": true,
+    "body_tokens_at_most_180": true,
+    "input_tokens_at_most_256": true
+  }
+}

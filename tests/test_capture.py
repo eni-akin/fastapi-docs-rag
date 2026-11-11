@@ -7,6 +7,7 @@ import httpx
 import pytest
 
 from fastapi_docs_rag import cli, ingest
+from fastapi_docs_rag.db import load_capture
 from fastapi_docs_rag.fetch import FetchLimits
 from fastapi_docs_rag.ingest import capture, render_markdown
 from fastapi_docs_rag.manifest import json_hash
@@ -16,6 +17,7 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 def run_capture(tmp_path, responses):
+    tmp_path.mkdir(parents=True, exist_ok=True)
     pages = [
         {
             "url": f"https://fastapi.tiangolo.com/tutorial/{name}/",
@@ -77,6 +79,111 @@ def test_capture_report_and_exports(tmp_path):
         markdown = (root / page["markdown_path"]).read_text()
         assert document["url"] in markdown
         assert page["code_blocks"] >= 1
+
+
+def test_combined_capture_reuses_verified_raw_bytes(tmp_path):
+    old_path, old = run_capture(tmp_path / "old", valid_responses())
+    expanded = tmp_path / "expanded.json"
+    expanded.write_text(json.dumps({"version": 1, "pages": old["manifest"]["pages"]}))
+    requested = []
+
+    def unexpected_fetch(request):
+        requested.append(str(request.url))
+        raise AssertionError("retained pages must not be fetched")
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(unexpected_fetch)) as client:
+            return await capture(
+                expanded,
+                tmp_path / "combined",
+                client,
+                FetchLimits(pause=0),
+                old_path,
+                tmp_path / "old" / "artifacts",
+            )
+
+    path, report = asyncio.run(run())
+    assert report["status"] == "succeeded"
+    assert not requested
+    assert report["retained_capture"]["capture_id"] == old["capture_id"]
+    assert report["capture_interval"]["started_at"] == old["started_at"]
+    assert [p["raw_hash"] for p in report["pages"]] == [p["raw_hash"] for p in old["pages"]]
+    assert all(p["reused_from_capture"] == old["capture_id"] for p in report["pages"])
+    load_capture(path, tmp_path / "combined")
+
+
+def test_combined_capture_fetches_only_new_pages_and_rechecks_retained_expectations(tmp_path):
+    old_path, old = run_capture(tmp_path / "old", valid_responses())
+    pages = [
+        *old["manifest"]["pages"],
+        {
+            "url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+            "expected_title": "Path Parameters",
+            "expected_code": "item_id",
+            "expected_section": "path-parameters-with-types",
+        },
+    ]
+    pages.sort(key=lambda page: page["url"])
+    manifest = tmp_path / "expanded.json"
+    manifest.write_text(json.dumps({"version": 1, "pages": pages}))
+    requested = []
+
+    def fetch(request):
+        requested.append(request.url.path)
+        return httpx.Response(
+            200,
+            text=(
+                '<article class="md-content__inner"><h1>Path Parameters</h1>'
+                '<h2 id="path-parameters-with-types">Path Parameters with Types</h2>'
+                "<p>Use a path parameter.</p><pre><code>item_id = 1\n</code></pre></article>"
+            ),
+            headers={"content-type": "text/html"},
+        )
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(fetch)) as client:
+            return await capture(
+                manifest,
+                tmp_path / "combined",
+                client,
+                FetchLimits(pause=0),
+                old_path,
+                tmp_path / "old" / "artifacts",
+            )
+
+    path, report = asyncio.run(run())
+    assert report["status"] == "succeeded"
+    assert requested == ["/tutorial/path-params/"]
+    assert report["pages_succeeded"] == 3
+    assert sum("reused_from_capture" in page for page in report["pages"]) == 2
+    load_capture(path, tmp_path / "combined")
+
+    pages[0]["expected_code"] = "example no longer present"
+    manifest.write_text(json.dumps({"version": 1, "pages": pages}))
+    _, rejected = asyncio.run(run())
+    assert rejected["status"] == "failed"
+    assert rejected["pages_failed"] == 1
+    assert "Expected code" in rejected["pages"][0]["error"]
+
+
+def test_combined_capture_rejects_tampered_retained_raw(tmp_path):
+    old_path, old = run_capture(tmp_path / "old", valid_responses())
+    raw = tmp_path / "old" / "artifacts" / old["pages"][0]["raw_path"]
+    raw.write_bytes(b"tampered")
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda request: None)) as client:
+            return await capture(
+                tmp_path / "old" / "seed.json",
+                tmp_path / "combined",
+                client,
+                FetchLimits(pause=0),
+                old_path,
+                tmp_path / "old" / "artifacts",
+            )
+
+    with pytest.raises(ValueError, match="Raw artifact checksum mismatch"):
+        asyncio.run(run())
 
 
 def test_failed_page_preserves_successes_and_raw_parse_failure(tmp_path):
