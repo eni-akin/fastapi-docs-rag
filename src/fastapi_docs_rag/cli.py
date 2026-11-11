@@ -41,6 +41,12 @@ def main() -> int:
     command.add_argument(
         "--model-dir", type=Path, default=Path("data/models/ms-marco-MiniLM-L6-v2")
     )
+    command = commands.add_parser(
+        "prepare-context-tokenizer", help="Download only the pinned Qwen tokenizer assets"
+    )
+    command.add_argument(
+        "--model-dir", type=Path, default=Path("data/models/qwen2.5-1.5b-tokenizer")
+    )
     command = commands.add_parser("import-capture", help="Build or reuse a keyword-only snapshot")
     command.add_argument("--report", type=Path, required=True)
     command.add_argument("--artifacts", type=Path, default=Path("data"))
@@ -57,6 +63,17 @@ def main() -> int:
     command.add_argument("--model-dir", type=Path, default=Path("data/models/all-MiniLM-L6-v2"))
     command.add_argument(
         "--reranker-dir", type=Path, default=Path("data/models/ms-marco-MiniLM-L6-v2")
+    )
+    command.add_argument("--json", action="store_true")
+    command = commands.add_parser("context", help="Print a bounded, source-checked evidence bundle")
+    command.add_argument("--snapshot", required=True)
+    command.add_argument("--query", required=True)
+    command.add_argument("--model-dir", type=Path, default=Path("data/models/all-MiniLM-L6-v2"))
+    command.add_argument(
+        "--reranker-dir", type=Path, default=Path("data/models/ms-marco-MiniLM-L6-v2")
+    )
+    command.add_argument(
+        "--tokenizer-dir", type=Path, default=Path("data/models/qwen2.5-1.5b-tokenizer")
     )
     command.add_argument("--json", action="store_true")
     command = commands.add_parser(
@@ -105,6 +122,11 @@ def main() -> int:
             from fastapi_docs_rag.rerank import prepare_reranker
 
             print(json.dumps(prepare_reranker(arguments.model_dir), indent=2))
+            return 0
+        if arguments.command == "prepare-context-tokenizer":
+            from fastapi_docs_rag.context import prepare_context_tokenizer
+
+            print(json.dumps(prepare_context_tokenizer(arguments.model_dir), indent=2))
             return 0
         if arguments.command != "capture":
             with connect_database() as connection:
@@ -171,6 +193,49 @@ def main() -> int:
                         )
                     )
                     return 0
+                elif arguments.command == "context":
+                    from fastapi_docs_rag.context import build_context, load_context_tokenizer
+
+                    rows = search(
+                        connection,
+                        arguments.snapshot,
+                        arguments.query,
+                        20,
+                        "hybrid-rerank",
+                        model_dir=arguments.model_dir,
+                        reranker_dir=arguments.reranker_dir,
+                    )
+                    tokenizer, _ = load_context_tokenizer(arguments.tokenizer_dir)
+                    result = build_context(
+                        connection, arguments.snapshot, arguments.query, rows, tokenizer=tokenizer
+                    )
+                    if not arguments.json:
+                        print(
+                            f"{len(result['entries'])} evidence entries | "
+                            f"{result['prompt_tokens']}/{result['profile']['max_input_tokens']} "
+                            f"input tokens | snapshot {result['snapshot_id']}"
+                        )
+                        print("Prompt version: " + result["version"])
+                        print("System: " + result["messages"][0]["content"])
+                        print("Question: " + result["question"])
+                        for entry in result["entries"]:
+                            print(f"\n{entry['evidence_id']}. {entry['title']} | {entry['url']}")
+                            print(
+                                f"document {entry['document_id']} | content hash "
+                                f"{entry['document_content_hash']} | raw hash "
+                                f"{entry['document_raw_hash']}"
+                            )
+                            print("chunks: " + ", ".join(entry["chunk_ids"]))
+                            print("source spans: " + json.dumps(entry["source_spans"]))
+                            print("variants: " + json.dumps(entry["variants"], ensure_ascii=False))
+                            print(
+                                f"partial code: {entry['partial_code']} | "
+                                f"expanded blocks: {entry['expanded_code_blocks']}"
+                            )
+                            print(entry["text"])
+                        print("\nSkipped: " + json.dumps(result["skipped"]))
+                        print("Sufficiency: " + result["sufficiency_policy"])
+                        return 0
                 else:
                     rows = search(
                         connection,
