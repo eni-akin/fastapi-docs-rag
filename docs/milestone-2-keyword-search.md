@@ -22,9 +22,9 @@ correctness. The two proposed outside-corpus questions also need your review.
 
 ## Branches
 
-Each branch contains its earlier prerequisites. All section code receives a
-subagent review and passing checks before its commit and push. `main` stays at
-the milestone-1 commit until a separate merge decision.
+Each branch contains its earlier prerequisites. All section code received a
+subagent review and passing checks before its commit and push. All five branches
+were subsequently merged into `main` through PRs #1–#5, ending at `793ea16`.
 
 | Branch | Section |
 |---|---|
@@ -34,7 +34,8 @@ the milestone-1 commit until a separate merge decision.
 | `milestone-2/keyword-search` | Parameterized ranked search and inspectable CLI output |
 | `milestone-2/evaluation` | Draft labels, provenance validation, diagnostics, and this handoff |
 
-Use `milestone-2/evaluation` to work with the cumulative implementation.
+Use `main` to work with the cumulative implementation. The section branches remain
+available as historical references. Human label approval remains outstanding.
 
 ## Run on this checkout
 

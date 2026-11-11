@@ -2,7 +2,7 @@
 
 Prepared: November 5, 2026.
 
-Status: implementation plan; application code, dependencies, corpus, and benchmarks have not been created. The project directory was empty when inspected. This document expands the RAG project in the supplied portfolio plan and applies the later decision to use official FastAPI documentation instead of Python documentation.
+Status update (November 11, 2026): milestone 1 and the agent-owned milestone-2 implementation are merged into `main`. Milestone 2's 20 human label reviews and some milestone-0 setup tasks remain outstanding. Next is milestone 3; see [its detailed implementation plan](milestone-3-implementation-plan.md) for the verified starting point, sequence and completion gates. Environment observations and defaults below describe the original planning baseline unless a later milestone report supersedes them. This document expands the RAG project in the supplied portfolio plan and applies the later decision to use official FastAPI documentation instead of Python documentation.
 
 ## 1. What we are building
 
@@ -497,6 +497,8 @@ Deliverable: inspectable captured content with retained code and anchors. Gate: 
 Deliverable: manifest -> capture -> chunks -> PostgreSQL -> inspectable keyword results. Gate: every retrieved result belongs to the requested snapshot, and all token/source integrity checks pass. Learn retrieval without a generator concealing errors.
 
 ### Milestone 3 — Vector search and hybrid comparison, 10–14 hours
+
+Detailed implementation sequence: [Milestone 3 plan](milestone-3-implementation-plan.md).
 
 1. Download and pin the embedding model/tokenizer revisions; verify tokenizer limits and vector shape.
 2. Build a vector-ready processing snapshot; encode in bounded batches and record throughput.
