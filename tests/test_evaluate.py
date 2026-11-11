@@ -180,6 +180,12 @@ def test_v2_draft_validates_source_variant_grade_and_review(database, labeled_sn
         validate_development_set(database, snapshot, dataset)
 
 
+def test_keyword_diagnostics_directs_v2_callers_to_comparison(database, labeled_snapshot):
+    snapshot, v1 = labeled_snapshot
+    with pytest.raises(ValueError, match="compare-retrieval"):
+        keyword_diagnostics(database, snapshot, _as_v2(database, snapshot, v1))
+
+
 def _as_v2(database, snapshot, v1):
     dataset = copy.deepcopy(v1)
     dataset["version"] = 2

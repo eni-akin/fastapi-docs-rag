@@ -1,7 +1,7 @@
 # Milestone 4: reranking and evidence budgets
 
 Status: ready-for-agent
-Resolution: planned
+Resolution: done — implementation independently verified; human semantic review deferred
 
 ## Scope
 
@@ -43,3 +43,10 @@ source-aware context, and four-mode evaluation/sufficiency diagnostics.
 November 11, 2026: continue autonomously through implementation and per-task
 merges, preserving deferred human reviews in `docs/action-items.md`. No answer
 generation or serving-release activation is included in this milestone.
+
+November 11, 2026: reranker and context branches merged. Evaluation branch produced
+the four-mode 60-draft report, selected-context coverage, and unvalidated cutoff
+sweep. Parent verification passed 182 tests with real PostgreSQL and tokenizer
+assets; an independent four-mode run reproduced all saved aggregates and the
+proposal, and checked every source span, prompt bound and cutoff denominator.
+See `docs/milestone-4-handoff.md`; the integration PR records final merge state.

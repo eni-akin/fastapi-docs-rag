@@ -4,6 +4,7 @@ import argparse
 import asyncio
 import json
 import sys
+import time
 from pathlib import Path
 
 import httpx
@@ -92,6 +93,15 @@ def main() -> int:
     command.add_argument(
         "--build-report", type=Path, help="Matching vector build JSON for reuse counts"
     )
+    command.add_argument(
+        "--with-rerank", action="store_true", help="Add reranked hybrid and context diagnostics"
+    )
+    command.add_argument(
+        "--reranker-dir", type=Path, default=Path("data/models/ms-marco-MiniLM-L6-v2")
+    )
+    command.add_argument(
+        "--tokenizer-dir", type=Path, default=Path("data/models/qwen2.5-1.5b-tokenizer")
+    )
     arguments = parser.parse_args()
     if arguments.command == "capture" and (arguments.retained_artifacts is None) != (
         arguments.retained_report is None
@@ -169,14 +179,35 @@ def main() -> int:
                         if arguments.build_report
                         else None
                     )
+                    reranker = tokenizer = provenance = load_timings = None
+                    if arguments.with_rerank:
+                        from fastapi_docs_rag.context import load_context_tokenizer
+                        from fastapi_docs_rag.rerank import load_reranker
+
+                        clock = time.perf_counter()
+                        reranker = load_reranker(arguments.reranker_dir)
+                        reranker_seconds = time.perf_counter() - clock
+                        clock = time.perf_counter()
+                        tokenizer, provenance = load_context_tokenizer(arguments.tokenizer_dir)
+                        load_timings = {
+                            "reranker_seconds": reranker_seconds,
+                            "context_tokenizer_seconds": time.perf_counter() - clock,
+                        }
                     result = compare_retrieval(
                         connection,
                         arguments.snapshot,
                         dataset,
                         model_dir=arguments.model_dir,
                         build_stats=build,
+                        reranker=reranker,
+                        context_tokenizer=tokenizer,
+                        context_profile=provenance,
+                        model_load_timings=load_timings,
                     )
                     write_json(arguments.output, result)
+                    policy = arguments.output.with_name(arguments.output.stem + "-policy.json")
+                    if arguments.with_rerank:
+                        write_json(policy, result["sufficiency_policy_proposal"])
                     summary = arguments.output.with_suffix(".md")
                     review_sheet = arguments.output.with_name(arguments.output.stem + "-review.md")
                     write_bytes(summary, comparison_markdown(result).encode("utf-8"))
@@ -187,6 +218,11 @@ def main() -> int:
                                 "report": str(arguments.output),
                                 "summary": str(summary),
                                 "review_sheet": str(review_sheet),
+                                **(
+                                    {"policy_proposal": str(policy)}
+                                    if arguments.with_rerank
+                                    else {}
+                                ),
                                 "label_validation": result["label_validation"],
                             },
                             indent=2,

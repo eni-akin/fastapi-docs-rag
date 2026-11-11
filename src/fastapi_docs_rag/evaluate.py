@@ -6,7 +6,7 @@ import time
 from collections import Counter
 from datetime import UTC, datetime
 from importlib.metadata import version
-from math import log2
+from math import isfinite, log2
 from pathlib import Path
 from uuid import UUID
 
@@ -283,6 +283,116 @@ def _span_covered(evidence: dict, rows: list[dict]) -> bool:
     return covered_until >= evidence["end"]
 
 
+def _missing_groups(question: dict, rows: list[dict]) -> list[str]:
+    return [
+        group["id"]
+        for group in question["evidence_groups"]
+        if not any(
+            all(_span_covered(span, rows) for span in alternative)
+            for alternative in group["alternatives"]
+        )
+    ]
+
+
+def context_coverage(question: dict, entries: list[dict]) -> dict:
+    """Measure complete proposed facts in selected source entries, not ranked chunks."""
+    if not question["answerable"]:
+        return {
+            "metric_denominator": 0,
+            "selected_entries": len(entries),
+            "group_coverage": None,
+            "complete_coverage": None,
+            "missing_groups": [],
+        }
+    missing = _missing_groups(question, entries)
+    group_count = len(question["evidence_groups"])
+    return {
+        "metric_denominator": 1,
+        "selected_entries": len(entries),
+        "group_coverage": (group_count - len(missing)) / group_count,
+        "complete_coverage": not missing,
+        "missing_groups": missing,
+    }
+
+
+def selected_rerank_score(reranked: list[dict], entries: list[dict]) -> dict:
+    """Bind the sufficiency signal to a chunk actually supplied in context."""
+    selected = {chunk_id for entry in entries for chunk_id in entry["chunk_ids"]}
+    if not selected:
+        return {"chunk_id": None, "raw_score": None}
+    matches = [row for row in reranked if row["chunk_id"] in selected]
+    if len(matches) != len(selected):
+        raise ValueError("Selected context references a chunk absent from reranked candidates")
+    best = max(matches, key=lambda row: (row["rerank_score"], row["chunk_id"]))
+    return {"chunk_id": best["chunk_id"], "raw_score": best["rerank_score"]}
+
+
+def calibrate_raw_scores(cases: list[dict]) -> dict:
+    """Sweep raw score cutoffs; empty evidence always rejects."""
+    for case in cases:
+        score = case["score"]
+        if type(case["answerable"]) is not bool or type(case["evidence_count"]) is not int:
+            raise ValueError("Calibration requires boolean labels and integer evidence counts")
+        if case["evidence_count"] < 0 or (
+            case["evidence_count"] and (type(score) not in (float, int) or not isfinite(score))
+        ):
+            raise ValueError("Nonempty calibration evidence needs a finite raw score")
+    answerable = sum(case["answerable"] for case in cases)
+    unsupported = len(cases) - answerable
+    if not answerable or not unsupported:
+        raise ValueError("Calibration needs both answerable and unsupported examples")
+    observed = sorted({case["score"] for case in cases if case["evidence_count"]})
+    cutoffs = [
+        ("accept_all_nonempty", None),
+        *[("score", value) for value in observed],
+        ("reject_all", None),
+    ]
+    sweep = []
+    for kind, cutoff in cutoffs:
+        accepted = [
+            case
+            for case in cases
+            if case["evidence_count"]
+            and kind != "reject_all"
+            and (kind == "accept_all_nonempty" or case["score"] >= cutoff)
+        ]
+        unsupported_accepted = sum(not case["answerable"] for case in accepted)
+        answerable_rejected = answerable - sum(case["answerable"] for case in accepted)
+        sweep.append(
+            {
+                "cutoff_kind": kind,
+                "raw_score_cutoff": cutoff,
+                "tie_policy": "accept score equal to cutoff; empty evidence always rejects",
+                "unsupported_accepted": unsupported_accepted,
+                "unsupported_denominator": unsupported,
+                "unsupported_acceptance_rate": unsupported_accepted / unsupported,
+                "answerable_rejected": answerable_rejected,
+                "answerable_denominator": answerable,
+                "answerable_rejection_rate": answerable_rejected / answerable,
+            }
+        )
+    # The two error types have equal weight. Prefer fewer unsupported acceptances on ties.
+    chosen = min(
+        sweep,
+        key=lambda point: (
+            point["unsupported_accepted"] * answerable + point["answerable_rejected"] * unsupported,
+            point["unsupported_accepted"],
+            point["answerable_rejected"],
+        ),
+    )
+    return {
+        "status": "unvalidated",
+        "score_type": "raw_cross_encoder_logit_not_probability",
+        "selection_rule": (
+            "minimum sum of class error rates; tie: fewer unsupported accepted, "
+            "then fewer answerable rejected"
+        ),
+        "empty_evidence_action": "insufficient_evidence",
+        "sweep": sweep,
+        "proposal": chosen,
+    }
+
+
 def ranking_metrics(question: dict, rows: list[dict], mapping: dict) -> dict:
     """Evaluate top ten against the fixed mapped positive-chunk set."""
     top = rows[:10]
@@ -311,14 +421,7 @@ def ranking_metrics(question: dict, rows: list[dict], mapping: dict) -> dict:
     ideal = sorted((2**grade - 1 for grade in grades.values()), reverse=True)[:10]
     dcg = sum(gain / log2(rank + 1) for rank, gain in enumerate(gains, 1))
     idcg = sum(gain / log2(rank + 1) for rank, gain in enumerate(ideal, 1))
-    missing = [
-        group["id"]
-        for group in question["evidence_groups"]
-        if not any(
-            all(_span_covered(span, top) for span in alternative)
-            for alternative in group["alternatives"]
-        )
-    ]
+    missing = _missing_groups(question, top)
     count = len(question["evidence_groups"])
     return {
         "metric_denominator": 1,
@@ -357,6 +460,14 @@ def _result_row(row: dict) -> dict:
         "keyword_score",
         "vector_distance",
         "vector_similarity",
+        "rerank_score",
+        "rerank_source_spans",
+        "rerank_scored_text",
+        "rerank_truncated",
+        "rerank_original_characters",
+        "rerank_scored_characters",
+        "rerank_pair_tokens",
+        "hybrid_rank",
     )
     return {**{key: row[key] for key in fields if key in row}, "text_excerpt": row["text"][:180]}
 
@@ -369,8 +480,12 @@ def compare_retrieval(
     embedder=None,
     model_dir: Path = Path("data/models/all-MiniLM-L6-v2"),
     build_stats: dict | None = None,
+    reranker=None,
+    context_tokenizer=None,
+    context_profile: dict | None = None,
+    model_load_timings: dict | None = None,
 ) -> dict:
-    """Run the three modes on one frozen vector snapshot with one encode per question."""
+    """Run three modes, or four with a supplied reranker and context tokenizer."""
     from fastapi_docs_rag.retrieve import fuse
 
     run_started_utc = datetime.now(UTC).isoformat()
@@ -394,6 +509,8 @@ def compare_retrieval(
         model_load_seconds = None
     if snapshot["profile"].get("embedding") != embedder.profile:
         raise ValueError("Snapshot embedding profile differs from the loaded model")
+    if (reranker is None) != (context_tokenizer is None):
+        raise ValueError("Four-mode comparison requires both reranker and context tokenizer")
     chunks = connection.execute(
         """SELECT c.id::text AS chunk_id, d.source_url,
                   d.content_hash AS document_content_hash, c.variants, c.source_spans
@@ -427,46 +544,75 @@ def compare_retrieval(
         vector = search(connection, snapshot_id, query, limit=20, mode="vector", embedder=embedder)
         stage["vector_seconds_including_one_encode"] = time.perf_counter() - clock
         clock = time.perf_counter()
-        hybrid = fuse(keyword, vector, 10)
+        hybrid = fuse(keyword, vector, 20 if reranker is not None else 10)
         stage["fusion_seconds"] = time.perf_counter() - clock
         mapping = mappings[question["id"]]
-        questions.append(
-            {
-                "id": question["id"],
-                "question": query,
-                "family": question["family"],
-                "category": question["category"],
-                "proposed_answerable": question["answerable"],
-                "review": question["review"],
-                "expected_facts": question["expected_facts"],
-                "proposed_evidence_groups": question["evidence_groups"],
-                "mapped_positive_chunks": mapping["grades"],
-                "timings": stage,
-                "modes": {
-                    "keyword": {
-                        "metrics": ranking_metrics(question, keyword[:10], mapping),
-                        "results": [_result_row(row) for row in keyword[:10]],
-                        "candidate_count": len(keyword),
-                    },
-                    "vector": {
-                        "metrics": ranking_metrics(question, vector[:10], mapping),
-                        "results": [_result_row(row) for row in vector[:10]],
-                        "candidate_count": len(vector),
-                    },
-                    "hybrid": {
-                        "metrics": ranking_metrics(question, hybrid, mapping),
-                        "results": [_result_row(row) for row in hybrid],
-                        "candidate_count": len({r["chunk_id"] for r in [*keyword, *vector]}),
-                    },
+        result = {
+            "id": question["id"],
+            "question": query,
+            "family": question["family"],
+            "category": question["category"],
+            "proposed_answerable": question["answerable"],
+            "review": question["review"],
+            "expected_facts": question["expected_facts"],
+            "proposed_evidence_groups": question["evidence_groups"],
+            "mapped_positive_chunks": mapping["grades"],
+            "timings": stage,
+            "modes": {
+                "keyword": {
+                    "metrics": ranking_metrics(question, keyword[:10], mapping),
+                    "results": [_result_row(row) for row in keyword[:10]],
+                    "candidate_count": len(keyword),
                 },
+                "vector": {
+                    "metrics": ranking_metrics(question, vector[:10], mapping),
+                    "results": [_result_row(row) for row in vector[:10]],
+                    "candidate_count": len(vector),
+                },
+                "hybrid": {
+                    "metrics": ranking_metrics(question, hybrid[:10], mapping),
+                    "results": [_result_row(row) for row in hybrid[:10]],
+                    "candidate_count": len({r["chunk_id"] for r in [*keyword, *vector]}),
+                },
+            },
+        }
+        if reranker is not None:
+            from fastapi_docs_rag.context import build_context
+
+            clock = time.perf_counter()
+            reranked = reranker.rerank(query, hybrid)
+            stage["rerank_scoring_seconds"] = time.perf_counter() - clock
+            clock = time.perf_counter()
+            bundle = build_context(
+                connection, snapshot_id, query, reranked, tokenizer=context_tokenizer
+            )
+            stage["context_selection_seconds"] = time.perf_counter() - clock
+            coverage = context_coverage(question, bundle["entries"])
+            scored_evidence = selected_rerank_score(reranked, bundle["entries"])
+            result["modes"]["hybrid_rerank"] = {
+                "metrics": ranking_metrics(question, reranked[:10], mapping),
+                "results": [_result_row(row) for row in reranked[:10]],
+                "candidate_count": len(reranked),
             }
-        )
+            result["selected_context"] = {
+                "coverage": coverage,
+                "entries": bundle["entries"],
+                "skipped": bundle["skipped"],
+                "prompt_tokens": bundle["prompt_tokens"],
+                "budget": bundle["budget"],
+                "profile": bundle["profile"],
+                "source_ids": [entry["evidence_id"] for entry in bundle["entries"]],
+                "scored_chunk_id": scored_evidence["chunk_id"],
+                "selected_raw_rerank_score": scored_evidence["raw_score"],
+                "top_raw_rerank_score": reranked[0]["rerank_score"] if reranked else None,
+            }
+        questions.append(result)
     execution_seconds = time.perf_counter() - started
     aggregates = {}
     for category in ("all", "direct_lookup", "paraphrase", "multi_section", "unsupported"):
         selected = [q for q in questions if category == "all" or q["category"] == category]
         aggregates[category] = {}
-        for mode in ("keyword", "vector", "hybrid"):
+        for mode in ("keyword", "vector", "hybrid", *(["hybrid_rerank"] if reranker else [])):
             metrics = [q["modes"][mode]["metrics"] for q in selected]
             positive = [m for m in metrics if m["metric_denominator"]]
             aggregates[category][mode] = {
@@ -492,7 +638,13 @@ def compare_retrieval(
     ).fetchall()
     code_hashes = {
         name: hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
-        for name in ("evaluate.py", "retrieve.py", "db.py")
+        for name in (
+            "evaluate.py",
+            "retrieve.py",
+            "db.py",
+            "cli.py",
+            *(["rerank.py", "context.py"] if reranker else []),
+        )
     }
     families = Counter(q["family"] for q in questions)
     retrieval_profile = {
@@ -502,7 +654,7 @@ def compare_retrieval(
         "final_depth": 10,
     }
     pending = validation["question_count"] - validation["review_counts"]["approved"]
-    return {
+    report = {
         "status": "draft_diagnostics" if pending else "reviewed_diagnostics",
         "started_at_utc": run_started_utc,
         "finished_at_utc": datetime.now(UTC).isoformat(),
@@ -550,6 +702,7 @@ def compare_retrieval(
             "code_sha256": code_hashes,
             "schema_migrations": migration_rows,
             "model_load_seconds": model_load_seconds,
+            "additional_model_load_seconds": model_load_timings,
             "cold_first_question_seconds": sum(questions[0]["timings"].values()),
             "warmed_remaining_mean_seconds": (
                 sum(sum(q["timings"].values()) for q in questions[1:]) / (len(questions) - 1)
@@ -567,6 +720,64 @@ def compare_retrieval(
         "aggregates": aggregates,
         "questions": questions,
     }
+    if reranker is not None:
+        report["retrieval_profile"]["rerank_candidates"] = 20
+        report["retrieval_profile_hash"] = json_hash(report["retrieval_profile"])
+        report["reranker_profile"] = reranker.profile
+        report["reranker_profile_hash"] = json_hash(reranker.profile)
+        profiles = {json_hash(q["selected_context"]["profile"]) for q in questions}
+        if len(profiles) != 1:
+            raise ValueError("Context profile changed within one comparison")
+        report["context_profile"] = questions[0]["selected_context"]["profile"]
+        report["context_profile_hash"] = profiles.pop()
+        report["tokenizer_load_provenance"] = context_profile
+        report["selected_context_aggregates"] = {}
+        for category in ("all", "direct_lookup", "paraphrase", "multi_section", "unsupported"):
+            positive = [
+                q["selected_context"]["coverage"]
+                for q in questions
+                if q["proposed_answerable"] and (category == "all" or q["category"] == category)
+            ]
+            report["selected_context_aggregates"][category] = {
+                "positive_metric_denominator": len(positive),
+                "group_coverage": (
+                    sum(value["group_coverage"] for value in positive) / len(positive)
+                    if positive
+                    else None
+                ),
+                "complete_coverage": (
+                    sum(value["complete_coverage"] for value in positive) / len(positive)
+                    if positive
+                    else None
+                ),
+            }
+        cases = [
+            {
+                "answerable": q["proposed_answerable"],
+                "score": q["selected_context"]["selected_raw_rerank_score"],
+                "evidence_count": len(q["selected_context"]["entries"]),
+            }
+            for q in questions
+        ]
+        policy = calibrate_raw_scores(cases)
+        policy["references"] = {
+            "snapshot_id": snapshot_id,
+            "dataset_hash": report["dataset_hash"],
+            "review_counts": validation["review_counts"],
+            "retrieval_profile_hash": report["retrieval_profile_hash"],
+            "reranker_profile_hash": report["reranker_profile_hash"],
+            "context_profile_hash": report["context_profile_hash"],
+            "code_sha256": code_hashes,
+            "schema_migrations": migration_rows,
+        }
+        policy["report_identity_scope"] = "report JSON excluding sufficiency_policy_proposal"
+        policy["report_identity"] = json_hash(report)
+        policy["action_items"] = [
+            "Human-review all draft labels, evidence spans and answerability.",
+            "Review the sufficiency tradeoff before any serving use.",
+        ]
+        report["sufficiency_policy_proposal"] = policy
+    return report
 
 
 def comparison_markdown(report: dict) -> str:
@@ -577,7 +788,7 @@ def comparison_markdown(report: dict) -> str:
         return "—" if value is None else f"{value:.3f}"
 
     lines = [
-        "# Draft three-mode retrieval comparison",
+        f"# Draft {len(report['aggregates']['all'])}-mode retrieval comparison",
         "",
         f"Snapshot: `{report['snapshot_id']}`; dataset hash: `{report['dataset_hash']}`.",
         f"Records: {report['label_validation']['question_count']}; human approved: "
@@ -597,6 +808,37 @@ def comparison_markdown(report: dict) -> str:
                 f"{fmt(values['ndcg_at_10'])} | {fmt(values['group_coverage_at_10'])} | "
                 f"{fmt(values['complete_coverage'])} |"
             )
+    if "selected_context_aggregates" in report:
+        lines += [
+            "",
+            "## Selected context fact coverage",
+            "",
+            "These values use up to five selected source entries, separate from top-10 "
+            "chunk metrics.",
+            "",
+            "| Category | Positive N | Group coverage | Complete coverage |",
+            "|---|---:|---:|---:|",
+        ]
+        for category, values in report["selected_context_aggregates"].items():
+            lines.append(
+                f"| {category} | {values['positive_metric_denominator']} | "
+                f"{fmt(values['group_coverage'])} | {fmt(values['complete_coverage'])} |"
+            )
+        proposal = report["sufficiency_policy_proposal"]
+        lines += [
+            "",
+            "## Provisional raw-score cutoff",
+            "",
+            "Status: unvalidated. All labels and the policy need human review before serving use.",
+            f"Proposed point: `{proposal['proposal']['cutoff_kind']}` at raw score "
+            f"`{proposal['proposal']['raw_score_cutoff']}`. "
+            f"Unsupported accepted: {proposal['proposal']['unsupported_accepted']}/"
+            f"{proposal['proposal']['unsupported_denominator']}; answerable rejected: "
+            f"{proposal['proposal']['answerable_rejected']}/"
+            f"{proposal['proposal']['answerable_denominator']}.",
+            "Equal scores are accepted together; empty evidence is always insufficient. "
+            "The complete cutoff sweep is in JSON.",
+        ]
     lines += [
         "",
         "The hybrid ranking reuses one keyword and one vector candidate list per "
@@ -616,6 +858,14 @@ def comparison_markdown(report: dict) -> str:
         }
         if missing:
             lines.append(f"- `{question['id']}` ({question['category']}): {missing}")
+        if (
+            "selected_context" in question
+            and question["selected_context"]["coverage"]["missing_groups"]
+        ):
+            lines.append(
+                f"  - Selected E1–E5 missing: "
+                f"{question['selected_context']['coverage']['missing_groups']}"
+            )
     lines += [
         "",
         "## Runtime and provenance",
@@ -680,6 +930,8 @@ def review_sheet_markdown(dataset: dict) -> str:
 
 
 def keyword_diagnostics(connection, snapshot_id: str, dataset: dict) -> dict:
+    if dataset.get("version") != 1:
+        raise ValueError("Keyword diagnostics requires version-1 labels; use compare-retrieval")
     validation = validate_development_set(connection, snapshot_id, dataset)
     results = []
     for question in dataset["questions"]:
