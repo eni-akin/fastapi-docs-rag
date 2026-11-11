@@ -3,8 +3,13 @@ import json
 
 import pytest
 
-from fastapi_docs_rag.db import import_capture, migrate
-from fastapi_docs_rag.evaluate import keyword_diagnostics, validate_development_set
+from fastapi_docs_rag.db import build_vector_snapshot, import_capture, migrate
+from fastapi_docs_rag.evaluate import (
+    compare_retrieval,
+    comparison_markdown,
+    keyword_diagnostics,
+    validate_development_set,
+)
 from fastapi_docs_rag.manifest import json_hash
 
 
@@ -149,3 +154,105 @@ def test_review_metadata_can_record_a_real_review_without_changing_provenance(
         "reviewed_at": "2026-11-05T12:00:00+00:00",
     }
     assert validate_development_set(database, snapshot, dataset)["human_review_complete"]
+
+
+def test_v2_draft_validates_source_variant_grade_and_review(database, labeled_snapshot):
+    snapshot, v1 = labeled_snapshot
+    dataset = _as_v2(database, snapshot, v1)
+    result = validate_development_set(database, snapshot, dataset)
+    assert result["category_counts"] == {"direct_lookup": 1}
+    assert not result["human_review_complete"]
+    question = dataset["questions"][0]
+    group = question["evidence_groups"][0]
+    group["alternatives"][0][0]["grade"] = 1
+    with pytest.raises(ValueError, match="grade"):
+        validate_development_set(database, snapshot, dataset)
+    group["alternatives"][0][0]["grade"] = True
+    with pytest.raises(ValueError, match="grade"):
+        validate_development_set(database, snapshot, dataset)
+    group["alternatives"][0][0]["grade"] = 2
+    question["review"] = {"status": "approved", "reviewer": None, "reviewed_at": None}
+    with pytest.raises(ValueError, match="reviewer"):
+        validate_development_set(database, snapshot, dataset)
+    question["review"]["reviewer"] = "Fixture reviewer"
+    question["review"]["reviewed_at"] = "2026-11-11T12:00:00"
+    with pytest.raises(ValueError, match="timezone"):
+        validate_development_set(database, snapshot, dataset)
+
+
+def _as_v2(database, snapshot, v1):
+    dataset = copy.deepcopy(v1)
+    dataset["version"] = 2
+    question = dataset["questions"][0]
+    question["category"] = "direct_lookup"
+    group = question["evidence_groups"][0]
+    group["fact"] = question["expected_facts"][0]
+    document = database.execute(
+        "SELECT document FROM rag_documents WHERE snapshot_id=%s", (snapshot,)
+    ).fetchone()["document"]
+    block = document["blocks"][group["evidence"][0]["block_index"]]
+    group["alternatives"] = [[{**group["evidence"][0], "variants": block["variants"], "grade": 2}]]
+    del group["evidence"]
+    return dataset
+
+
+def test_one_question_comparison_and_cli_share_one_query_encode(
+    database, labeled_snapshot, monkeypatch, tmp_path, capsys
+):
+    from fastapi_docs_rag import cli
+
+    keyword_snapshot, v1 = labeled_snapshot
+    dataset = _as_v2(database, keyword_snapshot, v1)
+
+    class StubEmbeddings:
+        profile = {
+            "model": "test",
+            "revision": "fixture",
+            "files": {"weights": "fixture"},
+            "pooling": "mean",
+            "normalization": "l2",
+            "dtype": "float32",
+            "dimension": 384,
+            "max_input_tokens": 256,
+            "batch_size": 32,
+            "license": "Apache-2.0",
+        }
+
+        def __init__(self):
+            self.calls = []
+
+        def encode(self, texts):
+            self.calls.append(texts)
+            return [[1.0] + [0.0] * 383 for _ in texts]
+
+    embedder = StubEmbeddings()
+    vector = build_vector_snapshot(database, keyword_snapshot, embedder)["snapshot_id"]
+    embedder.calls.clear()
+    report = compare_retrieval(database, vector, dataset, embedder=embedder)
+    assert embedder.calls == [["FastAPI"]]
+    assert report["status"] == "draft_diagnostics"
+    assert report["aggregates"]["all"]["hybrid"]["positive_metric_denominator"] == 1
+    assert "remaining mean: unavailable" in comparison_markdown(report)
+    path = tmp_path / "comparison.json"
+    labels = tmp_path / "labels.json"
+    labels.write_text(json.dumps(dataset))
+    monkeypatch.setenv("RAG_DATABASE_URL", database.info.dsn)
+    monkeypatch.setattr("fastapi_docs_rag.embed.load_embeddings", lambda _: embedder)
+    monkeypatch.setattr(
+        "sys.argv",
+        [
+            "rag",
+            "compare-retrieval",
+            "--snapshot",
+            vector,
+            "--dataset",
+            str(labels),
+            "--output",
+            str(path),
+        ],
+    )
+    assert cli.main() == 0
+    assert embedder.calls == [["FastAPI"], ["FastAPI"]]
+    assert path.exists() and path.with_suffix(".md").exists()
+    assert path.with_name("comparison-review.md").exists()
+    assert json.loads(capsys.readouterr().out)["label_validation"]["review_counts"]["draft"] == 1

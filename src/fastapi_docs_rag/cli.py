@@ -9,7 +9,7 @@ from pathlib import Path
 import httpx
 import psycopg
 
-from fastapi_docs_rag.artifacts import write_json
+from fastapi_docs_rag.artifacts import write_bytes, write_json
 from fastapi_docs_rag.db import connect_database, import_capture, migrate
 from fastapi_docs_rag.evaluate import keyword_diagnostics
 from fastapi_docs_rag.fetch import FetchLimits
@@ -54,6 +54,16 @@ def main() -> int:
     command.add_argument("--snapshot", required=True)
     command.add_argument("--dataset", type=Path, default=Path("evals/development-draft.json"))
     command.add_argument("--output", type=Path, required=True)
+    command = commands.add_parser(
+        "compare-retrieval", help="Draft keyword/vector/hybrid comparison on one vector snapshot"
+    )
+    command.add_argument("--snapshot", required=True)
+    command.add_argument("--dataset", type=Path, default=Path("evals/development-v2-draft.json"))
+    command.add_argument("--output", type=Path, required=True, help="JSON report path")
+    command.add_argument("--model-dir", type=Path, default=Path("data/models/all-MiniLM-L6-v2"))
+    command.add_argument(
+        "--build-report", type=Path, help="Matching vector build JSON for reuse counts"
+    )
     arguments = parser.parse_args()
     if arguments.command == "capture" and (arguments.retained_artifacts is None) != (
         arguments.retained_report is None
@@ -103,6 +113,43 @@ def main() -> int:
                                 "report": str(arguments.output),
                                 "label_validation": result["label_validation"],
                                 "categories": result["categories"],
+                            },
+                            indent=2,
+                        )
+                    )
+                    return 0
+                elif arguments.command == "compare-retrieval":
+                    from fastapi_docs_rag.evaluate import (
+                        compare_retrieval,
+                        comparison_markdown,
+                        review_sheet_markdown,
+                    )
+
+                    dataset = json.loads(arguments.dataset.read_text(encoding="utf-8"))
+                    build = (
+                        json.loads(arguments.build_report.read_text(encoding="utf-8"))
+                        if arguments.build_report
+                        else None
+                    )
+                    result = compare_retrieval(
+                        connection,
+                        arguments.snapshot,
+                        dataset,
+                        model_dir=arguments.model_dir,
+                        build_stats=build,
+                    )
+                    write_json(arguments.output, result)
+                    summary = arguments.output.with_suffix(".md")
+                    review_sheet = arguments.output.with_name(arguments.output.stem + "-review.md")
+                    write_bytes(summary, comparison_markdown(result).encode("utf-8"))
+                    write_bytes(review_sheet, review_sheet_markdown(dataset).encode("utf-8"))
+                    print(
+                        json.dumps(
+                            {
+                                "report": str(arguments.output),
+                                "summary": str(summary),
+                                "review_sheet": str(review_sheet),
+                                "label_validation": result["label_validation"],
                             },
                             indent=2,
                         )

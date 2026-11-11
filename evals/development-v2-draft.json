@@ -1,0 +1,2642 @@
+{
+  "version": 2,
+  "name": "milestone-3-development-v2-draft",
+  "capture_id": "58a210e6-d72f-4938-9efa-5698e1e9fd8e",
+  "manifest_hash": "23e46b6d7b15e079b2b2bb0605e4ab23d067365a40bad9a036851b500f1861a9",
+  "label_origin": "agent_draft",
+  "corpus": [
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+      "content_hash": "95005246f9209c4be67433ef3b7b1098ca19741df9c72c2560569481790d2df5"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/body/",
+      "content_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+      "content_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+      "content_hash": "09834b606651049b33bab8d1ac62b7cf0833e4fb6e9961cb93a79a5adeaaf11f"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+      "content_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+      "content_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+      "content_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+      "content_hash": "3677897c321a4d09200a652f465fd73887f7b53c8d6fc8503374abe562726225"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+      "content_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+      "content_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+      "content_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+      "content_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+      "content_hash": "b2c56905afd6a10462ba42eaa42f8422b86fa65d6666aa68df87dc1de45ef0a7"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/tutorial/testing/",
+      "content_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5"
+    }
+  ],
+  "questions": [
+    {
+      "id": "dev-01",
+      "family": "routing",
+      "split": "development",
+      "question": "How do I create a GET endpoint with FastAPI?",
+      "answerable": true,
+      "expected_facts": [
+        "Create a FastAPI application and use an app.get decorator with an async route function."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Create a FastAPI application and use an app.get decorator with an async route function.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+                "document_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221",
+                "section_anchor": "first-steps",
+                "block_index": 2,
+                "start": 0,
+                "end": 117,
+                "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World\"}\n",
+                "variants": [
+                  {
+                    "group": "tabs-1",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+          "document_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221",
+          "section_anchor": "first-steps",
+          "block_index": 1,
+          "start": 0,
+          "end": 47,
+          "text": "The simplest FastAPI file could look like this:",
+          "variants": [],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-02",
+      "family": "interactive-docs",
+      "split": "development",
+      "question": "Where can I open the interactive API documentation?",
+      "answerable": true,
+      "expected_facts": [
+        "The default interactive documentation is available at /docs."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "The default interactive documentation is available at /docs.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+                "document_hash": "61904f73962054631a994a3aee6767725d3b0282b92f7faefe5797203fb90221",
+                "section_anchor": "interactive-api-docs",
+                "block_index": 16,
+                "start": 0,
+                "end": 37,
+                "text": "Now go to http://127.0.0.1:8000/docs.",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-03",
+      "family": "path-types",
+      "split": "development",
+      "question": "How does FastAPI convert an int path parameter?",
+      "answerable": true,
+      "expected_facts": [
+        "An int annotation makes the path value arrive as an integer after conversion."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "An int annotation makes the path value arrive as an integer after conversion.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+                "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+                "section_anchor": "data-conversion",
+                "block_index": 16,
+                "start": 0,
+                "end": 100,
+                "text": "Notice that the value your function received (and returned) is 3, as a Python int, not a string \"3\".",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+                "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+                "section_anchor": "data-conversion",
+                "block_index": 17,
+                "start": 0,
+                "end": 78,
+                "text": "So, with that type declaration, FastAPI gives you automatic request \"parsing\".",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+          "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+          "section_anchor": "path-parameters-with-types",
+          "block_index": 8,
+          "start": 0,
+          "end": 143,
+          "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: int):\n    return {\"item_id\": item_id}\n",
+          "variants": [
+            {
+              "group": "tabs-2",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-04",
+      "family": "route-order",
+      "split": "development",
+      "question": "Why should a fixed path operation appear before a parameterized route?",
+      "answerable": true,
+      "expected_facts": [
+        "Path operations are evaluated in order, so a fixed route must precede a matching parameter route."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Path operations are evaluated in order, so a fixed route must precede a matching parameter route.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+                "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+                "section_anchor": "order-matters",
+                "block_index": 44,
+                "start": 0,
+                "end": 146,
+                "text": "Because path operations are evaluated in order, you need to make sure that the path for /users/me is declared before the one for /users/{user_id}:",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "paraphrase",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+          "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+          "section_anchor": "order-matters",
+          "block_index": 43,
+          "start": 0,
+          "end": 101,
+          "text": "And then you can also have a path /users/{user_id} to get data about a specific user by some user ID.",
+          "variants": [],
+          "grade": 1
+        },
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+          "document_hash": "6a85d5a4445e0c228a2efbb39701280effaa3fe09371142dc4297e1a3781aadc",
+          "section_anchor": "order-matters",
+          "block_index": 45,
+          "start": 0,
+          "end": 236,
+          "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/users/me\")\nasync def read_user_me():\n    return {\"user_id\": \"the current user\"}\n\n\n@app.get(\"/users/{user_id}\")\nasync def read_user(user_id: str):\n    return {\"user_id\": user_id}\n",
+          "variants": [
+            {
+              "group": "tabs-3",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-05",
+      "family": "query-defaults",
+      "split": "development",
+      "question": "How do I give skip and limit query parameters default values?",
+      "answerable": true,
+      "expected_facts": [
+        "Defaults in function parameters supply values when query parameters are omitted."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Defaults in function parameters supply values when query parameters are omitted.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+                "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+                "section_anchor": "defaults",
+                "block_index": 18,
+                "start": 0,
+                "end": 69,
+                "text": "In the example above they have default values of skip=0 and limit=10.",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+          "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+          "section_anchor": "defaults",
+          "block_index": 17,
+          "start": 0,
+          "end": 101,
+          "text": "As query parameters are not a fixed part of a path, they can be optional and can have default values.",
+          "variants": [],
+          "grade": 1
+        },
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+          "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+          "section_anchor": "defaults",
+          "block_index": 26,
+          "start": 0,
+          "end": 38,
+          "text": "skip=20: because you set it in the URL",
+          "variants": [],
+          "grade": 1
+        },
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+          "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+          "section_anchor": "defaults",
+          "block_index": 27,
+          "start": 0,
+          "end": 44,
+          "text": "limit=10: because that was the default value",
+          "variants": [],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-06",
+      "family": "optional-query",
+      "split": "development",
+      "question": "How do I make a query parameter optional?",
+      "answerable": true,
+      "expected_facts": [
+        "A None default makes the query parameter optional in the documented example."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "A None default makes the query parameter optional in the documented example.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+                "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+                "section_anchor": "optional-parameters",
+                "block_index": 29,
+                "start": 0,
+                "end": 90,
+                "text": "The same way, you can declare optional query parameters, by setting their default to None:",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+                "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+                "section_anchor": "optional-parameters",
+                "block_index": 30,
+                "start": 0,
+                "end": 219,
+                "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: str, q: str | None = None):\n    if q:\n        return {\"item_id\": item_id, \"q\": q}\n    return {\"item_id\": item_id}\n",
+                "variants": [
+                  {
+                    "group": "tabs-2",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-07",
+      "family": "query-bool",
+      "split": "development",
+      "question": "Can a boolean query parameter accept values such as yes or on?",
+      "answerable": true,
+      "expected_facts": [
+        "The documented boolean conversion accepts several true-like query strings."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "The documented boolean conversion accepts several true-like query strings.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+                "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+                "section_anchor": "query-parameter-type-conversion",
+                "block_index": 44,
+                "start": 0,
+                "end": 41,
+                "text": "http://127.0.0.1:8000/items/foo?short=on\n",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+                "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+                "section_anchor": "query-parameter-type-conversion",
+                "block_index": 46,
+                "start": 0,
+                "end": 42,
+                "text": "http://127.0.0.1:8000/items/foo?short=yes\n",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+                "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+                "section_anchor": "query-parameter-type-conversion",
+                "block_index": 47,
+                "start": 0,
+                "end": 142,
+                "text": "or any other case variation (uppercase, first letter in uppercase, etc), your function will see the parameter short with a bool value of True.",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+          "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+          "section_anchor": "query-parameter-type-conversion",
+          "block_index": 35,
+          "start": 0,
+          "end": 60,
+          "text": "You can also declare bool types, and they will be converted:",
+          "variants": [],
+          "grade": 1
+        },
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+          "document_hash": "fd17ce2482582d35412956f1fec846c4ffe53656eeed4d0c718162f18515b66c",
+          "section_anchor": "query-parameter-type-conversion",
+          "block_index": 36,
+          "start": 0,
+          "end": 374,
+          "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: str, q: str | None = None, short: bool = False):\n    item = {\"item_id\": item_id}\n    if q:\n        item.update({\"q\": q})\n    if not short:\n        item.update(\n            {\"description\": \"This is an amazing item that has a long description\"}\n        )\n    return item\n",
+          "variants": [
+            {
+              "group": "tabs-3",
+              "index": 0,
+              "label": "Python 3.10+"
+            }
+          ],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-08",
+      "family": "request-model",
+      "split": "development",
+      "question": "How do I define a JSON request body with Pydantic?",
+      "answerable": true,
+      "expected_facts": [
+        "Declare a BaseModel subclass with annotated fields and use it as a route parameter."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Declare a BaseModel subclass with annotated fields and use it as a route parameter.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+                "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+                "section_anchor": "create-your-data-model",
+                "block_index": 13,
+                "start": 0,
+                "end": 73,
+                "text": "Then you declare your data model as a class that inherits from BaseModel.",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+                "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+                "section_anchor": "create-your-data-model",
+                "block_index": 15,
+                "start": 0,
+                "end": 271,
+                "text": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\n\nclass Item(BaseModel):\n    name: str\n    description: str | None = None\n    price: float\n    tax: float | None = None\n\n\napp = FastAPI()\n\n\n@app.post(\"/items/\")\nasync def create_item(item: Item):\n    return item\n",
+                "variants": [
+                  {
+                    "group": "tabs-2",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-09",
+      "family": "mixed-parameters",
+      "split": "development",
+      "question": "Can one endpoint use a request body with path and query parameters?",
+      "answerable": true,
+      "expected_facts": [
+        "The documented endpoint combines path parameters, an Item body model, and optional query data."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "The documented endpoint combines path parameters, an Item body model, and optional query data.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+                "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+                "section_anchor": "request-body-path-query-parameters",
+                "block_index": 62,
+                "start": 0,
+                "end": 75,
+                "text": "You can also declare body, path and query parameters, all at the same time.",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+                "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+                "section_anchor": "request-body-path-query-parameters",
+                "block_index": 64,
+                "start": 0,
+                "end": 414,
+                "text": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\n\nclass Item(BaseModel):\n    name: str\n    description: str | None = None\n    price: float\n    tax: float | None = None\n\n\napp = FastAPI()\n\n\n@app.put(\"/items/{item_id}\")\nasync def update_item(item_id: int, item: Item, q: str | None = None):\n    result = {\"item_id\": item_id, **item.model_dump()}\n    if q:\n        result.update({\"q\": q})\n    return result\n",
+                "variants": [
+                  {
+                    "group": "tabs-6",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-10",
+      "family": "response-filter",
+      "split": "development",
+      "question": "What does response_model do to returned data?",
+      "answerable": true,
+      "expected_facts": [
+        "The declared response model validates, converts, documents, and filters the returned output."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "The declared response model validates, converts, documents, and filters the returned output.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+                "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+                "section_anchor": "response-model-parameter",
+                "block_index": 29,
+                "start": 0,
+                "end": 159,
+                "text": "FastAPI will use this response_model to do all the data documentation, validation, etc. and also to convert and filter the output data to its type declaration.",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-11",
+      "family": "response-security",
+      "split": "development",
+      "question": "How can I avoid returning an input password in my response?",
+      "answerable": true,
+      "expected_facts": [
+        "Use a distinct output model that omits the password field."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Use a distinct output model that omits the password field.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+                "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+                "section_anchor": "add-an-output-model",
+                "block_index": 54,
+                "start": 0,
+                "end": 96,
+                "text": "We can instead create an input model with the plaintext password and an output model without it:",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+                "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+                "section_anchor": "add-an-output-model",
+                "block_index": 55,
+                "start": 0,
+                "end": 431,
+                "text": "from typing import Any\n\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel, EmailStr\n\napp = FastAPI()\n\n\nclass UserIn(BaseModel):\n    username: str\n    password: str\n    email: EmailStr\n    full_name: str | None = None\n\n\nclass UserOut(BaseModel):\n    username: str\n    email: EmailStr\n    full_name: str | None = None\n\n\n@app.post(\"/user/\", response_model=UserOut)\nasync def create_user(user: UserIn) -> Any:\n    return user\n",
+                "variants": [
+                  {
+                    "group": "tabs-5",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "paraphrase"
+    },
+    {
+      "id": "dev-12",
+      "family": "response-priority",
+      "split": "development",
+      "question": "Which takes priority when both a return annotation and response_model are declared?",
+      "answerable": true,
+      "expected_facts": [
+        "The response_model takes priority over the return type annotation."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "The response_model takes priority over the return type annotation.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+                "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+                "section_anchor": "response-model-priority",
+                "block_index": 34,
+                "start": 0,
+                "end": 117,
+                "text": "If you declare both a return type and a response_model, the response_model will take priority and be used by FastAPI.",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-13",
+      "family": "dependency-injection",
+      "split": "development",
+      "question": "How do I receive a shared dependency value in a route?",
+      "answerable": true,
+      "expected_facts": [
+        "Declare a parameter with Depends on the dependency function."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Declare a parameter with Depends on the dependency function.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+                "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+                "section_anchor": "declare-the-dependency-in-the-dependant",
+                "block_index": 44,
+                "start": 0,
+                "end": 118,
+                "text": "The same way you use Body, Query, etc. with your path operation function parameters, use Depends with a new parameter:",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+                "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+                "section_anchor": "declare-the-dependency-in-the-dependant",
+                "block_index": 45,
+                "start": 0,
+                "end": 454,
+                "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI\n\napp = FastAPI()\n\n\nasync def common_parameters(q: str | None = None, skip: int = 0, limit: int = 100):\n    return {\"q\": q, \"skip\": skip, \"limit\": limit}\n\n\n@app.get(\"/items/\")\nasync def read_items(commons: Annotated[dict, Depends(common_parameters)]):\n    return commons\n\n\n@app.get(\"/users/\")\nasync def read_users(commons: Annotated[dict, Depends(common_parameters)]):\n    return commons\n",
+                "variants": [
+                  {
+                    "group": "tabs-5",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "paraphrase"
+    },
+    {
+      "id": "dev-14",
+      "family": "dependency-alias",
+      "split": "development",
+      "question": "How do I reuse an Annotated dependency declaration across routes?",
+      "answerable": true,
+      "expected_facts": [
+        "Assign an Annotated dependency type to an alias and reuse it in route signatures."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Assign an Annotated dependency type to an alias and reuse it in route signatures.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+                "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+                "section_anchor": "share-annotated-dependencies",
+                "block_index": 70,
+                "start": 0,
+                "end": 114,
+                "text": "But because we are using Annotated, we can store that Annotated value in a variable and use it in multiple places:",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+                "document_hash": "320336bde272e99c9b6d2e1c3fc4aa75700bb3eaa82212ffba4d6988dd9c4be0",
+                "section_anchor": "share-annotated-dependencies",
+                "block_index": 71,
+                "start": 0,
+                "end": 447,
+                "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI\n\napp = FastAPI()\n\n\nasync def common_parameters(q: str | None = None, skip: int = 0, limit: int = 100):\n    return {\"q\": q, \"skip\": skip, \"limit\": limit}\n\n\nCommonsDep = Annotated[dict, Depends(common_parameters)]\n\n\n@app.get(\"/items/\")\nasync def read_items(commons: CommonsDep):\n    return commons\n\n\n@app.get(\"/users/\")\nasync def read_users(commons: CommonsDep):\n    return commons\n",
+                "variants": [
+                  {
+                    "group": "tabs-7",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-15",
+      "family": "yield-cleanup",
+      "split": "development",
+      "question": "How do I close a database resource in a dependency with yield?",
+      "answerable": true,
+      "expected_facts": [
+        "Yield the resource inside try and close it in finally after its use."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Yield the resource inside try and close it in finally after its use.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+                "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+                "section_anchor": "a-database-dependency-with-yield",
+                "block_index": 14,
+                "start": 0,
+                "end": 99,
+                "text": "async def get_db():\n    db = DBSession()\n    try:\n        yield db\n    finally:\n        db.close()\n",
+                "variants": [
+                  {
+                    "group": "tabs-1",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "paraphrase",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "section_anchor": "a-database-dependency-with-yield",
+          "block_index": 12,
+          "start": 0,
+          "end": 90,
+          "text": "For example, you could use this to create a database session and close it after finishing.",
+          "variants": [],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-16",
+      "family": "yield-exceptions",
+      "split": "development",
+      "question": "How can a dependency with yield translate a caught exception into HTTPException?",
+      "answerable": true,
+      "expected_facts": [
+        "Catch the exception in an except block and raise HTTPException, as in the documented dependency."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Catch the exception in an except block and raise HTTPException, as in the documented dependency.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+                "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+                "section_anchor": "dependencies-with-yield-and-httpexception",
+                "block_index": 59,
+                "start": 0,
+                "end": 775,
+                "text": "from typing import Annotated\n\nfrom fastapi import Depends, FastAPI, HTTPException\n\napp = FastAPI()\n\n\ndata = {\n    \"plumbus\": {\"description\": \"Freshly pickled plumbus\", \"owner\": \"Morty\"},\n    \"portal-gun\": {\"description\": \"Gun to create portals\", \"owner\": \"Rick\"},\n}\n\n\nclass OwnerError(Exception):\n    pass\n\n\ndef get_username():\n    try:\n        yield \"Rick\"\n    except OwnerError as e:\n        raise HTTPException(status_code=400, detail=f\"Owner error: {e}\")\n\n\n@app.get(\"/items/{item_id}\")\ndef get_item(item_id: str, username: Annotated[str, Depends(get_username)]):\n    if item_id not in data:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    item = data[item_id]\n    if item[\"owner\"] != username:\n        raise OwnerError(username)\n    return item\n",
+                "variants": [
+                  {
+                    "group": "tabs-9",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "paraphrase",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "section_anchor": "dependencies-with-yield-and-httpexception",
+          "block_index": 54,
+          "start": 0,
+          "end": 88,
+          "text": "You can also use except to catch the exception that was raised and do something with it.",
+          "variants": [],
+          "grade": 1
+        },
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+          "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+          "section_anchor": "dependencies-with-yield-and-httpexception",
+          "block_index": 55,
+          "start": 0,
+          "end": 69,
+          "text": "For example, you can raise a different exception, like HTTPException.",
+          "variants": [],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-17",
+      "family": "testclient",
+      "split": "development",
+      "question": "How do I call FastAPI endpoints from a test without starting a live server?",
+      "answerable": true,
+      "expected_facts": [
+        "Use TestClient with the application and regular test functions."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Use TestClient with the application and regular test functions.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+                "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+                "section_anchor": "using-testclient",
+                "block_index": 10,
+                "start": 0,
+                "end": 62,
+                "text": "Create a TestClient by passing your FastAPI application to it.",
+                "variants": [],
+                "grade": 2
+              },
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+                "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+                "section_anchor": "using-testclient",
+                "block_index": 14,
+                "start": 0,
+                "end": 334,
+                "text": "from fastapi import FastAPI\nfrom fastapi.testclient import TestClient\n\napp = FastAPI()\n\n\n@app.get(\"/\")\nasync def read_main():\n    return {\"msg\": \"Hello World\"}\n\n\nclient = TestClient(app)\n\n\ndef test_read_main():\n    response = client.get(\"/\")\n    assert response.status_code == 200\n    assert response.json() == {\"msg\": \"Hello World\"}\n",
+                "variants": [
+                  {
+                    "group": "tabs-1",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup",
+      "context_evidence": [
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+          "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+          "section_anchor": "using-testclient",
+          "block_index": 11,
+          "start": 0,
+          "end": 91,
+          "text": "Create functions with a name that starts with test_ (this is a standard pytest convention).",
+          "variants": [],
+          "grade": 1
+        },
+        {
+          "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+          "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+          "section_anchor": "using-testclient",
+          "block_index": 16,
+          "start": 0,
+          "end": 64,
+          "text": "Notice that the testing functions are normal def, not async def.",
+          "variants": [],
+          "grade": 1
+        }
+      ]
+    },
+    {
+      "id": "dev-18",
+      "family": "testclient",
+      "split": "development",
+      "question": "How do I check a response status code and JSON body in a test?",
+      "answerable": true,
+      "expected_facts": [
+        "Call the endpoint through TestClient and assert its status_code and json result."
+      ],
+      "evidence_groups": [
+        {
+          "id": "support",
+          "fact": "Call the endpoint through TestClient and assert its status_code and json result.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+                "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+                "section_anchor": "using-testclient",
+                "block_index": 14,
+                "start": 0,
+                "end": 334,
+                "text": "from fastapi import FastAPI\nfrom fastapi.testclient import TestClient\n\napp = FastAPI()\n\n\n@app.get(\"/\")\nasync def read_main():\n    return {\"msg\": \"Hello World\"}\n\n\nclient = TestClient(app)\n\n\ndef test_read_main():\n    response = client.get(\"/\")\n    assert response.status_code == 200\n    assert response.json() == {\"msg\": \"Hello World\"}\n",
+                "variants": [
+                  {
+                    "group": "tabs-1",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "direct_lookup"
+    },
+    {
+      "id": "dev-19",
+      "family": "outside-corpus-19",
+      "split": "development",
+      "question": "What producer settings guarantee exactly-once Kafka writes from a FastAPI endpoint?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "The captured 14-page tutorial subset does not document Kafka producer transactional configuration.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "unsupported"
+    },
+    {
+      "id": "dev-20",
+      "family": "outside-corpus-20",
+      "split": "development",
+      "question": "How should I configure NGINX mutual TLS certificate rotation for this application?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "This captured 14-page subset does not contain NGINX mutual TLS and certificate-rotation configuration.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "category": "unsupported"
+    },
+    {
+      "id": "dev-21",
+      "family": "body-fields",
+      "split": "development",
+      "category": "direct_lookup",
+      "question": "Where should Field be imported from for a Pydantic model attribute?",
+      "answerable": true,
+      "expected_facts": [
+        "Import Field from pydantic."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Import Field from pydantic.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+                "document_hash": "95005246f9209c4be67433ef3b7b1098ca19741df9c72c2560569481790d2df5",
+                "section_anchor": "import-field",
+                "block_index": 14,
+                "start": 12,
+                "end": 52,
+                "text": "Field is imported directly from pydantic",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-22",
+      "family": "header-params",
+      "split": "development",
+      "category": "direct_lookup",
+      "question": "What does Header do with underscores in Python parameter names?",
+      "answerable": true,
+      "expected_facts": [
+        "Header converts underscores to hyphens by default."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Header converts underscores to hyphens by default.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+                "document_hash": "3677897c321a4d09200a652f465fd73887f7b53c8d6fc8503374abe562726225",
+                "section_anchor": "automatic-conversion",
+                "block_index": 30,
+                "start": 16,
+                "end": 100,
+                "text": "Header will convert the parameter names characters from underscore (_) to hyphen (-)",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-23",
+      "family": "response-status",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How do I declare a response status code and check the returned status in a test?",
+      "answerable": true,
+      "expected_facts": [
+        "Declare status_code on the path-operation decorator.",
+        "Use a TestClient response assertion to check the status code."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Declare status_code on the path-operation decorator.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+                "document_hash": "b2c56905afd6a10462ba42eaa42f8422b86fa65d6666aa68df87dc1de45ef0a7",
+                "section_anchor": "response-status-code",
+                "block_index": 13,
+                "start": 12,
+                "end": 64,
+                "text": "status_code is a parameter of the \"decorator\" method",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Use a TestClient response assertion to check the status code.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+                "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+                "section_anchor": "using-testclient",
+                "block_index": 14,
+                "start": 246,
+                "end": 280,
+                "text": "assert response.status_code == 200",
+                "variants": [
+                  {
+                    "group": "tabs-1",
+                    "index": 0,
+                    "label": "Python 3.10+"
+                  }
+                ],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-24",
+      "family": "query-validation",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "How can I cap the length of an optional search string?",
+      "answerable": true,
+      "expected_facts": [
+        "Use Query(max_length=50) inside Annotated."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Use Query(max_length=50) inside Annotated.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "add-query-to-annotated-in-the-q-parameter",
+                "block_index": 44,
+                "start": 16,
+                "end": 56,
+                "text": "Query(max_length=50) inside of Annotated",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-25",
+      "family": "query-list",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "Can a URL supply q more than once and preserve both values?",
+      "answerable": true,
+      "expected_facts": [
+        "A list query parameter declared with Query receives repeated values."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "A list query parameter declared with Query receives repeated values.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "query-parameter-list-multiple-values",
+                "block_index": 148,
+                "start": 10,
+                "end": 88,
+                "text": "receive the multiple q query parameters' values (foo and bar) in a Python list",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-26",
+      "family": "query-alias",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "How can a hyphenated public query name map to a Python variable?",
+      "answerable": true,
+      "expected_facts": [
+        "Declare a Query alias."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Declare a Query alias.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "alias-parameters",
+                "block_index": 200,
+                "start": 0,
+                "end": 94,
+                "text": "Then you can declare an alias, and that alias is what will be used to find the parameter value",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-27",
+      "family": "body-fields",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "How do I add extra JSON Schema metadata to a model field?",
+      "answerable": true,
+      "expected_facts": [
+        "Pass json_schema_extra to Field."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Pass json_schema_extra to Field.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+                "document_hash": "95005246f9209c4be67433ef3b7b1098ca19741df9c72c2560569481790d2df5",
+                "section_anchor": "add-extra-information",
+                "block_index": 31,
+                "start": 0,
+                "end": 65,
+                "text": "You can declare extra information with json_schema_extra in Field",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-28",
+      "family": "errors",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "Should an endpoint return or raise HTTPException?",
+      "answerable": true,
+      "expected_facts": [
+        "Raise HTTPException as a Python exception."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Raise HTTPException as a Python exception.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "raise-an-httpexception-in-your-code",
+                "block_index": 22,
+                "start": 33,
+                "end": 66,
+                "text": "you don't return it, you raise it",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-29",
+      "family": "errors",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "Can HTTPException detail contain a JSON object instead of text?",
+      "answerable": true,
+      "expected_facts": [
+        "The detail can be any JSON-convertible value."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "The detail can be any JSON-convertible value.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "the-resulting-response",
+                "block_index": 33,
+                "start": 31,
+                "end": 107,
+                "text": "you can pass any value that can be converted to JSON as the parameter detail",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-30",
+      "family": "errors",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "Which exception signals invalid request data inside FastAPI?",
+      "answerable": true,
+      "expected_facts": [
+        "FastAPI raises RequestValidationError."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "FastAPI raises RequestValidationError.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "override-request-validation-exceptions",
+                "block_index": 59,
+                "start": 38,
+                "end": 88,
+                "text": "FastAPI internally raises a RequestValidationError",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-31",
+      "family": "class-dependency",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "Must a dependency be a function?",
+      "answerable": true,
+      "expected_facts": [
+        "A dependency can be any callable, including a class."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "A dependency can be any callable, including a class.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+                "document_hash": "09834b606651049b33bab8d1ac62b7cf0833e4fb6e9961cb93a79a5adeaaf11f",
+                "section_anchor": "what-makes-a-dependency",
+                "block_index": 19,
+                "start": 23,
+                "end": 58,
+                "text": "a dependency should be a \"callable\"",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-32",
+      "family": "class-dependency",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "What shorthand avoids naming a dependency class twice?",
+      "answerable": true,
+      "expected_facts": [
+        "Use the class as the type and Depends() without an argument."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Use the class as the type and Depends() without an argument.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+                "document_hash": "09834b606651049b33bab8d1ac62b7cf0833e4fb6e9961cb93a79a5adeaaf11f",
+                "section_anchor": "shortcut",
+                "block_index": 115,
+                "start": 65,
+                "end": 100,
+                "text": "use Depends() without any parameter",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-33",
+      "family": "headers",
+      "split": "development",
+      "category": "paraphrase",
+      "question": "How can an endpoint collect repeated X-Token header values?",
+      "answerable": true,
+      "expected_facts": [
+        "Declare the header parameter as a list."
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Declare the header parameter as a list.",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+                "document_hash": "3677897c321a4d09200a652f465fd73887f7b53c8d6fc8503374abe562726225",
+                "section_anchor": "duplicate-headers",
+                "block_index": 43,
+                "start": 0,
+                "end": 63,
+                "text": "You can define those cases using a list in the type declaration",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-34",
+      "family": "query-validation",
+      "split": "development",
+      "category": "multi_section",
+      "question": "When is q optional, and how can I make it required while still using Query?",
+      "answerable": true,
+      "expected_facts": [
+        "A default value makes q optional",
+        "Omitting the default makes q required"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "A default value makes q optional",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "default-values",
+                "block_index": 113,
+                "start": 0,
+                "end": 80,
+                "text": "Having a default value of any type, including None, makes the parameter optional",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Omitting the default makes q required",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "required-parameters",
+                "block_index": 121,
+                "start": 68,
+                "end": 110,
+                "text": "you can simply not declare a default value",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-35",
+      "family": "query-validation",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How do I impose both a maximum and a minimum string length on q?",
+      "answerable": true,
+      "expected_facts": [
+        "Query supports max_length",
+        "Query also supports min_length"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Query supports max_length",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "add-query-to-annotated-in-the-q-parameter",
+                "block_index": 44,
+                "start": 16,
+                "end": 56,
+                "text": "Query(max_length=50) inside of Annotated",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Query also supports min_length",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "add-more-validations",
+                "block_index": 85,
+                "start": 0,
+                "end": 39,
+                "text": "You can also add a parameter min_length",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-36",
+      "family": "body-fields",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How can a model field validate input and add extra schema metadata?",
+      "answerable": true,
+      "expected_facts": [
+        "Field declares validation and metadata",
+        "json_schema_extra adds schema information"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Field declares validation and metadata",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+                "document_hash": "95005246f9209c4be67433ef3b7b1098ca19741df9c72c2560569481790d2df5",
+                "section_anchor": "recap",
+                "block_index": 36,
+                "start": 8,
+                "end": 70,
+                "text": "use Pydantic's Field to declare extra validations and metadata",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "json_schema_extra adds schema information",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+                "document_hash": "95005246f9209c4be67433ef3b7b1098ca19741df9c72c2560569481790d2df5",
+                "section_anchor": "add-extra-information",
+                "block_index": 31,
+                "start": 0,
+                "end": 65,
+                "text": "You can declare extra information with json_schema_extra in Field",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-37",
+      "family": "headers",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How are Python header names mapped to HTTP names, and how are duplicates collected?",
+      "answerable": true,
+      "expected_facts": [
+        "Header maps underscores to hyphens",
+        "A list type collects duplicate headers"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Header maps underscores to hyphens",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+                "document_hash": "3677897c321a4d09200a652f465fd73887f7b53c8d6fc8503374abe562726225",
+                "section_anchor": "automatic-conversion",
+                "block_index": 30,
+                "start": 16,
+                "end": 100,
+                "text": "Header will convert the parameter names characters from underscore (_) to hyphen (-)",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "A list type collects duplicate headers",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+                "document_hash": "3677897c321a4d09200a652f465fd73887f7b53c8d6fc8503374abe562726225",
+                "section_anchor": "duplicate-headers",
+                "block_index": 43,
+                "start": 0,
+                "end": 63,
+                "text": "You can define those cases using a list in the type declaration",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-38",
+      "family": "response-status",
+      "split": "development",
+      "category": "multi_section",
+      "question": "Which documented statuses mean Created and No Content?",
+      "answerable": true,
+      "expected_facts": [
+        "201 means Created",
+        "204 means No Content and has no body"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "201 means Created",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+                "document_hash": "b2c56905afd6a10462ba42eaa42f8422b86fa65d6666aa68df87dc1de45ef0a7",
+                "section_anchor": "about-http-status-codes",
+                "block_index": 32,
+                "start": 25,
+                "end": 39,
+                "text": "201, \"Created\"",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "204 means No Content and has no body",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+                "document_hash": "b2c56905afd6a10462ba42eaa42f8422b86fa65d6666aa68df87dc1de45ef0a7",
+                "section_anchor": "about-http-status-codes",
+                "block_index": 33,
+                "start": 18,
+                "end": 35,
+                "text": "204, \"No Content\"",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-39",
+      "family": "errors",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How does an endpoint report a missing item and attach an error header?",
+      "answerable": true,
+      "expected_facts": [
+        "Raise HTTPException with 404 for a missing item",
+        "HTTPException can carry custom error headers"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Raise HTTPException with 404 for a missing item",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "raise-an-httpexception-in-your-code",
+                "block_index": 25,
+                "start": 79,
+                "end": 123,
+                "text": "raise an exception with a status code of 404",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "HTTPException can carry custom error headers",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "add-custom-headers",
+                "block_index": 37,
+                "start": 58,
+                "end": 94,
+                "text": "add custom headers to the HTTP error",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-40",
+      "family": "errors",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How do I handle my own exception type and override validation errors?",
+      "answerable": true,
+      "expected_facts": [
+        "Register a custom exception handler",
+        "Register a RequestValidationError handler"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Register a custom exception handler",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "install-custom-exception-handlers",
+                "block_index": 45,
+                "start": 46,
+                "end": 70,
+                "text": "@app.exception_handler()",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Register a RequestValidationError handler",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "override-request-validation-exceptions",
+                "block_index": 61,
+                "start": 66,
+                "end": 112,
+                "text": "@app.exception_handler(RequestValidationError)",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-41",
+      "family": "class-dependency",
+      "split": "development",
+      "category": "multi_section",
+      "question": "Why can CommonQueryParams be a dependency, and how are its constructor values populated?",
+      "answerable": true,
+      "expected_facts": [
+        "Classes are callable dependencies",
+        "FastAPI solves constructor parameters"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Classes are callable dependencies",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+                "document_hash": "09834b606651049b33bab8d1ac62b7cf0833e4fb6e9961cb93a79a5adeaaf11f",
+                "section_anchor": "classes-as-dependencies_1",
+                "block_index": 32,
+                "start": 4,
+                "end": 37,
+                "text": "a Python class is also a callable",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "FastAPI solves constructor parameters",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+                "document_hash": "09834b606651049b33bab8d1ac62b7cf0833e4fb6e9961cb93a79a5adeaaf11f",
+                "section_anchor": "classes-as-dependencies_1",
+                "block_index": 55,
+                "start": 0,
+                "end": 68,
+                "text": "Those parameters are what FastAPI will use to \"solve\" the dependency",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-42",
+      "family": "dependencies",
+      "split": "development",
+      "category": "multi_section",
+      "question": "Can I use a class for parameter injection and a yield dependency for cleanup?",
+      "answerable": true,
+      "expected_facts": [
+        "Classes can be dependencies",
+        "Yield dependencies run exit steps"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Classes can be dependencies",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+                "document_hash": "09834b606651049b33bab8d1ac62b7cf0833e4fb6e9961cb93a79a5adeaaf11f",
+                "section_anchor": "classes-as-dependencies_1",
+                "block_index": 33,
+                "start": 18,
+                "end": 62,
+                "text": "you could use a Python class as a dependency",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Yield dependencies run exit steps",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+                "document_hash": "68b6cb32b3750c6cfff23b0f81d3a2fc1c938c578b88a76e00dbe2103fa70f5f",
+                "section_anchor": "dependencies-with-yield",
+                "block_index": 2,
+                "start": 12,
+                "end": 79,
+                "text": "use yield instead of return, and write the extra steps (code) after",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-43",
+      "family": "request-body",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How can a request model define its shape and validate a specific field?",
+      "answerable": true,
+      "expected_facts": [
+        "A request model inherits BaseModel",
+        "Field declares attribute validation"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "A request model inherits BaseModel",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body/",
+                "document_hash": "60986debde428dabb75f08fdabbd35d10195f673b4b2f60ce72a8017c5906339",
+                "section_anchor": "create-your-data-model",
+                "block_index": 13,
+                "start": 9,
+                "end": 72,
+                "text": "declare your data model as a class that inherits from BaseModel",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Field declares attribute validation",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+                "document_hash": "95005246f9209c4be67433ef3b7b1098ca19741df9c72c2560569481790d2df5",
+                "section_anchor": "recap",
+                "block_index": 36,
+                "start": 8,
+                "end": 70,
+                "text": "use Pydantic's Field to declare extra validations and metadata",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-44",
+      "family": "response",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How do I filter response fields and declare a Created status?",
+      "answerable": true,
+      "expected_facts": [
+        "The response model filters returned data",
+        "The decorator status_code sets the status"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "The response model filters returned data",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+                "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+                "section_anchor": "response-model-return-type",
+                "block_index": 12,
+                "start": 8,
+                "end": 78,
+                "text": "limit and filter the output data to what is defined in the return type",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "The decorator status_code sets the status",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+                "document_hash": "b2c56905afd6a10462ba42eaa42f8422b86fa65d6666aa68df87dc1de45ef0a7",
+                "section_anchor": "response-status-code",
+                "block_index": 13,
+                "start": 12,
+                "end": 64,
+                "text": "status_code is a parameter of the \"decorator\" method",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-45",
+      "family": "testing-errors",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How can I make a test client and have the endpoint signal a missing item?",
+      "answerable": true,
+      "expected_facts": [
+        "TestClient takes the FastAPI application",
+        "Raise HTTPException with 404 for an absent item"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "TestClient takes the FastAPI application",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+                "document_hash": "59b01268e1a56e42943270d6cae7a7119474a99a57c140ef4c0040d03ff9ecd5",
+                "section_anchor": "using-testclient",
+                "block_index": 10,
+                "start": 0,
+                "end": 61,
+                "text": "Create a TestClient by passing your FastAPI application to it",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Raise HTTPException with 404 for an absent item",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "raise-an-httpexception-in-your-code",
+                "block_index": 25,
+                "start": 79,
+                "end": 123,
+                "text": "raise an exception with a status code of 404",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-46",
+      "family": "query-and-header",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How do public hyphenated query names and Python header names map to incoming requests?",
+      "answerable": true,
+      "expected_facts": [
+        "Query alias maps a public name",
+        "Header converts underscores to hyphens"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Query alias maps a public name",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+                "document_hash": "48f2ddd46942a31f88acbd5f57a4a302659d81f174470c13b86b6a6ed015fa08",
+                "section_anchor": "alias-parameters",
+                "block_index": 200,
+                "start": 13,
+                "end": 94,
+                "text": "declare an alias, and that alias is what will be used to find the parameter value",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Header converts underscores to hyphens",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+                "document_hash": "3677897c321a4d09200a652f465fd73887f7b53c8d6fc8503374abe562726225",
+                "section_anchor": "automatic-conversion",
+                "block_index": 30,
+                "start": 16,
+                "end": 100,
+                "text": "Header will convert the parameter names characters from underscore (_) to hyphen (-)",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-47",
+      "family": "response-and-errors",
+      "split": "development",
+      "category": "multi_section",
+      "question": "How can I avoid exposing an input password in successful output and signal a missing item?",
+      "answerable": true,
+      "expected_facts": [
+        "Use a response model to filter output",
+        "Raise HTTPException for a missing item"
+      ],
+      "evidence_groups": [
+        {
+          "id": "fact-1",
+          "fact": "Use a response model to filter output",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+                "document_hash": "61cf94cdd89af40be3af8ca4846e4b598c3b12582772ff827b9625d77129a415",
+                "section_anchor": "response-model-return-type",
+                "block_index": 12,
+                "start": 8,
+                "end": 78,
+                "text": "limit and filter the output data to what is defined in the return type",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fact-2",
+          "fact": "Raise HTTPException for a missing item",
+          "alternatives": [
+            [
+              {
+                "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+                "document_hash": "eb9f24dd7fc1b4b477e2b976862d1742f9c9e59d9aa079d45c8907357f1b68d7",
+                "section_anchor": "raise-an-httpexception-in-your-code",
+                "block_index": 25,
+                "start": 79,
+                "end": 123,
+                "text": "raise an exception with a status code of 404",
+                "variants": [],
+                "grade": 2
+              }
+            ]
+          ]
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-48",
+      "family": "outside-corpus-19",
+      "split": "development",
+      "category": "unsupported",
+      "question": "What Kafka producer idempotence and transaction settings guarantee exactly-once writes?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-49",
+      "family": "outside-corpus-20",
+      "split": "development",
+      "category": "unsupported",
+      "question": "How should NGINX mutual TLS certificates be rotated without downtime?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-50",
+      "family": "redis",
+      "split": "development",
+      "category": "unsupported",
+      "question": "How do I set up Redis Cluster failover for FastAPI sessions?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-51",
+      "family": "kubernetes",
+      "split": "development",
+      "category": "unsupported",
+      "question": "What Kubernetes HPA metrics should scale this API under traffic spikes?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-52",
+      "family": "aws",
+      "split": "development",
+      "category": "unsupported",
+      "question": "Which IAM policy should I attach for S3 multipart uploads?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-53",
+      "family": "grpc",
+      "split": "development",
+      "category": "unsupported",
+      "question": "How do I expose this FastAPI route as a gRPC bidirectional stream?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-54",
+      "family": "celery",
+      "split": "development",
+      "category": "unsupported",
+      "question": "What Celery broker retry settings should I use for delayed jobs?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-55",
+      "family": "sqlalchemy",
+      "split": "development",
+      "category": "unsupported",
+      "question": "How should SQLAlchemy pool_size and max_overflow be tuned for production?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-56",
+      "family": "websocket",
+      "split": "development",
+      "category": "unsupported",
+      "question": "How do I reconnect and replay missed WebSocket messages after a server restart?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-57",
+      "family": "payments",
+      "split": "development",
+      "category": "unsupported",
+      "question": "How should Stripe webhook signatures and duplicate payments be handled?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-58",
+      "family": "tracing",
+      "split": "development",
+      "category": "unsupported",
+      "question": "Which OpenTelemetry collector sampling policy meets a fixed cost budget?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-59",
+      "family": "secrets",
+      "split": "development",
+      "category": "unsupported",
+      "question": "How do I rotate HashiCorp Vault database credentials every hour?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "dev-60",
+      "family": "deployment",
+      "split": "development",
+      "category": "unsupported",
+      "question": "Which Terraform resources deploy this API to Azure Container Apps?",
+      "answerable": false,
+      "expected_facts": [],
+      "evidence_groups": [],
+      "unanswerable_reason": "Proposed outside the captured 14-page English Tutorial corpus; requires human review.",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    }
+  ]
+}

@@ -1,7 +1,11 @@
 # Milestone 3: vector search and hybrid comparison
 
 Prepared: November 11, 2026.
-Status: implementation plan; no milestone-3 code or benchmark results yet.
+Status update (November 11, 2026): agent-owned milestone-3 implementation and
+draft three-mode diagnostics are complete. All 60 labels remain agent drafts;
+the owner deferred human review and answer-sufficiency policy. The semantic
+quality gate and approved benchmark remain open. See
+[the handoff](milestone-3-handoff.md) and [action items](action-items.md).
 Parent scope: [RAG implementation plan](rag-implementation-plan.md), milestone 3.
 
 ## Outcome
