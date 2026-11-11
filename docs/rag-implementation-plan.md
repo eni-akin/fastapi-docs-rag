@@ -2,7 +2,7 @@
 
 Prepared: November 5, 2026.
 
-Status update (November 11, 2026): milestone 1 and the agent-owned milestone-2 implementation are merged into `main`. Milestone 2's 20 human label reviews and some milestone-0 setup tasks remain outstanding. Next is milestone 3; see [its detailed implementation plan](milestone-3-implementation-plan.md) for the verified starting point, sequence and completion gates. Environment observations and defaults below describe the original planning baseline unless a later milestone report supersedes them. This document expands the RAG project in the supplied portfolio plan and applies the later decision to use official FastAPI documentation instead of Python documentation.
+Status update (November 11, 2026): milestone 1 and agent-owned milestone-2 and milestone-3 implementations are merged into `main`. The owner deferred human label reviews as action items; semantic quality gates remain open, and some milestone-0 setup work remains. See [the milestone-3 handoff](milestone-3-handoff.md) for verified runtime evidence and [the milestone-4 plan](milestone-4-implementation-plan.md) for the next implementation sequence. Environment observations and defaults below describe the original planning baseline unless a later milestone report supersedes them. This document expands the RAG project in the supplied portfolio plan and applies the later decision to use official FastAPI documentation instead of Python documentation.
 
 ## 1. What we are building
 
@@ -509,6 +509,8 @@ Detailed implementation sequence: [Milestone 3 plan](milestone-3-implementation-
 Deliverable: keyword/vector/hybrid reports with question-level successes and misses. Gate: vectors and queries use compatible identities, complete-snapshot validation passes, and repeated processing reuses unchanged work. Learn why exact identifiers and paraphrases behave differently.
 
 ### Milestone 4 — Reranking and evidence budgets, 8–12 hours
+
+Detailed implementation sequence: [Milestone 4 plan](milestone-4-implementation-plan.md).
 
 1. Add cross-encoder pair scoring with explicit input-length checks.
 2. Implement variant-aware deduplication and bounded context selection.
