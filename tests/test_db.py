@@ -9,7 +9,7 @@ from fastapi_docs_rag.chunk import ChunkConfig
 
 
 def test_migrations_are_repeatable_and_checked(database):
-    assert db.migrate(database) == ["0001_keyword.sql"]
+    assert db.migrate(database) == ["0001_keyword.sql", "0002_vectors.sql"]
     assert db.migrate(database) == []
     database.execute("UPDATE rag_schema_migrations SET sha256='modified'")
     with pytest.raises(ValueError, match="checksum"):
@@ -99,6 +99,10 @@ def test_document_and_chunk_snapshot_must_match(database, capture_factory):
                 database.execute(
                     """
                     INSERT INTO rag_chunks
+                    (id, snapshot_id, document_id, chunk_key, evidence_key, text,
+                     heading_path, section_anchor, variants, callout, source_spans,
+                     partial_code, embedding_input, embedding_input_hash,
+                     body_tokens, input_tokens, search_vector)
                     SELECT %s, s.id, %s, c.chunk_key, c.evidence_key, c.text,
                            c.heading_path, c.section_anchor, c.variants, c.callout, c.source_spans,
                            c.partial_code, c.embedding_input, c.embedding_input_hash,
@@ -168,7 +172,10 @@ def test_storage_cli_uses_real_database(database, capture_factory, monkeypatch, 
     monkeypatch.setenv("RAG_DATABASE_URL", database.info.dsn)
     monkeypatch.setattr("sys.argv", ["rag", "migrate"])
     assert cli.main() == 0
-    assert json.loads(capsys.readouterr().out)["applied"] == ["0001_keyword.sql"]
+    assert json.loads(capsys.readouterr().out)["applied"] == [
+        "0001_keyword.sql",
+        "0002_vectors.sql",
+    ]
     report, root = capture_factory()
     monkeypatch.setattr(
         "sys.argv", ["rag", "import-capture", "--report", str(report), "--artifacts", str(root)]
