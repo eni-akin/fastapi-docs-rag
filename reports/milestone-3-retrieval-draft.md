@@ -73,8 +73,8 @@ The hybrid ranking reuses one keyword and one vector candidate list per question
 
 ## Runtime and provenance
 
-- Model load: 2.9119011249858886 seconds; first question: 0.024 seconds; remaining mean: 0.009 seconds.
-- Execution: 0.531 seconds; throughput: 112.99 questions/second.
+- Model load: 3.0030517089762725 seconds; first question: 0.028 seconds; remaining mean: 0.009 seconds.
+- Execution: 0.562 seconds; throughput: 106.68 questions/second.
 - Build reuse: {'snapshot_id': '279777ae-c949-4cae-8403-2224b314903f', 'reused': False, 'state': 'ready', 'document_count': 14, 'chunk_count': 637, 'encoded_inputs': 266, 'reused_inputs': 346}.
 - Snapshot profile hash: `983b1abf73f3dfd87b9c9902d2acf1a24c92c84683c56208406a47ba9be57487`; retrieval profile hash: `c122daa937ae2744fc3d16055ff1371be114fe738e2ae4ee5947a08de3a45443`; corpus hash: `47a4caa9dcbe4bd3d7268fecccdaad9a50424c9facbe643aac7de98a26fe70be`.
 - Full ranks, scores, source spans, missing groups, code and migration hashes are in the JSON report.

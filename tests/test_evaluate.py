@@ -255,4 +255,5 @@ def test_one_question_comparison_and_cli_share_one_query_encode(
     assert embedder.calls == [["FastAPI"], ["FastAPI"]]
     assert path.exists() and path.with_suffix(".md").exists()
     assert path.with_name("comparison-review.md").exists()
+    assert "1 of 1 records await human approval" in path.with_name("comparison-review.md").read_text()
     assert json.loads(capsys.readouterr().out)["label_validation"]["review_counts"]["draft"] == 1

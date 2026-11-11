@@ -1,7 +1,7 @@
 {
   "status": "draft_diagnostics",
-  "started_at_utc": "2026-11-11T10:12:41.804851+00:00",
-  "finished_at_utc": "2026-11-11T10:12:45.278378+00:00",
+  "started_at_utc": "2026-11-11T10:14:31.994227+00:00",
+  "finished_at_utc": "2026-11-11T10:14:35.593192+00:00",
   "interpretation": "60 of 60 labels await human approval. Retrieval overlap is not answer sufficiency; unsupported questions may still return neighbors.",
   "snapshot_id": "279777ae-c949-4cae-8403-2224b314903f",
   "snapshot_fingerprint": "7640cfa64e70b58458f622e46671e8965edb729113b78149f3b6050efb2bb506",
@@ -70,7 +70,7 @@
     "human_review_complete": false
   },
   "mapping_valid": true,
-  "mapping_limitations": "Positive overlap maps labels to chunks; complete fact coverage requires every character of one source-span alternative across retrieved fragments.",
+  "mapping_limitations": "Positive overlap maps labels to chunks; complete fact coverage requires every character in each span of one alternative across retrieved fragments.",
   "retrieval_profile": {
     "keyword_candidates": 20,
     "vector_candidates": 20,
@@ -92,7 +92,7 @@
       "tokenizers": "0.23.3"
     },
     "code_sha256": {
-      "evaluate.py": "45c8413a518bac9821c58b2a3eeaa93d5e7fdcbf3f13f07e12d466c6cf387581",
+      "evaluate.py": "b586f1a84f2fa0bf87aa21a7efeb2f1e84236f960e3fc98fc06fcf63bc4855c7",
       "retrieve.py": "936f69b9253f665afc7ce8d733bde17a3db01ff624a7cc297c78a71dd3b46cf5",
       "db.py": "f8e6dcd47ea5fb78bdf4e56eadf620b8865143dccb445b97b8d64d2c104405cf"
     },
@@ -106,11 +106,11 @@
         "sha256": "85883667bc2074e75ba162447c5ec9bdf37759659f3c85a19745c646b3c6d238"
       }
     ],
-    "model_load_seconds": 2.9119011249858886,
-    "cold_first_question_seconds": 0.024048417049925774,
-    "warmed_remaining_mean_seconds": 0.008545932337302336,
-    "execution_seconds": 0.5310247089946643,
-    "questions_per_second": 112.98909256707088,
+    "model_load_seconds": 3.0030517089762725,
+    "cold_first_question_seconds": 0.02777475002221763,
+    "warmed_remaining_mean_seconds": 0.009014602485152309,
+    "execution_seconds": 0.562440833018627,
+    "questions_per_second": 106.67788765971923,
     "vector_build_stats": {
       "snapshot_id": "279777ae-c949-4cae-8403-2224b314903f",
       "reused": false,
@@ -357,9 +357,9 @@
         "eb753608-7f22-505d-9162-f3b714dc9b47": 1
       },
       "timings": {
-        "keyword_seconds": 0.001375042018480599,
-        "vector_seconds_including_one_encode": 0.022653042047750205,
-        "fusion_seconds": 2.0332983694970608e-05
+        "keyword_seconds": 0.0023374169832095504,
+        "vector_seconds_including_one_encode": 0.02541683299932629,
+        "fusion_seconds": 2.050003968179226e-05
       },
       "modes": {
         "keyword": {
@@ -1286,9 +1286,9 @@
         "3d49e724-4219-5865-b9e6-0ebb4c6ece4c": 2
       },
       "timings": {
-        "keyword_seconds": 0.0008373750024475157,
-        "vector_seconds_including_one_encode": 0.007086166995577514,
-        "fusion_seconds": 2.3250002413988113e-05
+        "keyword_seconds": 0.0010002499911934137,
+        "vector_seconds_including_one_encode": 0.008768957981374115,
+        "fusion_seconds": 1.8250022549182177e-05
       },
       "modes": {
         "keyword": {
@@ -2141,9 +2141,9 @@
         "27cf6d37-f9fc-5ebb-b3d8-f75093929933": 1
       },
       "timings": {
-        "keyword_seconds": 0.000647165987174958,
-        "vector_seconds_including_one_encode": 0.008447458036243916,
-        "fusion_seconds": 2.1915999241173267e-05
+        "keyword_seconds": 0.001013082975987345,
+        "vector_seconds_including_one_encode": 0.008174833026714623,
+        "fusion_seconds": 5.1458016969263554e-05
       },
       "modes": {
         "keyword": {
@@ -3069,9 +3069,9 @@
         "cad43471-ead8-53e3-aec4-9372b6f7fe65": 1
       },
       "timings": {
-        "keyword_seconds": 0.0005532919894903898,
-        "vector_seconds_including_one_encode": 0.008958999998867512,
-        "fusion_seconds": 1.9208004232496023e-05
+        "keyword_seconds": 0.0007089580176398158,
+        "vector_seconds_including_one_encode": 0.010269583959598094,
+        "fusion_seconds": 3.7207966670393944e-05
       },
       "modes": {
         "keyword": {
@@ -3882,9 +3882,9 @@
         "40205d1d-e038-5598-87fe-164dc41ab1ce": 2
       },
       "timings": {
-        "keyword_seconds": 0.0005403339746408165,
-        "vector_seconds_including_one_encode": 0.0076818750239908695,
-        "fusion_seconds": 1.8624996300786734e-05
+        "keyword_seconds": 0.000958500022534281,
+        "vector_seconds_including_one_encode": 0.010584250034298748,
+        "fusion_seconds": 3.6457960959523916e-05
       },
       "modes": {
         "keyword": {
@@ -4881,9 +4881,9 @@
         "752a9e9c-9311-51c3-b958-f05cd40959f1": 2
       },
       "timings": {
-        "keyword_seconds": 0.0005656669964082539,
-        "vector_seconds_including_one_encode": 0.008357667014934123,
-        "fusion_seconds": 1.6667007002979517e-05
+        "keyword_seconds": 0.0006360000115819275,
+        "vector_seconds_including_one_encode": 0.008712041017133743,
+        "fusion_seconds": 1.7666025087237358e-05
       },
       "modes": {
         "keyword": {
@@ -5774,9 +5774,9 @@
         "5af9bd4f-8fa6-5f86-aa98-6bcb66e01c98": 1
       },
       "timings": {
-        "keyword_seconds": 0.001374291954562068,
-        "vector_seconds_including_one_encode": 0.008742125006392598,
-        "fusion_seconds": 3.63329891115427e-05
+        "keyword_seconds": 0.0014914589701220393,
+        "vector_seconds_including_one_encode": 0.009003709012176841,
+        "fusion_seconds": 3.124994691461325e-05
       },
       "modes": {
         "keyword": {
@@ -7162,9 +7162,9 @@
         "df91cb4c-6bcc-52c1-bbd4-03bebb06873b": 2
       },
       "timings": {
-        "keyword_seconds": 0.0005529160262085497,
-        "vector_seconds_including_one_encode": 0.008674707962200046,
-        "fusion_seconds": 1.7250014934688807e-05
+        "keyword_seconds": 0.0005533329676836729,
+        "vector_seconds_including_one_encode": 0.007674749998841435,
+        "fusion_seconds": 1.7458980437368155e-05
       },
       "modes": {
         "keyword": {
@@ -8021,9 +8021,9 @@
         "ae9561a1-3796-555f-9535-6e6bd3ae8a23": 2
       },
       "timings": {
-        "keyword_seconds": 0.0005629999795928597,
-        "vector_seconds_including_one_encode": 0.0077125419629737735,
-        "fusion_seconds": 1.9458995666354895e-05
+        "keyword_seconds": 0.0008091669878922403,
+        "vector_seconds_including_one_encode": 0.007826749992091209,
+        "fusion_seconds": 1.85410026460886e-05
       },
       "modes": {
         "keyword": {
@@ -8894,9 +8894,9 @@
         "fbf7c921-8d20-5775-8d84-de0ca0884dbf": 2
       },
       "timings": {
-        "keyword_seconds": 0.00045466702431440353,
-        "vector_seconds_including_one_encode": 0.006912584009114653,
-        "fusion_seconds": 1.679197885096073e-05
+        "keyword_seconds": 0.0006378329708240926,
+        "vector_seconds_including_one_encode": 0.008278209017589688,
+        "fusion_seconds": 1.695897663012147e-05
       },
       "modes": {
         "keyword": {
@@ -9691,9 +9691,9 @@
         "6a93e1d6-1de4-57f4-bde8-9073cd57be5e": 2
       },
       "timings": {
-        "keyword_seconds": 0.00037829100620001554,
-        "vector_seconds_including_one_encode": 0.007465082977432758,
-        "fusion_seconds": 1.7291982658207417e-05
+        "keyword_seconds": 0.0003548749955371022,
+        "vector_seconds_including_one_encode": 0.008358499966561794,
+        "fusion_seconds": 1.912500010803342e-05
       },
       "modes": {
         "keyword": {
@@ -10496,9 +10496,9 @@
         "e76b7b78-043b-5c64-afd4-4da7d42fa53b": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002264579525217414,
-        "vector_seconds_including_one_encode": 0.0070085839834064245,
-        "fusion_seconds": 2.2332998923957348e-05
+        "keyword_seconds": 0.00036941602593287826,
+        "vector_seconds_including_one_encode": 0.00826162495650351,
+        "fusion_seconds": 1.7291982658207417e-05
       },
       "modes": {
         "keyword": {
@@ -11295,9 +11295,9 @@
         "d397d19a-f062-548b-a7c3-406169affec0": 2
       },
       "timings": {
-        "keyword_seconds": 0.00022975000320002437,
-        "vector_seconds_including_one_encode": 0.007542792009189725,
-        "fusion_seconds": 1.791701652109623e-05
+        "keyword_seconds": 0.0003447500057518482,
+        "vector_seconds_including_one_encode": 0.009781958011444658,
+        "fusion_seconds": 1.77919864654541e-05
       },
       "modes": {
         "keyword": {
@@ -12234,9 +12234,9 @@
         "698113ec-c960-5f4c-8797-2cfc9034d1af": 2
       },
       "timings": {
-        "keyword_seconds": 0.00024395901709794998,
-        "vector_seconds_including_one_encode": 0.00623529200674966,
-        "fusion_seconds": 2.3083004634827375e-05
+        "keyword_seconds": 0.0002724159858189523,
+        "vector_seconds_including_one_encode": 0.008236334018874913,
+        "fusion_seconds": 2.112501533702016e-05
       },
       "modes": {
         "keyword": {
@@ -13122,9 +13122,9 @@
         "14b47946-59dd-559c-a66c-752f41834bf1": 1
       },
       "timings": {
-        "keyword_seconds": 0.0004311670199967921,
-        "vector_seconds_including_one_encode": 0.008093708020169288,
-        "fusion_seconds": 1.708301715552807e-05
+        "keyword_seconds": 0.0003042920143343508,
+        "vector_seconds_including_one_encode": 0.008292125014122576,
+        "fusion_seconds": 1.879094634205103e-05
       },
       "modes": {
         "keyword": {
@@ -13949,9 +13949,9 @@
         "67670635-3677-57af-a942-d9cb0cf5b499": 1
       },
       "timings": {
-        "keyword_seconds": 0.00028149998979642987,
-        "vector_seconds_including_one_encode": 0.006864125025458634,
-        "fusion_seconds": 2.2916996385902166e-05
+        "keyword_seconds": 0.000266792019829154,
+        "vector_seconds_including_one_encode": 0.006742750003468245,
+        "fusion_seconds": 1.679197885096073e-05
       },
       "modes": {
         "keyword": {
@@ -14791,9 +14791,9 @@
         "bfc35535-78b6-559d-9a61-ae465c730e89": 1
       },
       "timings": {
-        "keyword_seconds": 0.00034379196586087346,
-        "vector_seconds_including_one_encode": 0.007686000026296824,
-        "fusion_seconds": 1.691601937636733e-05
+        "keyword_seconds": 0.0003042499884031713,
+        "vector_seconds_including_one_encode": 0.006189666979480535,
+        "fusion_seconds": 1.7291982658207417e-05
       },
       "modes": {
         "keyword": {
@@ -15678,9 +15678,9 @@
         "6ff6f99b-7fae-5c40-8f4b-6641d59b8082": 2
       },
       "timings": {
-        "keyword_seconds": 0.00027845799922943115,
-        "vector_seconds_including_one_encode": 0.00650162500096485,
-        "fusion_seconds": 2.0957959350198507e-05
+        "keyword_seconds": 0.000324999971780926,
+        "vector_seconds_including_one_encode": 0.008277792017906904,
+        "fusion_seconds": 2.0749983377754688e-05
       },
       "modes": {
         "keyword": {
@@ -16511,9 +16511,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00025525002274662256,
-        "vector_seconds_including_one_encode": 0.00705716700758785,
-        "fusion_seconds": 1.7082958947867155e-05
+        "keyword_seconds": 0.0003839579876512289,
+        "vector_seconds_including_one_encode": 0.009413042047526687,
+        "fusion_seconds": 1.895899185910821e-05
       },
       "modes": {
         "keyword": {
@@ -17461,9 +17461,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00020350003615021706,
-        "vector_seconds_including_one_encode": 0.007151708996389061,
-        "fusion_seconds": 2.1208019461482763e-05
+        "keyword_seconds": 0.00044475001050159335,
+        "vector_seconds_including_one_encode": 0.00900187500519678,
+        "fusion_seconds": 1.7790996935218573e-05
       },
       "modes": {
         "keyword": {
@@ -18493,9 +18493,9 @@
         "92c80691-de1c-5d97-9230-b9e243016e98": 2
       },
       "timings": {
-        "keyword_seconds": 0.00022687501041218638,
-        "vector_seconds_including_one_encode": 0.007579499972052872,
-        "fusion_seconds": 1.8000020645558834e-05
+        "keyword_seconds": 0.00033345900010317564,
+        "vector_seconds_including_one_encode": 0.009949958010111004,
+        "fusion_seconds": 1.6542035154998302e-05
       },
       "modes": {
         "keyword": {
@@ -19328,9 +19328,9 @@
         "0aa3ab76-ccfb-5f55-aec4-a9d91d56e4d1": 2
       },
       "timings": {
-        "keyword_seconds": 0.00024349999148398638,
-        "vector_seconds_including_one_encode": 0.0072090839967131615,
-        "fusion_seconds": 2.2667052689939737e-05
+        "keyword_seconds": 0.00022837496362626553,
+        "vector_seconds_including_one_encode": 0.010196375020314008,
+        "fusion_seconds": 2.0209001377224922e-05
       },
       "modes": {
         "keyword": {
@@ -20388,9 +20388,9 @@
         "6ff6f99b-7fae-5c40-8f4b-6641d59b8082": 2
       },
       "timings": {
-        "keyword_seconds": 0.00030804198468104005,
-        "vector_seconds_including_one_encode": 0.007680250040721148,
-        "fusion_seconds": 1.7832964658737183e-05
+        "keyword_seconds": 0.000488292018417269,
+        "vector_seconds_including_one_encode": 0.01032941701123491,
+        "fusion_seconds": 1.7457990907132626e-05
       },
       "modes": {
         "keyword": {
@@ -21286,9 +21286,9 @@
         "77bef833-0af3-5608-8869-251ef22b90b8": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002704999642446637,
-        "vector_seconds_including_one_encode": 0.0071953750448301435,
-        "fusion_seconds": 2.520898124203086e-05
+        "keyword_seconds": 0.000333332980517298,
+        "vector_seconds_including_one_encode": 0.008804208016954362,
+        "fusion_seconds": 1.7833022866398096e-05
       },
       "modes": {
         "keyword": {
@@ -22375,9 +22375,9 @@
         "7bfca660-b1b1-5d64-962c-762297c8d244": 2
       },
       "timings": {
-        "keyword_seconds": 0.00022091600112617016,
-        "vector_seconds_including_one_encode": 0.007771333970595151,
-        "fusion_seconds": 1.6250007320195436e-05
+        "keyword_seconds": 0.00033608300145715475,
+        "vector_seconds_including_one_encode": 0.008597209001891315,
+        "fusion_seconds": 2.0499981474131346e-05
       },
       "modes": {
         "keyword": {
@@ -23620,9 +23620,9 @@
         "c60868ca-7bd4-5825-892c-b76e136fe8b5": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002584999892860651,
-        "vector_seconds_including_one_encode": 0.008173000009264797,
-        "fusion_seconds": 1.9791012164205313e-05
+        "keyword_seconds": 0.00032529199961572886,
+        "vector_seconds_including_one_encode": 0.00916262500686571,
+        "fusion_seconds": 1.5624973457306623e-05
       },
       "modes": {
         "keyword": {
@@ -24649,9 +24649,9 @@
         "2991ec8e-6272-5f48-873a-13733241df6f": 2
       },
       "timings": {
-        "keyword_seconds": 0.00026591698406264186,
-        "vector_seconds_including_one_encode": 0.007448874996043742,
-        "fusion_seconds": 1.9041006453335285e-05
+        "keyword_seconds": 0.00028554099844768643,
+        "vector_seconds_including_one_encode": 0.008096874982584268,
+        "fusion_seconds": 1.8499966245144606e-05
       },
       "modes": {
         "keyword": {
@@ -25530,9 +25530,9 @@
         "93f8d19c-2759-576e-a702-1e45d92a709e": 2
       },
       "timings": {
-        "keyword_seconds": 0.0011268329690210521,
-        "vector_seconds_including_one_encode": 0.007961917028296739,
-        "fusion_seconds": 4.337495192885399e-05
+        "keyword_seconds": 0.0011875000200234354,
+        "vector_seconds_including_one_encode": 0.007385416945908219,
+        "fusion_seconds": 3.4791999496519566e-05
       },
       "modes": {
         "keyword": {
@@ -26856,9 +26856,9 @@
         "ef3dca2d-db37-583a-b9be-65075d9ddd4f": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002627080539241433,
-        "vector_seconds_including_one_encode": 0.008416833996307105,
-        "fusion_seconds": 2.091604983434081e-05
+        "keyword_seconds": 0.0003200840437784791,
+        "vector_seconds_including_one_encode": 0.008127124980092049,
+        "fusion_seconds": 1.7207989003509283e-05
       },
       "modes": {
         "keyword": {
@@ -27819,9 +27819,9 @@
         "a73d97a9-bb5a-5997-873d-fc408e52f6fb": 2
       },
       "timings": {
-        "keyword_seconds": 0.00027641700580716133,
-        "vector_seconds_including_one_encode": 0.008349166950210929,
-        "fusion_seconds": 1.6291975043714046e-05
+        "keyword_seconds": 0.0003445419715717435,
+        "vector_seconds_including_one_encode": 0.008203209028579295,
+        "fusion_seconds": 1.7000013031065464e-05
       },
       "modes": {
         "keyword": {
@@ -28676,9 +28676,9 @@
         "99bda34e-d587-5bc7-93f4-de8fef5535aa": 2
       },
       "timings": {
-        "keyword_seconds": 0.00047037500189617276,
-        "vector_seconds_including_one_encode": 0.008983833016827703,
-        "fusion_seconds": 1.89170241355896e-05
+        "keyword_seconds": 0.00028304196894168854,
+        "vector_seconds_including_one_encode": 0.008002082991879433,
+        "fusion_seconds": 2.0666979253292084e-05
       },
       "modes": {
         "keyword": {
@@ -29654,9 +29654,9 @@
         "be3fdbdd-88cb-5b93-b919-3c36d5ae5b42": 2
       },
       "timings": {
-        "keyword_seconds": 0.0003600000054575503,
-        "vector_seconds_including_one_encode": 0.008739374985452741,
-        "fusion_seconds": 1.8000020645558834e-05
+        "keyword_seconds": 0.00037037499714642763,
+        "vector_seconds_including_one_encode": 0.008734416973311454,
+        "fusion_seconds": 1.750001683831215e-05
       },
       "modes": {
         "keyword": {
@@ -30449,9 +30449,9 @@
         "dec0e219-b6f5-5114-9ee9-cd77c4f2735b": 2
       },
       "timings": {
-        "keyword_seconds": 0.00031029200181365013,
-        "vector_seconds_including_one_encode": 0.009326083003543317,
-        "fusion_seconds": 2.4915963876992464e-05
+        "keyword_seconds": 0.00024508300703018904,
+        "vector_seconds_including_one_encode": 0.008751583052799106,
+        "fusion_seconds": 1.8207996618002653e-05
       },
       "modes": {
         "keyword": {
@@ -31391,8 +31391,8 @@
         "c17f57f4-bf6d-5f3f-bf03-714ef362a41e": 2
       },
       "timings": {
-        "keyword_seconds": 0.00030454195803031325,
-        "vector_seconds_including_one_encode": 0.009974624961614609,
+        "keyword_seconds": 0.0003672500024549663,
+        "vector_seconds_including_one_encode": 0.008978291996754706,
         "fusion_seconds": 1.89170241355896e-05
       },
       "modes": {
@@ -32386,9 +32386,9 @@
         "8e84b49c-edf6-50c7-9308-d45685703363": 2
       },
       "timings": {
-        "keyword_seconds": 0.00031116598984226584,
-        "vector_seconds_including_one_encode": 0.010642209032084793,
-        "fusion_seconds": 2.879102248698473e-05
+        "keyword_seconds": 0.00037458300357684493,
+        "vector_seconds_including_one_encode": 0.008247625024523586,
+        "fusion_seconds": 1.91659783013165e-05
       },
       "modes": {
         "keyword": {
@@ -33447,9 +33447,9 @@
         "2991ec8e-6272-5f48-873a-13733241df6f": 2
       },
       "timings": {
-        "keyword_seconds": 0.0004882090142928064,
-        "vector_seconds_including_one_encode": 0.0095739999669604,
-        "fusion_seconds": 1.7667014617472887e-05
+        "keyword_seconds": 0.00036816700594499707,
+        "vector_seconds_including_one_encode": 0.006797875044867396,
+        "fusion_seconds": 1.8583028577268124e-05
       },
       "modes": {
         "keyword": {
@@ -34454,9 +34454,9 @@
         "dec0e219-b6f5-5114-9ee9-cd77c4f2735b": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002933340147137642,
-        "vector_seconds_including_one_encode": 0.01043741701869294,
-        "fusion_seconds": 4.650000482797623e-05
+        "keyword_seconds": 0.00036929198540747166,
+        "vector_seconds_including_one_encode": 0.008323416986968368,
+        "fusion_seconds": 1.7667014617472887e-05
       },
       "modes": {
         "keyword": {
@@ -35550,9 +35550,9 @@
         "4d3a72f8-f9b4-53f2-b28c-89f2a196ff87": 2
       },
       "timings": {
-        "keyword_seconds": 0.00027250003768131137,
-        "vector_seconds_including_one_encode": 0.008832459046971053,
-        "fusion_seconds": 2.3209024220705032e-05
+        "keyword_seconds": 0.0003081670147366822,
+        "vector_seconds_including_one_encode": 0.008624791982583702,
+        "fusion_seconds": 6.724998820573092e-05
       },
       "modes": {
         "keyword": {
@@ -36663,9 +36663,9 @@
         "13226076-efc0-5279-84e8-880bceb8d9ac": 2
       },
       "timings": {
-        "keyword_seconds": 0.00039766699774190784,
-        "vector_seconds_including_one_encode": 0.009676334040705115,
-        "fusion_seconds": 2.120796125382185e-05
+        "keyword_seconds": 0.0002697079908102751,
+        "vector_seconds_including_one_encode": 0.007941332994960248,
+        "fusion_seconds": 1.570803578943014e-05
       },
       "modes": {
         "keyword": {
@@ -37646,9 +37646,9 @@
         "a73d97a9-bb5a-5997-873d-fc408e52f6fb": 2
       },
       "timings": {
-        "keyword_seconds": 0.0003297499497421086,
-        "vector_seconds_including_one_encode": 0.008365709043573588,
-        "fusion_seconds": 2.575002145022154e-05
+        "keyword_seconds": 0.0002687079831957817,
+        "vector_seconds_including_one_encode": 0.00830854196101427,
+        "fusion_seconds": 2.0957959350198507e-05
       },
       "modes": {
         "keyword": {
@@ -38539,9 +38539,9 @@
         "b143ead3-c3b6-5927-a3b9-b29a39c93ce7": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002715419977903366,
-        "vector_seconds_including_one_encode": 0.008259791997261345,
-        "fusion_seconds": 2.9708025977015495e-05
+        "keyword_seconds": 0.00027370802126824856,
+        "vector_seconds_including_one_encode": 0.009049166983459145,
+        "fusion_seconds": 1.59589690156281e-05
       },
       "modes": {
         "keyword": {
@@ -39422,9 +39422,9 @@
         "3836996d-2454-5e8f-85f7-d13c428e5393": 2
       },
       "timings": {
-        "keyword_seconds": 0.00044708402128890157,
-        "vector_seconds_including_one_encode": 0.00868558295769617,
-        "fusion_seconds": 1.8041988369077444e-05
+        "keyword_seconds": 0.0003274169866926968,
+        "vector_seconds_including_one_encode": 0.008970499970018864,
+        "fusion_seconds": 2.1874962840229273e-05
       },
       "modes": {
         "keyword": {
@@ -40317,9 +40317,9 @@
         "bff39297-6b63-5406-81e1-3b3bd10f32ee": 2
       },
       "timings": {
-        "keyword_seconds": 0.00030037504620850086,
-        "vector_seconds_including_one_encode": 0.008316416991874576,
-        "fusion_seconds": 1.7749960534274578e-05
+        "keyword_seconds": 0.0002668329980224371,
+        "vector_seconds_including_one_encode": 0.008699542027898133,
+        "fusion_seconds": 1.8249964341521263e-05
       },
       "modes": {
         "keyword": {
@@ -41362,9 +41362,9 @@
         "023c78b7-1011-5474-a7f1-74d69ec320a9": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002864159760065377,
-        "vector_seconds_including_one_encode": 0.00853925000410527,
-        "fusion_seconds": 2.454104833304882e-05
+        "keyword_seconds": 0.00027116702403873205,
+        "vector_seconds_including_one_encode": 0.007471040997188538,
+        "fusion_seconds": 1.9875005818903446e-05
       },
       "modes": {
         "keyword": {
@@ -42295,9 +42295,9 @@
         "93f8d19c-2759-576e-a702-1e45d92a709e": 2
       },
       "timings": {
-        "keyword_seconds": 0.00031754199881106615,
-        "vector_seconds_including_one_encode": 0.008226457983255386,
-        "fusion_seconds": 1.9084021914750338e-05
+        "keyword_seconds": 0.00028675002977252007,
+        "vector_seconds_including_one_encode": 0.008104167005512863,
+        "fusion_seconds": 1.89170241355896e-05
       },
       "modes": {
         "keyword": {
@@ -43214,9 +43214,9 @@
         "0aa3ab76-ccfb-5f55-aec4-a9d91d56e4d1": 2
       },
       "timings": {
-        "keyword_seconds": 0.0002691249828785658,
-        "vector_seconds_including_one_encode": 0.008122833038214594,
-        "fusion_seconds": 2.7291011065244675e-05
+        "keyword_seconds": 0.00029087497387081385,
+        "vector_seconds_including_one_encode": 0.008229749975726008,
+        "fusion_seconds": 2.195901470258832e-05
       },
       "modes": {
         "keyword": {
@@ -44309,9 +44309,9 @@
         "93f8d19c-2759-576e-a702-1e45d92a709e": 2
       },
       "timings": {
-        "keyword_seconds": 0.00031529099214822054,
-        "vector_seconds_including_one_encode": 0.008095750003121793,
-        "fusion_seconds": 1.795898424461484e-05
+        "keyword_seconds": 0.0002722910139709711,
+        "vector_seconds_including_one_encode": 0.010309625009540468,
+        "fusion_seconds": 2.1082989405840635e-05
       },
       "modes": {
         "keyword": {
@@ -45085,9 +45085,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.0002627500216476619,
-        "vector_seconds_including_one_encode": 0.008480083022732288,
-        "fusion_seconds": 2.7125002816319466e-05
+        "keyword_seconds": 0.000252292025834322,
+        "vector_seconds_including_one_encode": 0.007886375009547919,
+        "fusion_seconds": 2.012500772252679e-05
       },
       "modes": {
         "keyword": {
@@ -45879,9 +45879,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00027474999660626054,
-        "vector_seconds_including_one_encode": 0.00873325002612546,
-        "fusion_seconds": 1.899997005239129e-05
+        "keyword_seconds": 0.00021824997384101152,
+        "vector_seconds_including_one_encode": 0.008638625033199787,
+        "fusion_seconds": 1.737498678267002e-05
       },
       "modes": {
         "keyword": {
@@ -46759,9 +46759,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.0002591669908724725,
-        "vector_seconds_including_one_encode": 0.009324042010121047,
-        "fusion_seconds": 2.575002145022154e-05
+        "keyword_seconds": 0.00025166699197143316,
+        "vector_seconds_including_one_encode": 0.008817207999527454,
+        "fusion_seconds": 2.7542002499103546e-05
       },
       "modes": {
         "keyword": {
@@ -47547,9 +47547,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.0002758749760687351,
-        "vector_seconds_including_one_encode": 0.008417708973865956,
-        "fusion_seconds": 1.7457990907132626e-05
+        "keyword_seconds": 0.0002792910090647638,
+        "vector_seconds_including_one_encode": 0.008475375012494624,
+        "fusion_seconds": 1.7000013031065464e-05
       },
       "modes": {
         "keyword": {
@@ -48587,9 +48587,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00023787497775629163,
-        "vector_seconds_including_one_encode": 0.007659624970983714,
-        "fusion_seconds": 2.62079993262887e-05
+        "keyword_seconds": 0.0002592909731902182,
+        "vector_seconds_including_one_encode": 0.008170917048119009,
+        "fusion_seconds": 2.320896601304412e-05
       },
       "modes": {
         "keyword": {
@@ -49591,9 +49591,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00028249999741092324,
-        "vector_seconds_including_one_encode": 0.007542124949395657,
-        "fusion_seconds": 2.0332983694970608e-05
+        "keyword_seconds": 0.0002755419700406492,
+        "vector_seconds_including_one_encode": 0.008983291976619512,
+        "fusion_seconds": 1.899997005239129e-05
       },
       "modes": {
         "keyword": {
@@ -50503,9 +50503,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00038487499114125967,
-        "vector_seconds_including_one_encode": 0.007908082974608988,
-        "fusion_seconds": 2.8082984499633312e-05
+        "keyword_seconds": 0.0003613749868236482,
+        "vector_seconds_including_one_encode": 0.008147250046022236,
+        "fusion_seconds": 2.258399035781622e-05
       },
       "modes": {
         "keyword": {
@@ -51315,9 +51315,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.0002535419771447778,
-        "vector_seconds_including_one_encode": 0.007938875001855195,
-        "fusion_seconds": 1.8207996618002653e-05
+        "keyword_seconds": 0.0003085000207647681,
+        "vector_seconds_including_one_encode": 0.008707791042979807,
+        "fusion_seconds": 1.7665966879576445e-05
       },
       "modes": {
         "keyword": {
@@ -52185,9 +52185,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.0002469590399414301,
-        "vector_seconds_including_one_encode": 0.009506332979071885,
-        "fusion_seconds": 2.5541987270116806e-05
+        "keyword_seconds": 0.000224041985347867,
+        "vector_seconds_including_one_encode": 0.009334458038210869,
+        "fusion_seconds": 2.4834007490426302e-05
       },
       "modes": {
         "keyword": {
@@ -53015,9 +53015,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00026045902632176876,
-        "vector_seconds_including_one_encode": 0.007891833956819028,
-        "fusion_seconds": 1.833302667364478e-05
+        "keyword_seconds": 0.00023154198424890637,
+        "vector_seconds_including_one_encode": 0.008892540994565934,
+        "fusion_seconds": 1.7915968783199787e-05
       },
       "modes": {
         "keyword": {
@@ -53881,9 +53881,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.00024687504628673196,
-        "vector_seconds_including_one_encode": 0.007774708967190236,
-        "fusion_seconds": 1.9832979887723923e-05
+        "keyword_seconds": 0.00025091698626056314,
+        "vector_seconds_including_one_encode": 0.008281209040433168,
+        "fusion_seconds": 1.754198456183076e-05
       },
       "modes": {
         "keyword": {
@@ -54769,9 +54769,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.0002553339581936598,
-        "vector_seconds_including_one_encode": 0.007231333991512656,
-        "fusion_seconds": 2.3874978069216013e-05
+        "keyword_seconds": 0.0002467499580234289,
+        "vector_seconds_including_one_encode": 0.008843834046274424,
+        "fusion_seconds": 2.3833999875932932e-05
       },
       "modes": {
         "keyword": {
@@ -55723,9 +55723,9 @@
       "proposed_evidence_groups": [],
       "mapped_positive_chunks": {},
       "timings": {
-        "keyword_seconds": 0.0003594579757191241,
-        "vector_seconds_including_one_encode": 0.007980041031260043,
-        "fusion_seconds": 1.795799471437931e-05
+        "keyword_seconds": 0.0002662909682840109,
+        "vector_seconds_including_one_encode": 0.009171999990940094,
+        "fusion_seconds": 1.7207989003509283e-05
       },
       "modes": {
         "keyword": {
