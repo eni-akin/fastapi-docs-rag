@@ -1,4 +1,4 @@
-"""Transactional keyword snapshots and checksum-verified capture import."""
+"""Immutable keyword/vector snapshots and checksum-verified capture import."""
 
 import hashlib
 import json
@@ -13,6 +13,7 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
 from fastapi_docs_rag.chunk import ChunkConfig, chunk_document
+from fastapi_docs_rag.embed import validate_vector
 from fastapi_docs_rag.manifest import canonical_url, json_hash
 from fastapi_docs_rag.parse import PARSER_VERSION, parse_page, validate_page
 
@@ -248,4 +249,198 @@ def import_capture(
         "state": "ready",
         "document_count": len(documents),
         "chunk_count": chunk_count,
+    }
+
+
+def build_vector_snapshot(connection, source_snapshot_id, embedder) -> dict:
+    """Publish an immutable vector copy of one ready keyword snapshot."""
+    source = connection.execute(
+        "SELECT * FROM rag_snapshots WHERE id=%s", (source_snapshot_id,)
+    ).fetchone()
+    if not source or source["state"] != "ready" or source["capability"] != "keyword_only":
+        raise ValueError("Source must be an explicitly selected ready keyword snapshot")
+    embedding_profile = embedder.profile
+    if (
+        not isinstance(embedding_profile, dict)
+        or embedding_profile.get("dimension") != 384
+        or embedding_profile.get("normalization") != "l2"
+        or not embedding_profile.get("files")
+    ):
+        raise ValueError("Embedding profile must identify normalized 384-dimensional model files")
+    profile = {**source["profile"], "embedding": embedding_profile}
+    fingerprint = json_hash(
+        {
+            "source_fingerprint": source["fingerprint"],
+            "capability": "vector_ready",
+            "profile": profile,
+        }
+    )
+
+    def existing_result():
+        row = connection.execute(
+            "SELECT id, state, document_count, chunk_count FROM rag_snapshots WHERE fingerprint=%s",
+            (fingerprint,),
+        ).fetchone()
+        if row and row["state"] != "ready":
+            raise ValueError("An incomplete snapshot already owns this vector fingerprint")
+        if row:
+            return {
+                "snapshot_id": str(row["id"]),
+                "reused": True,
+                "state": "ready",
+                "document_count": row["document_count"],
+                "chunk_count": row["chunk_count"],
+                "encoded_inputs": 0,
+                "reused_inputs": 0,
+            }
+        return None
+
+    if result := existing_result():
+        return result
+    documents = connection.execute(
+        "SELECT * FROM rag_documents WHERE snapshot_id=%s ORDER BY source_url",
+        (source_snapshot_id,),
+    ).fetchall()
+    chunks = connection.execute(
+        "SELECT * FROM rag_chunks WHERE snapshot_id=%s ORDER BY chunk_key", (source_snapshot_id,)
+    ).fetchall()
+    if len(documents) != source["document_count"] or len(chunks) != source["chunk_count"]:
+        raise ValueError("Source snapshot row counts are incomplete")
+    inputs = {}
+    for chunk in chunks:
+        value = chunk["embedding_input"]
+        digest = hashlib.sha256(value.encode()).hexdigest()
+        if (
+            digest != chunk["embedding_input_hash"]
+            or not 0 <= chunk["body_tokens"] <= 254
+            or not 2 <= chunk["input_tokens"] <= 256
+            or not chunk["text"]
+            or not chunk["chunk_key"]
+            or chunk["embedding"] is not None
+        ):
+            raise ValueError("Source chunk metadata or embedding input is invalid")
+        if digest in inputs and inputs[digest] != value:
+            raise ValueError("Different embedding inputs share one hash")
+        inputs[digest] = value
+    vectors = {}
+    if inputs:
+        rows = connection.execute(
+            """
+            SELECT c.embedding_input_hash, c.embedding_input, c.embedding::text AS embedding
+            FROM rag_chunks c JOIN rag_snapshots s ON s.id=c.snapshot_id
+            WHERE s.state='ready' AND s.capability='vector_ready'
+              AND s.profile->'embedding'=%s::jsonb
+              AND c.embedding_input_hash=ANY(%s)
+            ORDER BY s.created_at, s.id, c.id
+            """,
+            (Jsonb(embedding_profile), list(inputs)),
+        ).fetchall()
+        for row in rows:
+            digest = row["embedding_input_hash"]
+            if row["embedding_input"] == inputs[digest] and digest not in vectors:
+                vectors[digest] = row["embedding"]
+    reused_inputs = len(vectors)
+    missing = [(digest, value) for digest, value in inputs.items() if digest not in vectors]
+    for offset in range(0, len(missing), 32):
+        batch = missing[offset : offset + 32]
+        encoded = embedder.encode([value for _, value in batch])
+        if len(encoded) != len(batch):
+            raise ValueError("Embedding encoder returned the wrong number of vectors")
+        for (digest, _), vector in zip(batch, encoded, strict=True):
+            vectors[digest] = "[" + ",".join(map(str, validate_vector(vector))) + "]"
+
+    with connection.transaction():
+        connection.execute("SELECT pg_advisory_xact_lock(610240002)")
+        if result := existing_result():
+            return result
+        current = connection.execute(
+            "SELECT fingerprint, state, capability FROM rag_snapshots WHERE id=%s FOR SHARE",
+            (source_snapshot_id,),
+        ).fetchone()
+        if (
+            not current
+            or current["fingerprint"] != source["fingerprint"]
+            or current["state"] != "ready"
+            or current["capability"] != "keyword_only"
+        ):
+            raise ValueError("Source snapshot changed during vector build")
+        snapshot_id = uuid4()
+        connection.execute(
+            """
+            INSERT INTO rag_snapshots
+            (id, fingerprint, capability, state, manifest_hash, profile, capture,
+             document_count, chunk_count)
+            VALUES (%s, %s, 'vector_ready', 'building', %s, %s, %s, %s, %s)
+            """,
+            (
+                snapshot_id,
+                fingerprint,
+                source["manifest_hash"],
+                Jsonb(profile),
+                Jsonb(source["capture"]),
+                len(documents),
+                len(chunks),
+            ),
+        )
+        document_ids = {}
+        for document in documents:
+            new_id = uuid5(snapshot_id, document["source_url"])
+            document_ids[document["id"]] = new_id
+            connection.execute(
+                """
+                INSERT INTO rag_documents
+                (id, snapshot_id, source_url, title, content_hash, raw_hash, document)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    new_id,
+                    snapshot_id,
+                    document["source_url"],
+                    document["title"],
+                    document["content_hash"],
+                    document["raw_hash"],
+                    Jsonb(document["document"]),
+                ),
+            )
+        for chunk in chunks:
+            connection.execute(
+                """
+                INSERT INTO rag_chunks
+                (id, snapshot_id, document_id, chunk_key, evidence_key, text,
+                 heading_path, section_anchor, variants, callout, source_spans,
+                 partial_code, embedding_input, embedding_input_hash, body_tokens,
+                 input_tokens, search_vector, embedding)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+                        %s, %s, %s, %s, %s, %s::vector)
+                """,
+                (
+                    uuid5(snapshot_id, chunk["chunk_key"]),
+                    snapshot_id,
+                    document_ids[chunk["document_id"]],
+                    chunk["chunk_key"],
+                    chunk["evidence_key"],
+                    chunk["text"],
+                    Jsonb(chunk["heading_path"]),
+                    chunk["section_anchor"],
+                    Jsonb(chunk["variants"]),
+                    Jsonb(chunk["callout"]),
+                    Jsonb(chunk["source_spans"]),
+                    chunk["partial_code"],
+                    chunk["embedding_input"],
+                    chunk["embedding_input_hash"],
+                    chunk["body_tokens"],
+                    chunk["input_tokens"],
+                    chunk["search_vector"],
+                    vectors[chunk["embedding_input_hash"]],
+                ),
+            )
+        connection.execute("UPDATE rag_snapshots SET state='ready' WHERE id=%s", (snapshot_id,))
+    return {
+        "snapshot_id": str(snapshot_id),
+        "reused": False,
+        "state": "ready",
+        "document_count": len(documents),
+        "chunk_count": len(chunks),
+        "encoded_inputs": len(missing),
+        "reused_inputs": reused_inputs,
     }
