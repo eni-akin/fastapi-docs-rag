@@ -97,9 +97,11 @@ def search(
     mode: str = "keyword",
     embedder=None,
     model_dir: Path = DEFAULT_MODEL_DIR,
+    reranker=None,
+    reranker_dir=None,
 ) -> list:
-    if mode not in {"keyword", "vector", "hybrid"}:
-        raise ValueError("Search mode must be keyword, vector, or hybrid")
+    if mode not in {"keyword", "vector", "hybrid", "hybrid-rerank"}:
+        raise ValueError("Search mode must be keyword, vector, hybrid, or hybrid-rerank")
     if not isinstance(query, str) or not query.strip() or len(query) > 2000:
         raise ValueError("Query must contain between 1 and 2000 characters")
     if type(limit) is not int or not 1 <= limit <= 50:
@@ -127,8 +129,17 @@ def search(
     vector = validate_vector(embedder.encode([query.strip()])[0])
     if mode == "vector":
         return _vector(connection, snapshot, vector, limit)
-    return fuse(
+    rows = fuse(
         _keyword(connection, snapshot, query.strip(), 20),
         _vector(connection, snapshot, vector, 20),
-        limit,
+        20 if mode == "hybrid-rerank" else limit,
     )
+    if mode == "hybrid-rerank":
+        for rank, row in enumerate(rows, start=1):
+            row["hybrid_rank"] = rank
+        if reranker is None:
+            from fastapi_docs_rag.rerank import DEFAULT_MODEL_DIR, load_reranker
+
+            reranker = load_reranker(reranker_dir or DEFAULT_MODEL_DIR)
+        return reranker.rerank(query.strip(), rows)[: min(limit, 20)]
+    return rows
