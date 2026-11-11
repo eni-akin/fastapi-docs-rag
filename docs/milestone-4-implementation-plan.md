@@ -1,7 +1,7 @@
 # Milestone 4: reranking and evidence budgets
 
 Prepared: November 11, 2026.
-Status: planned implementation; semantic review remains an owner action item.
+Status: agent implementation complete; semantic review remains an owner action item. See [the milestone-4 handoff](milestone-4-handoff.md).
 Scope: milestone 4 and sections 7.3–7.4 of the agreed RAG implementation plan.
 
 ## Outcome and inherited boundaries

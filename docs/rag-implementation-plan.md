@@ -2,7 +2,7 @@
 
 Prepared: November 5, 2026.
 
-Status update (November 11, 2026): milestone 1 and agent-owned milestone-2 and milestone-3 implementations are merged into `main`. The owner deferred human label reviews as action items; semantic quality gates remain open, and some milestone-0 setup work remains. See [the milestone-3 handoff](milestone-3-handoff.md) for verified runtime evidence and [the milestone-4 plan](milestone-4-implementation-plan.md) for the next implementation sequence. Environment observations and defaults below describe the original planning baseline unless a later milestone report supersedes them. This document expands the RAG project in the supplied portfolio plan and applies the later decision to use official FastAPI documentation instead of Python documentation.
+Status update (November 11, 2026): milestone 1 and agent-owned implementations for milestones 2–4 are verified and merged into `main`. The owner deferred human label and policy reviews as action items; semantic quality gates remain open, and some milestone-0 setup work remains. See [the milestone-3 handoff](milestone-3-handoff.md) and [milestone-4 handoff](milestone-4-handoff.md) for runtime evidence and limitations. The next implementation milestone is 5, cited generation through the CLI. Environment observations and defaults below describe the original planning baseline unless a later milestone report supersedes them. This document expands the RAG project in the supplied portfolio plan and applies the later decision to use official FastAPI documentation instead of Python documentation.
 
 ## 1. What we are building
 
