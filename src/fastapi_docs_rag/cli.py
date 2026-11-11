@@ -26,6 +26,9 @@ def main() -> int:
     )
     command.add_argument("--output", type=Path, default=Path("data"))
     commands.add_parser("migrate", help="Apply checked PostgreSQL schema migrations")
+    commands.add_parser(
+        "prepare-embeddings", help="Download and verify the pinned local MiniLM model"
+    )
     command = commands.add_parser("import-capture", help="Build or reuse a keyword-only snapshot")
     command.add_argument("--report", type=Path, required=True)
     command.add_argument("--artifacts", type=Path, default=Path("data"))
@@ -53,6 +56,11 @@ def main() -> int:
             return await capture(arguments.manifest, arguments.output, client, limits)
 
     try:
+        if arguments.command == "prepare-embeddings":
+            from fastapi_docs_rag.embed import prepare_embeddings
+
+            print(json.dumps(prepare_embeddings(), indent=2))
+            return 0
         if arguments.command != "capture":
             with connect_database() as connection:
                 if arguments.command == "migrate":
