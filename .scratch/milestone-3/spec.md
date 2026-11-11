@@ -1,7 +1,7 @@
 # Milestone 3: vector search and hybrid comparison
 
 Status: ready-for-agent
-Resolution: planned; implementation not started
+Resolution: done — agent implementation verified; human label review deferred by owner
 
 ## Scope
 
@@ -38,5 +38,8 @@ human-reviewed development questions. Preserve existing keyword behavior.
 
 ## Comments
 
-November 11, 2026: planning only. Seven numbered milestones remain (3–9), plus
-explicit milestone-0 setup carryover and milestone-2 human label review.
+November 11, 2026: agent-owned embedding, vector storage, retrieval, corpus,
+and evaluation work is implemented. The 60 development labels remain drafts:
+0 human approved, 60 pending. The owner deferred these reviews and the
+answer-sufficiency policy to the action items in `docs/action-items.md`.
+Consequently the semantic quality gate and an approved benchmark remain open.
