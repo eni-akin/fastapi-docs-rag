@@ -35,6 +35,12 @@ def main() -> int:
     commands.add_parser(
         "prepare-embeddings", help="Download and verify the pinned local MiniLM model"
     )
+    command = commands.add_parser(
+        "prepare-reranker", help="Download and verify the pinned local cross-encoder"
+    )
+    command.add_argument(
+        "--model-dir", type=Path, default=Path("data/models/ms-marco-MiniLM-L6-v2")
+    )
     command = commands.add_parser("import-capture", help="Build or reuse a keyword-only snapshot")
     command.add_argument("--report", type=Path, required=True)
     command.add_argument("--artifacts", type=Path, default=Path("data"))
@@ -44,9 +50,14 @@ def main() -> int:
     command = commands.add_parser("search", help="Inspect matches in a ready snapshot")
     command.add_argument("--snapshot", required=True)
     command.add_argument("--query", required=True)
-    command.add_argument("--mode", choices=["keyword", "vector", "hybrid"], default="keyword")
+    command.add_argument(
+        "--mode", choices=["keyword", "vector", "hybrid", "hybrid-rerank"], default="keyword"
+    )
     command.add_argument("--limit", type=int, default=10)
     command.add_argument("--model-dir", type=Path, default=Path("data/models/all-MiniLM-L6-v2"))
+    command.add_argument(
+        "--reranker-dir", type=Path, default=Path("data/models/ms-marco-MiniLM-L6-v2")
+    )
     command.add_argument("--json", action="store_true")
     command = commands.add_parser(
         "diagnose-keyword", help="Check label provenance and inspect misses"
@@ -89,6 +100,11 @@ def main() -> int:
             from fastapi_docs_rag.embed import prepare_embeddings
 
             print(json.dumps(prepare_embeddings(), indent=2))
+            return 0
+        if arguments.command == "prepare-reranker":
+            from fastapi_docs_rag.rerank import prepare_reranker
+
+            print(json.dumps(prepare_reranker(arguments.model_dir), indent=2))
             return 0
         if arguments.command != "capture":
             with connect_database() as connection:
@@ -163,6 +179,7 @@ def main() -> int:
                         arguments.limit,
                         arguments.mode,
                         model_dir=arguments.model_dir,
+                        reranker_dir=arguments.reranker_dir,
                     )
                     result = {
                         "snapshot_id": arguments.snapshot,
@@ -177,13 +194,24 @@ def main() -> int:
                                 "RRF"
                                 if arguments.mode == "hybrid"
                                 else (
-                                    "cosine similarity" if arguments.mode == "vector" else "score"
+                                    "raw rerank logit"
+                                    if arguments.mode == "hybrid-rerank"
+                                    else (
+                                        "cosine similarity"
+                                        if arguments.mode == "vector"
+                                        else "score"
+                                    )
                                 )
                             )
-                            print(f"\n{index}. {row['title']} | {label} {row['score']:.6f}")
+                            displayed = (
+                                row["rerank_score"]
+                                if arguments.mode == "hybrid-rerank"
+                                else row["score"]
+                            )
+                            print(f"\n{index}. {row['title']} | {label} {displayed:.6f}")
                             if arguments.mode == "vector":
                                 print(f"cosine distance: {row['distance']:.6f}")
-                            if arguments.mode == "hybrid":
+                            if arguments.mode in {"hybrid", "hybrid-rerank"}:
                                 print(
                                     f"keyword rank: {row['keyword_rank']} | "
                                     f"vector rank: {row['vector_rank']} | "
@@ -191,6 +219,16 @@ def main() -> int:
                                     f"vector distance: {row['vector_distance']} | "
                                     f"vector similarity: {row['vector_similarity']}"
                                 )
+                            if arguments.mode == "hybrid-rerank":
+                                print(
+                                    f"RRF score: {row['score']:.6f} | "
+                                    f"pair tokens: {row['rerank_pair_tokens']} | "
+                                    f"truncated: {row['rerank_truncated']}"
+                                )
+                                print(
+                                    "scored source spans: " + json.dumps(row["rerank_source_spans"])
+                                )
+                                print("scored text: " + row["rerank_scored_text"])
                             print(f"chunk {row['chunk_id']} | document {row['document_id']}")
                             print(row["url"])
                             print("heading: " + " > ".join(row["heading_path"]))
