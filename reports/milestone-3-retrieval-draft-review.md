@@ -1,6 +1,6 @@
 # Development question review sheet
 
-All records below are agent drafts. The owner must approve or correct expected facts, answerability, source spans, grades, alternatives, and sufficiency before the milestone quality gate can pass.
+60 of 60 records await human approval. The owner must approve or correct expected facts, answerability, source spans, grades, alternatives, and sufficiency before the milestone quality gate can pass.
 
 ## dev-01 — direct_lookup
 

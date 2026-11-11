@@ -525,7 +525,7 @@ def compare_retrieval(
         "mapping_valid": True,
         "mapping_limitations": (
             "Positive overlap maps labels to chunks; complete fact coverage requires every "
-            "character of one source-span alternative across retrieved fragments."
+            "character in each span of one alternative across retrieved fragments."
         ),
         "retrieval_profile": retrieval_profile,
         "retrieval_profile_hash": json_hash(retrieval_profile),
@@ -640,12 +640,13 @@ def comparison_markdown(report: dict) -> str:
 
 
 def review_sheet_markdown(dataset: dict) -> str:
+    pending = sum(q["review"]["status"] != "approved" for q in dataset["questions"])
     lines = [
         "# Development question review sheet",
         "",
-        "All records below are agent drafts. The owner must approve or correct expected facts, "
-        "answerability, source spans, grades, alternatives, and sufficiency before the "
-        "milestone quality gate can pass.",
+        f"{pending} of {len(dataset['questions'])} records await human approval. The owner "
+        "must approve or correct expected facts, answerability, source spans, grades, "
+        "alternatives, and sufficiency before the milestone quality gate can pass.",
         "",
     ]
     for question in dataset["questions"]:
