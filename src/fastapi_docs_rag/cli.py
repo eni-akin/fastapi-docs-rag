@@ -25,6 +25,12 @@ def main() -> int:
         "--manifest", type=Path, default=Path("corpus/manifests/tutorial-seed.json")
     )
     command.add_argument("--output", type=Path, default=Path("data"))
+    command.add_argument(
+        "--retained-report", type=Path, help="Reuse unchanged pages from a prior capture"
+    )
+    command.add_argument(
+        "--retained-artifacts", type=Path, help="Artifact root for the prior capture"
+    )
     commands.add_parser("migrate", help="Apply checked PostgreSQL schema migrations")
     commands.add_parser(
         "prepare-embeddings", help="Download and verify the pinned local MiniLM model"
@@ -32,11 +38,15 @@ def main() -> int:
     command = commands.add_parser("import-capture", help="Build or reuse a keyword-only snapshot")
     command.add_argument("--report", type=Path, required=True)
     command.add_argument("--artifacts", type=Path, default=Path("data"))
-    command = commands.add_parser("search", help="Inspect keyword matches in a ready snapshot")
+    command = commands.add_parser("embed-snapshot", help="Build or reuse a vector-ready snapshot")
+    command.add_argument("--snapshot", required=True, help="Ready keyword snapshot UUID")
+    command.add_argument("--model-dir", type=Path, default=Path("data/models/all-MiniLM-L6-v2"))
+    command = commands.add_parser("search", help="Inspect matches in a ready snapshot")
     command.add_argument("--snapshot", required=True)
     command.add_argument("--query", required=True)
-    command.add_argument("--mode", choices=["keyword"], default="keyword")
+    command.add_argument("--mode", choices=["keyword", "vector", "hybrid"], default="keyword")
     command.add_argument("--limit", type=int, default=10)
+    command.add_argument("--model-dir", type=Path, default=Path("data/models/all-MiniLM-L6-v2"))
     command.add_argument("--json", action="store_true")
     command = commands.add_parser(
         "diagnose-keyword", help="Check label provenance and inspect misses"
@@ -45,6 +55,10 @@ def main() -> int:
     command.add_argument("--dataset", type=Path, default=Path("evals/development-draft.json"))
     command.add_argument("--output", type=Path, required=True)
     arguments = parser.parse_args()
+    if arguments.command == "capture" and (arguments.retained_artifacts is None) != (
+        arguments.retained_report is None
+    ):
+        parser.error("--retained-report and --retained-artifacts must be used together")
 
     async def run():
         limits = FetchLimits()
@@ -53,7 +67,12 @@ def main() -> int:
             headers={"user-agent": "fastapi-docs-rag/0.1 (documentation capture)"},
             trust_env=False,
         ) as client:
-            return await capture(arguments.manifest, arguments.output, client, limits)
+            retained = {}
+            if arguments.retained_report is not None:
+                retained["retained_report_path"] = arguments.retained_report
+            if arguments.retained_artifacts is not None:
+                retained["retained_artifact_dir"] = arguments.retained_artifacts
+            return await capture(arguments.manifest, arguments.output, client, limits, **retained)
 
     try:
         if arguments.command == "prepare-embeddings":
@@ -67,6 +86,13 @@ def main() -> int:
                     result = {"applied": migrate(connection)}
                 elif arguments.command == "import-capture":
                     result = import_capture(connection, arguments.report, arguments.artifacts)
+                elif arguments.command == "embed-snapshot":
+                    from fastapi_docs_rag.db import build_vector_snapshot
+                    from fastapi_docs_rag.embed import load_embeddings
+
+                    result = build_vector_snapshot(
+                        connection, arguments.snapshot, load_embeddings(arguments.model_dir)
+                    )
                 elif arguments.command == "diagnose-keyword":
                     dataset = json.loads(arguments.dataset.read_text(encoding="utf-8"))
                     result = keyword_diagnostics(connection, arguments.snapshot, dataset)
@@ -89,6 +115,7 @@ def main() -> int:
                         arguments.query,
                         arguments.limit,
                         arguments.mode,
+                        model_dir=arguments.model_dir,
                     )
                     result = {
                         "snapshot_id": arguments.snapshot,
@@ -99,7 +126,24 @@ def main() -> int:
                     if not arguments.json:
                         print(f"{len(rows)} results | snapshot {arguments.snapshot}")
                         for index, row in enumerate(rows, start=1):
-                            print(f"\n{index}. {row['title']} | score {row['score']:.6f}")
+                            label = (
+                                "RRF"
+                                if arguments.mode == "hybrid"
+                                else (
+                                    "cosine similarity" if arguments.mode == "vector" else "score"
+                                )
+                            )
+                            print(f"\n{index}. {row['title']} | {label} {row['score']:.6f}")
+                            if arguments.mode == "vector":
+                                print(f"cosine distance: {row['distance']:.6f}")
+                            if arguments.mode == "hybrid":
+                                print(
+                                    f"keyword rank: {row['keyword_rank']} | "
+                                    f"vector rank: {row['vector_rank']} | "
+                                    f"keyword score: {row['keyword_score']} | "
+                                    f"vector distance: {row['vector_distance']} | "
+                                    f"vector similarity: {row['vector_similarity']}"
+                                )
                             print(f"chunk {row['chunk_id']} | document {row['document_id']}")
                             print(row["url"])
                             print("heading: " + " > ".join(row["heading_path"]))
